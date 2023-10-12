@@ -11,10 +11,10 @@ export default function EducationForm({ onChange, setState, currState }: Educati
    return (
 		<div className="form-container">
 			<form action="">
-				<Input label='School' keyName='school' placeholder='Amestrian, State Military' onChange={onChange} setState={setState} currState={currState}/>
-				<Input label='Degree | Study' keyName='study' placeholder='State Alchemist' onChange={onChange} setState={setState} currState={currState}/>
-				<Input label='Start Date' keyName='startDate' placeholder='October 1911' onChange={onChange} setState={setState} currState={currState}/>
-				<Input label='End Date' keyName='endDate' placeholder='August 1917' onChange={onChange} setState={setState} currState={currState}/>
+				<Input label='School' keyName='school' placeholder='School Name' onChange={onChange} setState={setState} currState={currState}/>
+				<Input label='Degree | Study' keyName='study' placeholder='Degree Type' onChange={onChange} setState={setState} currState={currState}/>
+				<Input label='Start Date' keyName='startDate' placeholder='Start Date' onChange={onChange} setState={setState} currState={currState}/>
+				<Input label='End Date' keyName='endDate' placeholder='End Date' onChange={onChange} setState={setState} currState={currState}/>
 			</form>
 		</div>
    )

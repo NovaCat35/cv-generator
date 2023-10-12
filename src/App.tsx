@@ -2,6 +2,7 @@ import { useState } from "react";
 import GeneralForm from "./components/GeneralForm.tsx";
 import ResumePreview from "./components/ResumePreview.tsx";
 import EducationForm from "./components/EducationForm.tsx";
+import ExperienceForm from './components/ExperienceForm.tsx'
 import "./styles/App.css";
 
 export interface Person {
@@ -13,6 +14,14 @@ export interface Person {
 export interface Education {
 	school: string;
 	study: string;
+	startDate: string;
+	endDate?: string;
+}
+
+export interface Experience {
+	company: string;
+	position: string;
+	description: string
 	startDate: string;
 	endDate?: string;
 }
@@ -38,6 +47,14 @@ function App() {
 		endDate: "August 1917",
 	});
 
+	const [experience, setExperience] = useState<Experience>({
+		company: 'Aperture Science',
+		position: 'Space Research Assistant',
+		description: 'Helped look into moon gel studies',
+		startDate: '09/1975',
+		endDate: '04/1980'
+	});
+
 	/**
 	 * This handleChange function covers the dynamic inputs from each component 'Forms'.
 	 * The setState and currState is the parameters unique to each form component that. 
@@ -53,9 +70,10 @@ function App() {
 			<div className="main-forms-container">
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm onChange={handleChange} currState={education} setState={setEducation}/>
+				<ExperienceForm onChange={handleChange} currState={experience} setState={setExperience}/>
 			</div>
 			<div className="resume-preview">
-				<ResumePreview personInfo={person} educationInfo={education} />
+				<ResumePreview personInfo={person} educationInfo={education} experienceInfo={experience} />
 			</div>
 		</>
 	);

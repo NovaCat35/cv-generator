@@ -12,9 +12,9 @@ export default function GeneralForm({ onChange, currState, setState }: GeneralFo
 	return (
 		<div className="form-container">
 			<form action="">
-				<Input label='Full Name' keyName='name' placeholder='Edward Elric' onChange={onChange} setState={setState} currState={currState}/>
-				<Input label='Email' keyName='email' placeholder='edward.elric@gmail.com' onChange={onChange} setState={setState} currState={currState}/>
-				<Input label='Telephone' keyName='phone' placeholder='(202) 456-1111' onChange={onChange} setState={setState} currState={currState}/>
+				<Input label='Full Name' keyName='name' placeholder='First and Last Name' onChange={onChange} setState={setState} currState={currState}/>
+				<Input label='Email' keyName='email' placeholder='Email' onChange={onChange} setState={setState} currState={currState}/>
+				<Input label='Telephone' keyName='phone' placeholder='Phone Number' onChange={onChange} setState={setState} currState={currState}/>
 			</form>
 		</div>
 	);
