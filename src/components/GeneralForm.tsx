@@ -1,19 +1,20 @@
 import Input from "./Input.tsx";
-import { Person } from "../App.tsx";
+import {HandleChange, Person} from '../App.tsx'
 
 interface GeneralFormProps {
-   personInfo: Person;
-   onChange: (e: React.ChangeEvent<HTMLInputElement>, inputValue: string) => void;
+   onChange: (data: HandleChange) => void;
+	currState: Person;
+	setState: React.Dispatch<React.SetStateAction<any>>;
 }
  
 
-export default function GeneralForm({ personInfo, onChange }: GeneralFormProps) {
+export default function GeneralForm({ onChange, currState, setState }: GeneralFormProps) {
 	return (
 		<div className="form-container">
 			<form action="">
-				<Input label='Full name' keyName='name' placeholder='Edward Elric' onChange={onChange} />
-				<Input label='Email' keyName='email' placeholder='edward.elric@gmail.com' onChange={onChange} />
-				<Input label='Telephone' keyName='phone' placeholder='(202) 456-1111' onChange={onChange} />
+				<Input label='Full Name' keyName='name' placeholder='Edward Elric' onChange={onChange} setState={setState} currState={currState}/>
+				<Input label='Email' keyName='email' placeholder='edward.elric@gmail.com' onChange={onChange} setState={setState} currState={currState}/>
+				<Input label='Telephone' keyName='phone' placeholder='(202) 456-1111' onChange={onChange} setState={setState} currState={currState}/>
 			</form>
 		</div>
 	);

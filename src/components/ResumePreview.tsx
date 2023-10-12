@@ -1,6 +1,10 @@
-import { Person } from "../App.tsx";
+import { Person, Education } from "../App.tsx";
 
-export default function ResumePreview({ personInfo }: { personInfo: Person }) {
+interface ResumePreviewProps {
+    personInfo: Person;
+    educationInfo: Education
+}
+export default function ResumePreview({ personInfo, educationInfo }: ResumePreviewProps) {
 	return (
 		<>
 			<header>
@@ -9,7 +13,10 @@ export default function ResumePreview({ personInfo }: { personInfo: Person }) {
             <div className='phone'>{personInfo.phone}</div>
          </header>
          <main>
-            
+            <div className='school'>{educationInfo.school}</div>
+            <div className='study'>{educationInfo.study}</div>
+            <div className='startDate'>{educationInfo.startDate}</div>
+            <div className='endDate'>{educationInfo.endDate}</div>
          </main>
 		</>
 	);
