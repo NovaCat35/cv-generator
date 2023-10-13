@@ -1,0 +1,55 @@
+@import "./App.scss";
+
+.main-forms-container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+
+	.form-container {
+    // width: clamp(200px, 90%, 300px);
+		border-radius: 10px;
+		padding: 15px 15px 10px;
+		background-color: $white-background;
+		h1 {
+			font-size: 1.5rem;
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			div {
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+				label {
+					position: relative;
+					left: 8px;
+					top: 10px;
+					padding: 1px 5px;
+					align-self: flex-start;
+					border-radius: 5px;
+					background-color: rgb(207, 225, 238);
+					font-size: 0.95rem;
+					color: rgb(65, 67, 70);
+				}
+				input {
+					background-color: rgb(238, 238, 238);
+					appearance: none;
+					border: 1.5px solid transparent;
+					// border: 1.5px solid rgb(166, 166, 166);
+					border-radius: 5px;
+					padding: 10px;
+					&::placeholder {
+						color: rgb(123, 123, 123);
+					}
+					&:focus {
+						outline: none !important;
+						border: 1.5px solid rgb(145, 187, 238);
+						box-shadow: 0 0 5px #75a7dd;
+					}
+				}
+			}
+		}
+	}
+}

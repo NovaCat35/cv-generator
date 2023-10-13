@@ -1,0 +1,12 @@
+$white-background: rgb(255, 255, 255);
+
+#root {
+  background-color: rgb(173, 176, 183);
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  @media screen and (min-width: 750px) {
+    gap: 25px;
+  }
+}

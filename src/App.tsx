@@ -3,7 +3,9 @@ import GeneralForm from "./components/GeneralForm.tsx";
 import ResumePreview from "./components/ResumePreview.tsx";
 import EducationForm from "./components/EducationForm.tsx";
 import ExperienceForm from './components/ExperienceForm.tsx'
-import "./styles/App.css";
+import "./styles/App.scss";
+import "./styles/mainForms.scss";
+import "./styles/resumePreview.scss";
 
 export interface Person {
 	name: string;
