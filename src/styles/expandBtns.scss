@@ -1,0 +1,23 @@
+.previewBtn {
+   position: fixed;
+   right: 0;
+   bottom: 0;
+   margin: 35px;
+   z-index: 2;
+   border: none;
+   border-radius: 50%;
+   background-color: rgb(156, 202, 118);
+   height: 70px;
+   width: 70px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   img {
+      width: 100%; /* This will make sure the image takes up 100% of the container width */
+      height: auto; /* To maintain the aspect ratio */
+   }
+   @media screen and (min-width: 550px) {
+      display: none;
+   }   
+}
+

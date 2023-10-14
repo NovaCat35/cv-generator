@@ -1,24 +1,31 @@
 $white-background: rgb(255, 255, 255);
 
 .main-forms-container {
-  position: absolute;
-  top: 0;
-  left: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-  width: 80vw;
-  z-index: 1;
-  background-color: rgb(135, 142, 160);
-  padding: 1rem;
-  min-height: 100vh;
-  
+	width: 80vw;
+	z-index: 1;
+	background-color: rgb(135, 142, 160);
+	padding: 1rem;
+	min-height: 100vh;
+	transition: all .5s ease-in-out;
+
+	&.hidden{
+		overflow: hidden;
+		width: 0;
+		padding: 0;
+	}
+
 	.form-container {
 		border-radius: 10px;
 		padding: 15px 15px 10px;
 		background-color: $white-background;
 		h1 {
-			font-size: clamp(1rem, 2vw ,1.5rem);
+			font-size: clamp(1rem, 2vw, 1.5rem);
 		}
 		form {
 			display: flex;
@@ -29,7 +36,7 @@ $white-background: rgb(255, 255, 255);
 				flex-direction: column;
 				gap: 5px;
 				label {
-          font-size: clamp(.7rem, 2vw,  0.95rem);
+					font-size: clamp(0.7rem, 2vw, 0.95rem);
 					position: relative;
 					left: 8px;
 					top: 10px;
@@ -40,9 +47,9 @@ $white-background: rgb(255, 255, 255);
 					color: rgb(38, 42, 48);
 				}
 				input {
-          font-size: clamp(.7rem, 2vw, 1rem);
+					font-size: clamp(0.7rem, 2vw, 1rem);
 					background-color: rgb(238, 238, 238);
-					appearance: none; 
+					appearance: none;
 					border: 1.5px solid transparent;
 					border-radius: 5px;
 					padding: 3px;
@@ -54,23 +61,28 @@ $white-background: rgb(255, 255, 255);
 						border: 1.5px solid rgb(145, 187, 238);
 						box-shadow: 0 0 5px #75a7dd;
 					}
-          @media screen and (min-width: 750px) { 
-            padding: 10px;
-          }
+					@media screen and (min-width: 750px) {
+						padding: 10px;
+					}
 				}
 			}
-      @media screen and (min-width: 750px) { 
-        gap: 10px;
-        margin: 0;
-      }
+			@media screen and (min-width: 750px) {
+				gap: 10px;
+				margin: 0;
+			}
 		}
 	}
-  @media screen and (min-width: 550px) {
-    position: relative;
-    background-color: rgb(173, 176, 183);
-    width: clamp(200px, 50%, 300px);
-    padding: 2rem 0 2rem 1.5rem ;
-    overflow-y: visible;
-    height: none;
-  }
+	@media screen and (min-width: 550px) {
+		position: relative;
+		background-color: rgb(173, 176, 183);
+		width: clamp(200px, 50%, 300px);
+		padding: 2rem 0 2rem 1.5rem;
+		overflow-y: visible;
+		height: none;
+		&.hidden{
+			padding: 2rem 0 2rem 1.5rem;
+			width: clamp(200px, 50%, 300px);
+			padding: 2rem 0 2rem 1.5rem;
+		}
+	}
 }
