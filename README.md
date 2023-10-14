@@ -1,27 +1,23 @@
-# React + TypeScript + Vite
+# CV Generator
+Trying to get started with a basic resume template? Look no further, this CV generator will help you fill in the essential details and give you a basic layout as you seek out on your job hunting journey.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Link: WORK IN PROGRESS ...
 
-Currently, two official plugins are available:
+## CHALLENGES
+In an effort to minimize redundancy in code with passing props and having template functions to cover many bases, I ran into a lot of typescript confusion with regards to state variables, passing setState as a parameter to components to be later use as callback, and good structure practices. So far, I keep progressing to fix these mistakes as I continue to change around variables and components as new features get added....
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Build With
+ - React + Vite
+ - TypeScript
+ - Sass
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+## Getting Started with React
+> To get setup with React, run the following in terminal
+```
+1) npm create vite@latest projectName -- --template react-ts
+2) cd cv-generator
+3) npm install
+4) npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Sources

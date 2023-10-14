@@ -7,7 +7,7 @@ interface ResumePreviewProps {
 }
 export default function ResumePreview({ personInfo, educationInfo, experienceInfo }: ResumePreviewProps) {
 	return (
-		<>
+		<div className='resume-container'>
 			<header>
 				<div className="name">{personInfo.name}</div>
 				<div className="email">{personInfo.email}</div>
@@ -28,6 +28,6 @@ export default function ResumePreview({ personInfo, educationInfo, experienceInf
 					<div className="endDate">{experienceInfo.endDate}</div>
 				</div>
 			</main>
-		</>
+		</div>
 	);
 }

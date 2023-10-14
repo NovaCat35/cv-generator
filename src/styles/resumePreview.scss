@@ -1,17 +1,21 @@
-@import "./App.scss";
+$white-background: rgb(255, 255, 255);
 
 .resume-preview {
-   background-color: $white-background;
-   width: 8.5in;
-   height: 11in;
-   box-shadow: 0 15px 25px -5px rgba(50,50,93,.1), 0 8px 16px -8px rgba(0,0,0,.25);
-   header{
-      .name {
-         font-size: 2rem;
+   height: 100vh;
+   padding: 2rem 1.5rem 2rem 0;
+   .resume-container{
+      background-color: $white-background;
+      max-width: 8.5in;
+      max-height: 11in; 
+      box-shadow: 0 15px 25px -5px rgba(50,50,93,.1), 0 8px 16px -8px rgba(0,0,0,.25);
+      header{
+         .name {
+            font-size: 2rem;
+         }
+         padding: 30px;
       }
-      padding: 30px;
-   }
-   main {
-      padding: 30px;
+      main {
+         padding: 30px;
+      }
    }
  }

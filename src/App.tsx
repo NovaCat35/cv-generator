@@ -63,7 +63,6 @@ function App() {
 	 * This way we can change the different states without having to create multiple handleChange for each 'form' component.
 	 * */ 
 	const handleChange = ({ e, fieldName, setState, currState }: HandleChange) => {
-		console.log(setState)
 		setState({ ...currState, [fieldName]: e.target.value });
 	};
 
