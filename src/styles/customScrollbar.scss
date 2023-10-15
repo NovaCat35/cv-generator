@@ -1,0 +1,18 @@
+@mixin customScrollBars() {
+   /* Style the scrollbar */
+	&::-webkit-scrollbar {
+		width: 4px; /* Set the width of the scrollbar */
+	}
+	/* Track */
+	&::-webkit-scrollbar-track {
+		background: #e4e6e7; /* Color of the track */
+	}
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+		background: #888; /* Color of the thumb */
+	}
+	/* Handle on hover */
+	&::-webkit-scrollbar-thumb:hover {
+		background: #555; 
+	}
+}

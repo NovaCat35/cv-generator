@@ -14,6 +14,8 @@ export interface Person {
 	name: string;
 	email: string;
 	phone: string;
+	location: string;
+	website: string;
 }
 
 export interface Education {
@@ -43,6 +45,8 @@ function App() {
 		name: "Edward Elric",
 		email: "edward.elric@gmail.com",
 		phone: "(202) 456-1111",
+		location: "Resembool, Amestris",
+		website: "linkedin.com/in/edwardelric",
 	});
 
 	const [education, setEducation] = useState<Education>({

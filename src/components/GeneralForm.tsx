@@ -15,6 +15,8 @@ export default function GeneralForm({ onChange, currState, setState }: GeneralFo
 					<Input label="Full Name" keyName="name" placeholder="First and Last Name" onChange={onChange} setState={setState} currState={currState} />
 					<Input label="Email" keyName="email" placeholder="Email" onChange={onChange} setState={setState} currState={currState} />
 					<Input label="Telephone" keyName="phone" placeholder="Phone Number" onChange={onChange} setState={setState} currState={currState} />
+					<Input label="Location" keyName="location" placeholder="Location" onChange={onChange} setState={setState} currState={currState} />
+					<Input label="Website" keyName="website" placeholder="Personal Website" onChange={onChange} setState={setState} currState={currState} />
 				</form>
 			</div>
 	);

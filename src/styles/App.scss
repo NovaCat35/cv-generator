@@ -7,7 +7,8 @@ $white-background: rgb(255, 255, 255);
   justify-content: center;
   gap: 15px;
   // A reminder that setting a height here means the parent wont extend down to child when overflow
-  @media screen and (min-width: 750px) {
-    // gap: 25px;
+  @media screen and (min-width: 550px) {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
   }
 }

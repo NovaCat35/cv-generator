@@ -1,6 +1,8 @@
+@import './customScrollbar.scss';
 $white-background: rgb(255, 255, 255);
 
 .main-forms-container {
+	@include customScrollBars;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -8,18 +10,19 @@ $white-background: rgb(255, 255, 255);
 	flex-direction: column;
 	gap: 20px;
 	width: 80vw;
+	height: 100vh;
 	z-index: 1;
 	background-color: rgb(135, 142, 160);
 	padding: 1rem;
 	min-height: 100vh;
 	transition: all .5s ease-in-out;
-
+	overflow-y: auto;
+	/* Hides the 'preview' btn for smaller screens */
 	&.hidden{
 		overflow: hidden;
 		width: 0;
 		padding: 0;
 	}
-
 	.form-container {
 		border-radius: 10px;
 		padding: 15px 15px 10px;
@@ -73,15 +76,14 @@ $white-background: rgb(255, 255, 255);
 		}
 	}
 	@media screen and (min-width: 550px) {
+		grid-column: 1 / 2;
 		position: relative;
 		background-color: rgb(173, 176, 183);
-		width: clamp(200px, 50%, 300px);
-		padding: 2rem 0 2rem 1.5rem;
-		overflow-y: visible;
-		height: none;
+		width: auto;
+		padding: 2rem;
+		/* Ignores the hidden set by the 'preview' btn for bigger screens so we don't hide the left side's inputs */
 		&.hidden{
-			padding: 2rem 0 2rem 1.5rem;
-			width: clamp(200px, 50%, 300px);
+			width: auto;
 			padding: 2rem 0 2rem 1.5rem;
 		}
 	}

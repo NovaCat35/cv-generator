@@ -2,20 +2,50 @@ $white-background: rgb(255, 255, 255);
 
 .resume-preview {
    height: 100vh;
-   padding: 2rem 1.5rem 2rem 0;
+   padding: 1rem;
+   position: relative;
+   justify-self: center;
    .resume-container{
+      box-sizing: border-box; /* Not sure why the body's box-sizing isn't being applied here*/
+      padding: 30px;
       background-color: $white-background;
-      max-width: 8.5in;
-      max-height: 11in; 
+      width: 8.5in;
+      height: 11in; 
+      position: absolute; 
+      top: 50%; 
+      left: 50%; 
+      transform: translate(-50%, -50%) scale(0.43);
       box-shadow: 0 15px 25px -5px rgba(50,50,93,.1), 0 8px 16px -8px rgba(0,0,0,.25);
+      display: grid;
+      grid-template-rows: 100px 1fr;
       header{
+         display: grid;
+         grid-template-columns: 2fr 1fr;
+         grid-template-rows: 50px;
          .name {
-            font-size: 2rem;
+            font-size: 3rem;
          }
-         padding: 30px;
+         .contact-info {
+            display: grid;
+            grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+            column-gap: 10px;
+         }
       }
       main {
-         padding: 30px;
+         display: grid;
+         grid-template-rows: repeat(2, 1fr);
+         h1 {
+            font-size: 2rem;
+         }
       }
+      @media screen and (min-width: 550px) {
+         transform: translate(-50%, -50%) scale(.45);
+      }
+      @media screen and (min-width: 700px) {
+         transform: translate(-50%, -50%) scale(.6);
+      }
+   }
+   @media screen and (min-width: 550px) {
+
    }
  }
