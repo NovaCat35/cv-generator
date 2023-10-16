@@ -9,9 +9,9 @@ interface InputProps {
 	onChange: (data: HandleChange) => void;
 }
 
-export default function Input({ keyName, label, placeholder, onChange, setState, currState }: InputProps) {
+export function Input({ keyName, label, placeholder, onChange, setState, currState }: InputProps) {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		onChange({ e, fieldName: keyName, setState, currState });
+		onChange({ e, keyName, setState, currState });
 	};
 
 	return (

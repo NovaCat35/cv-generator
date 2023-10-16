@@ -25,19 +25,27 @@ export interface Education {
 	endDate?: string;
 }
 
-export interface Experience {
+export interface ExperienceItem {
 	company: string;
 	position: string;
+	location: string;
 	description: string;
 	startDate: string;
 	endDate?: string;
 }
+export interface Experience extends Array<ExperienceItem> {}
 
 export interface HandleChange {
 	e: React.ChangeEvent<HTMLInputElement>;
-	fieldName: string;
+	keyName: string;
 	setState: React.Dispatch<React.SetStateAction<any>>;
 	currState: any;
+}
+
+export interface HandleListChange {
+	setState: React.Dispatch<React.SetStateAction<any>>;
+	currState: Experience;
+	newElement: ExperienceItem;
 }
 
 function App() {
@@ -56,13 +64,24 @@ function App() {
 		endDate: "August 1917",
 	});
 
-	const [experience, setExperience] = useState<Experience>({
-		company: "Aperture Science",
-		position: "Space Research Assistant",
-		description: "Helped look into moon gel studies",
-		startDate: "09/1975",
-		endDate: "04/1980",
-	});
+	const [experience, setExperience] = useState<Experience>([
+		{
+			company: "Aperture Science",
+			position: "Research Assistant",
+			location: 'USA',
+			description: "Contributed to groundbreaking research projects at Aperture Science, specializing in lunar gel studies. Conducted experiments, analyzed samples, and collaborated with a team of scientists. Played a key role in advancing our understanding of extraterrestrial materials, supporting the organization's mission in pioneering space technology.",
+			startDate: "09/1975",
+			endDate: "04/1980",
+		},
+		{ 
+			company: "Adventure Guide", 
+			position: "Adventurer", 
+			location: 'Teyvat',
+			description: "Contributed to groundbreaking research projects at Aperture Science, specializing in lunar gel studies. Conducted experiments, analyzed samples, and collaborated with a team of scientists. Played a key role in advancing our understanding of extraterrestrial materials, supporting the organization's mission in pioneering space technology.", 
+			startDate: "09/1975", 
+			endDate: "04/1980" 
+		},
+	]);
 
 	const [isPreviewActive, setIsPreviewActive] = useState(false);
 
@@ -71,16 +90,23 @@ function App() {
 	 * The setState and currState is the parameters unique to each form component that.
 	 * This way we can change the different states without having to create multiple handleChange for each 'form' component.
 	 * */
-	const handleChange = ({ e, fieldName, setState, currState }: HandleChange) => {
-		setState({ ...currState, [fieldName]: e.target.value });
+	const handleChange = ({ e, keyName, setState, currState }: HandleChange) => {
+		setState({ ...currState, [keyName]: e.target.value });
+	};
+	/**
+	 * handleCollectionList keeps track of a list of exp or skills added by form submits
+	 * While the individual 'forms'.tsx handle the adding of individual elements, we need to append them all here
+	 * */
+	const setCollectionList = ({ setState, currState, newElement }: HandleListChange) => {
+		setState([...currState, newElement]);
 	};
 
 	return (
 		<>
-			<div className={isPreviewActive ? 'main-forms-container hidden' : 'main-forms-container'}>
+			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm onChange={handleChange} currState={education} setState={setEducation} />
-				<ExperienceForm onChange={handleChange} currState={experience} setState={setExperience} />
+				<ExperienceForm handleSubmitChange={setCollectionList} currState={experience} setState={setExperience} />
 			</div>
 			<div className="resume-preview">
 				<ResumePreview personInfo={person} educationInfo={education} experienceInfo={experience} />
@@ -95,7 +121,7 @@ function App() {
 					}
 				}}
 			>
-				<img src={isPreviewActive ? visibleImgOff: visibleImg} alt="preview-btn" />
+				<img src={isPreviewActive ? visibleImgOff : visibleImg} alt="preview-btn" />
 			</button>
 		</>
 	);

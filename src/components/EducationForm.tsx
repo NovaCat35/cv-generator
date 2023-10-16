@@ -1,4 +1,4 @@
-import Input from "./Input.tsx";
+import {Input} from "./Input.tsx";
 import { Education, HandleChange } from "../App.tsx";
 
 interface EducationFormProps {

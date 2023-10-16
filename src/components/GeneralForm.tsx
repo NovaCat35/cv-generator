@@ -1,4 +1,4 @@
-import Input from "./Input.tsx";
+import {Input} from "./Input.tsx";
 import { HandleChange, Person } from "../App.tsx";
 
 interface GeneralFormProps {

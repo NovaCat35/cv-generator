@@ -5,7 +5,6 @@ $white-background: rgb(255, 255, 255);
   background-color: rgb(173, 176, 183);
   display: flex;
   justify-content: center;
-  gap: 15px;
   // A reminder that setting a height here means the parent wont extend down to child when overflow
   @media screen and (min-width: 550px) {
     display: grid;
