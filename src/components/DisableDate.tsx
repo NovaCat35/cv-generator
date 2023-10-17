@@ -4,7 +4,7 @@ interface DisableDateProps{
 export default function DisableDate({onToggle}: DisableDateProps) {
 	return (
 		<div className="toggle-container">
-			<label htmlFor="checkbox">I currently work here</label>
+			<label htmlFor="checkbox">Current Status</label>
 			<input type="checkbox" id="checkbox" onChange={onToggle}/>
 		</div>
 	);

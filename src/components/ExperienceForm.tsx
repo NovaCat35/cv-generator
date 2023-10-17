@@ -46,8 +46,8 @@ export default function ExperienceForm({ handleSubmitChange, setState, currState
 				<Input label="Position Title" keyName="position" placeholder="Position" onChange={onChange} setState={setState} currState={currState} />
 				<Input label="Description" keyName="description" placeholder="Role Description" onChange={onChange} setState={setState} currState={currState} />
 				<DisableDate onToggle={handleToggle}/>
-				<InputDate label="Start Date" keyName="startDate" onChange={onChange} setState={setState} currState={currState} />
-				{isChecked ? '' : <InputDate label="End Date" keyName="endDate" onChange={onChange} setState={setState} currState={currState} /> }
+				<InputDate label="Start Date *" keyName="startDate" onChange={onChange} setState={setState} currState={currState} />
+				{isChecked ? '' : <InputDate label="End Date *" keyName="endDate" onChange={onChange} setState={setState} currState={currState} /> }
 				<button className='submit-btn' type="submit">Submit</button>
 			</form>
 		</div>
