@@ -3,15 +3,18 @@ import { HandleListChange, Experience, HandleChange } from "../App.tsx";
 import { useState } from "react";
 import {InputDate} from "./InputDate.tsx";
 import DisableDate from "./DisableDate.tsx";
+import ExpandSVG from "../assets/expand.svg";
 
 
 interface ExperienceFormProps {
+	isActive: boolean;
+	onExpand: () => void;
 	handleSubmitChange: (data: HandleListChange) => void;
 	currState: Experience;
 	setState: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export default function ExperienceForm({ handleSubmitChange, setState, currState }: ExperienceFormProps) {
+export default function ExperienceForm({ isActive, onExpand, handleSubmitChange, setState, currState }: ExperienceFormProps) {
 	const [currExp, setCurrExp] = useState({
 		company: '',
 		position: '',
@@ -20,7 +23,6 @@ export default function ExperienceForm({ handleSubmitChange, setState, currState
 		startDate: '',
 		endDate: '',
 	});
-
 	const [isChecked, setIsChecked] = useState(false);
 
 	const onChange = ({value, keyName} : HandleChange) => {
@@ -39,8 +41,11 @@ export default function ExperienceForm({ handleSubmitChange, setState, currState
 	}
 
 	return (
-		<div className="form-container">
-			<h1>Experience</h1>
+		<div className={isActive ? 'form-container active' : 'form-container'}>
+			<div className="head">
+				<h1>Experience</h1>
+				<button className={isActive ? 'expandBtn active' : 'expandBtn'} onClick={onExpand}><img src={ExpandSVG} alt="expand icon"/></button>
+			</div>
 			<form onSubmit={handleSubmit}>
 				<Input label="Company Name" keyName="company" placeholder="Company Name" onChange={onChange} setState={setState} currState={currState} />
 				<Input label="Position Title" keyName="position" placeholder="Position" onChange={onChange} setState={setState} currState={currState} />

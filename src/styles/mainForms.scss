@@ -1,5 +1,5 @@
-@import './customScrollbar.scss';
-@import './disableDate.scss';
+@import "./customScrollbar.scss";
+@import "./disableDate.scss";
 $white-background: rgb(255, 255, 255);
 
 .main-forms-container {
@@ -16,10 +16,10 @@ $white-background: rgb(255, 255, 255);
 	background-color: rgb(135, 142, 160);
 	padding: 1rem;
 	min-height: 100vh;
-	transition: all .5s ease-in-out;
+	transition: all 0.5s ease-in-out;
 	overflow-y: auto;
 	/* Hides the 'preview' btn for smaller screens */
-	&.hidden{
+	&.hidden {
 		overflow: hidden;
 		width: 0;
 		padding: 0;
@@ -28,8 +28,21 @@ $white-background: rgb(255, 255, 255);
 		border-radius: 10px;
 		padding: 15px 15px 10px;
 		background-color: $white-background;
+		transition: all .5s ease-in-out;
+		height: auto;
+		&:not(.active){
+			height: 30px;
+			form{
+				visibility: hidden;
+			}
+		}
 		h1 {
 			font-size: clamp(1rem, 2vw, 1.5rem);
+		}
+		.head {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 		}
 		form {
 			display: flex;
@@ -50,7 +63,7 @@ $white-background: rgb(255, 255, 255);
 					background-color: rgb(207, 225, 238);
 					color: rgb(38, 42, 48);
 				}
-				input:not(input[type='checkbox']) {
+				input:not(input[type="checkbox"]) {
 					font-size: clamp(0.7rem, 2vw, 1rem);
 					background-color: rgb(238, 238, 238);
 					appearance: none;
@@ -70,19 +83,22 @@ $white-background: rgb(255, 255, 255);
 					}
 				}
 			}
-			button[type='submit'] {
+			button[type="submit"] {
 				margin-top: 10px;
 				appearance: none;
 				-webkit-appearance: none;
 				font-size: 1rem;
 				border-radius: 5px;
-				border: 1px solid rgb(217, 215, 215);
+				border: 2px solid rgb(202, 224, 229);
 				background-color: #dee0e3;
 				padding: 5px;
-				&:hover{
-					border: 1px solid rgb(53, 132, 174);
+				width: 90%;
+				align-self: center;
+				transition: all .3s ease-in-out;
+				&:hover {
+					border: 2px solid rgb(53, 132, 174);
 					background-color: #9cbddf;
-					color: rgb(255, 255, 255);
+					color: $white-background;
 					text-shadow: 1px 1px 5px rgb(90, 115, 170);
 				}
 			}
@@ -99,7 +115,7 @@ $white-background: rgb(255, 255, 255);
 		width: auto;
 		padding: 2rem;
 		/* Ignores the hidden set by the 'preview' btn for bigger screens so we don't hide the left side's inputs */
-		&.hidden{
+		&.hidden {
 			width: auto;
 			padding: 2rem 0 2rem 1.5rem;
 		}

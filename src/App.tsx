@@ -86,6 +86,7 @@ function App() {
 	]);
 
 	const [isPreviewActive, setIsPreviewActive] = useState(false);
+	const [activeIndex, setActiveIndex] = useState(0);
 
 	/**
 	 * This handleChange function covers the dynamic inputs from each component 'Forms'.
@@ -107,8 +108,8 @@ function App() {
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
-				<EducationForm onChange={handleChange} currState={education} setState={setEducation} />
-				<ExperienceForm handleSubmitChange={setCollectionList} currState={experience} setState={setExperience} />
+				<EducationForm isActive={activeIndex === 0} onExpand={() => setActiveIndex(0)} onChange={handleChange} currState={education} setState={setEducation} />
+				<ExperienceForm isActive={activeIndex === 1} onExpand={() => setActiveIndex(1)} handleSubmitChange={setCollectionList} currState={experience} setState={setExperience} />
 			</div>
 			<div className="resume-preview">
 				<ResumePreview personInfo={person} educationInfo={education} experienceInfo={experience} />

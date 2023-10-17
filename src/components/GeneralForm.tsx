@@ -9,7 +9,7 @@ interface GeneralFormProps {
 
 export default function GeneralForm({ onChange, currState, setState }: GeneralFormProps) {
 	return (
-			<div className="form-container">
+			<div className="form-container active">
 				<h1>Personal Profile</h1>
 				<form action="">
 					<Input label="Full Name" keyName="name" placeholder="First and Last Name" onChange={onChange} setState={setState} currState={currState} />
