@@ -21,20 +21,27 @@ export default function ResumePreview({ personInfo, educationInfo, experienceInf
 			<main>
 				<div className="education-container">
 					<h1>Education</h1>
-					<div className="school">{educationInfo.school}</div>
-					<div className="study">{educationInfo.study}</div>
-					<div className="startDate">{educationInfo.startDate}</div>
-					<div className="endDate">{educationInfo.endDate}</div>
+					<div className="education-details">
+						<div className="school">{educationInfo.school}</div>
+						<div className="date-container">
+							<div className="startDate">{educationInfo.startDate}</div>
+							<div className="endDate">{educationInfo.endDate}</div>
+						</div>
+						<div className="study">{educationInfo.study}</div>
+						<div className="location">{educationInfo.location}</div>
+					</div>
 				</div>
 				<div className="experience-container">
 					<h1>Career Experience</h1>
 					{experienceInfo.map((experience : ExperienceItem, index: number) => (
-						<div className={`exp-${index}`} key={uuidv4()}>
+						<div className={`exp-details`} key={uuidv4()}>
 							<div className="company">{experience.company}</div>
+							<div className="date-container">
+								<div className="startDate">{experience.startDate}</div>
+								<div className="endDate">{experience.endDate}</div>
+							</div>
 							<div className="position">{experience.position}</div>
 							<div className="description">{experience.description}</div>
-							<div className="startDate">{experience.startDate}</div>
-							<div className="endDate">{experience.endDate}</div>
 						</div>
 					))}
 				</div>

@@ -1,4 +1,5 @@
 import {Input} from "./Input.tsx";
+import {InputDate} from "./InputDate.tsx";
 import { Education, HandleChange } from "../App.tsx";
 
 interface EducationFormProps {
@@ -13,9 +14,10 @@ export default function EducationForm({ onChange, setState, currState }: Educati
 			<h1>Education</h1>
 			<form action="">
 				<Input label="School" keyName="school" placeholder="School Name" onChange={onChange} setState={setState} currState={currState} />
+				<Input label="Location" keyName="location" placeholder="School Name" onChange={onChange} setState={setState} currState={currState} />
 				<Input label="Degree | Study" keyName="study" placeholder="Degree Type" onChange={onChange} setState={setState} currState={currState} />
-				<Input label="Start Date" keyName="startDate" placeholder="Start Date" onChange={onChange} setState={setState} currState={currState} />
-				<Input label="End Date" keyName="endDate" placeholder="End Date" onChange={onChange} setState={setState} currState={currState} />
+				<InputDate label="Start Date" keyName="startDate"onChange={onChange} setState={setState} currState={currState} />
+				<InputDate label="End Date" keyName="endDate" onChange={onChange} setState={setState} currState={currState} />
 			</form>
 		</div>
 	);

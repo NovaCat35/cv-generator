@@ -37,6 +37,31 @@ $white-background: rgb(255, 255, 255);
          h1 {
             font-size: 2rem;
          }
+         .education-container {
+            .education-details {
+               display: grid;
+               grid-template: repeat(2, 20px)/ 2fr 160px;
+              .study {
+                  display: list-item; /* This has to be "list-item"                                          */
+                  margin-left : 1rem;
+              }
+            }
+         }
+         .experience-container {
+            .exp-details{
+               display: grid;
+               margin-bottom: 15px;
+               grid-template: repeat(2, 20px) 1fr / 1fr 160px;
+               .company{
+                  font-weight: 700;
+               }
+               .description {
+                  grid-row: 3 / -1;
+                  display: list-item;
+                  margin-left: 1rem;
+               }
+            }
+         }
       }
       @media screen and (min-width: 550px) {
          transform: translate(-50%, -50%) scale(.45);
@@ -49,3 +74,12 @@ $white-background: rgb(255, 255, 255);
 
    }
  }
+
+ .date-container {
+   display: flex;
+   font-weight: 700;
+   .startDate::after {
+      content: '-';
+      margin: 0 5px;
+   }
+}

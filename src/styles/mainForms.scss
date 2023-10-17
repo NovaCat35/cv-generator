@@ -38,7 +38,7 @@ $white-background: rgb(255, 255, 255);
 				display: flex;
 				flex-direction: column;
 				gap: 5px;
-				label {
+				label:not(.toggle-container label) {
 					font-size: clamp(0.7rem, 2vw, 0.95rem);
 					position: relative;
 					left: 8px;
@@ -49,7 +49,7 @@ $white-background: rgb(255, 255, 255);
 					background-color: rgb(207, 225, 238);
 					color: rgb(38, 42, 48);
 				}
-				input {
+				input:not(input[type='checkbox']) {
 					font-size: clamp(0.7rem, 2vw, 1rem);
 					background-color: rgb(238, 238, 238);
 					appearance: none;
@@ -67,6 +67,9 @@ $white-background: rgb(255, 255, 255);
 					@media screen and (min-width: 750px) {
 						padding: 10px;
 					}
+				}
+				input#checkbox{
+					margin-right: auto;
 				}
 			}
 			@media screen and (min-width: 750px) {

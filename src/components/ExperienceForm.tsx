@@ -1,6 +1,9 @@
 import {Input} from "./Input.tsx";
 import { HandleListChange, Experience, HandleChange } from "../App.tsx";
 import { useState } from "react";
+import {InputDate} from "./InputDate.tsx";
+import DisableDate from "./DisableDate.tsx";
+
 
 interface ExperienceFormProps {
 	handleSubmitChange: (data: HandleListChange) => void;
@@ -18,14 +21,21 @@ export default function ExperienceForm({ handleSubmitChange, setState, currState
 		endDate: '',
 	});
 
-	const onChange = ({e, keyName} : HandleChange) => {
-		setCurrExp({...currExp, [keyName] : e.target.value})
+	const [isChecked, setIsChecked] = useState(false);
+
+	const onChange = ({value, keyName} : HandleChange) => {
+		setCurrExp({...currExp, [keyName] : value})
 	}
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		const newElement = {...currExp}
+		const updatedEndDate = isChecked ? 'Present' : currExp.endDate;
+		const newElement = {...currExp, endDate : updatedEndDate}
 		handleSubmitChange({setState, currState, newElement});
+	}
+
+	const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setIsChecked(e.target.checked);
 	}
 
 	return (
@@ -35,8 +45,9 @@ export default function ExperienceForm({ handleSubmitChange, setState, currState
 				<Input label="Company Name" keyName="company" placeholder="Company Name" onChange={onChange} setState={setState} currState={currState} />
 				<Input label="Position Title" keyName="position" placeholder="Position" onChange={onChange} setState={setState} currState={currState} />
 				<Input label="Description" keyName="description" placeholder="Role Description" onChange={onChange} setState={setState} currState={currState} />
-				<Input label="Start Date" keyName="startDate" placeholder="" onChange={onChange} setState={setState} currState={currState} />
-				<Input label="End Date" keyName="endDate" placeholder="" onChange={onChange} setState={setState} currState={currState} />
+				<DisableDate onToggle={handleToggle}/>
+				<InputDate label="Start Date" keyName="startDate" onChange={onChange} setState={setState} currState={currState} />
+				{isChecked ? '' : <InputDate label="End Date" keyName="endDate" onChange={onChange} setState={setState} currState={currState} /> }
 				<button className='submit-btn' type="submit">Submit</button>
 			</form>
 		</div>

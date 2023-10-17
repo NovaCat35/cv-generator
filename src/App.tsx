@@ -21,6 +21,7 @@ export interface Person {
 export interface Education {
 	school: string;
 	study: string;
+	location: string;
 	startDate: string;
 	endDate?: string;
 }
@@ -31,12 +32,12 @@ export interface ExperienceItem {
 	location: string;
 	description: string;
 	startDate: string;
-	endDate?: string;
+	endDate: string;
 }
 export interface Experience extends Array<ExperienceItem> {}
 
 export interface HandleChange {
-	e: React.ChangeEvent<HTMLInputElement>;
+	value: string;
 	keyName: string;
 	setState: React.Dispatch<React.SetStateAction<any>>;
 	currState: any;
@@ -58,28 +59,29 @@ function App() {
 	});
 
 	const [education, setEducation] = useState<Education>({
-		school: "Amestrian, State Military",
-		study: "State Alchemist",
-		startDate: "October 1911",
-		endDate: "August 1917",
+		school: "Amestrian State Military",
+		location: "Amestris, Central City",
+		study: "Master of State Alchemy",
+		startDate: "Sept 1911",
+		endDate: "May 1917",
 	});
 
 	const [experience, setExperience] = useState<Experience>([
 		{
-			company: "Aperture Science",
+			company: "Aperture Science, Inc.",
 			position: "Research Assistant",
 			location: 'USA',
-			description: "Contributed to groundbreaking research projects at Aperture Science, specializing in lunar gel studies. Conducted experiments, analyzed samples, and collaborated with a team of scientists. Played a key role in advancing our understanding of extraterrestrial materials, supporting the organization's mission in pioneering space technology.",
-			startDate: "09/1975",
-			endDate: "04/1980",
+			description: "Contributed invaluable insights to the development of cutting-edge technologies, most notably the revolutionary portal gun.",
+			startDate: "Aug 1957",
+			endDate: "April 1970",
 		},
 		{ 
-			company: "Adventure Guide", 
-			position: "Adventurer", 
-			location: 'Teyvat',
-			description: "Contributed to groundbreaking research projects at Aperture Science, specializing in lunar gel studies. Conducted experiments, analyzed samples, and collaborated with a team of scientists. Played a key role in advancing our understanding of extraterrestrial materials, supporting the organization's mission in pioneering space technology.", 
-			startDate: "09/1975", 
-			endDate: "04/1980" 
+			company: "Amestrian State Military", 
+			position: "State Alchemist", 
+			location: 'Amestris, Central City',
+			description: "Utilized alchemical expertise and innovative problem-solving to investigate and resolve complex alchemical mysteries. Demonstrated exceptional skill in both theoretical and practical alchemy, ensuring the safety and security of Amestris through pioneering advancements in alchemical techniques.", 
+			startDate: "Sept 1911", 
+			endDate: "May 1917" 
 		},
 	]);
 
@@ -90,8 +92,8 @@ function App() {
 	 * The setState and currState is the parameters unique to each form component that.
 	 * This way we can change the different states without having to create multiple handleChange for each 'form' component.
 	 * */
-	const handleChange = ({ e, keyName, setState, currState }: HandleChange) => {
-		setState({ ...currState, [keyName]: e.target.value });
+	const handleChange = ({ value, keyName, setState, currState }: HandleChange) => {
+		setState({ ...currState, [keyName]: value });
 	};
 	/**
 	 * handleCollectionList keeps track of a list of exp or skills added by form submits
