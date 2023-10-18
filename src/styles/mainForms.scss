@@ -1,5 +1,7 @@
 @import "./customScrollbar.scss";
 @import "./disableDate.scss";
+@import "./fonts.scss";
+
 $white-background: rgb(255, 255, 255);
 
 .main-forms-container {
@@ -13,11 +15,12 @@ $white-background: rgb(255, 255, 255);
 	width: 80vw;
 	height: 100vh;
 	z-index: 1;
-	background-color: rgb(135, 142, 160);
+	background-color: rgb(191, 191, 192);
 	padding: 1rem;
 	min-height: 100vh;
 	transition: all 0.5s ease-in-out;
 	overflow-y: auto;
+	box-shadow: 1px 1px 10px 0px rgb(163, 161, 161);
 	/* Hides the 'preview' btn for smaller screens */
 	&.hidden {
 		overflow: hidden;
@@ -28,6 +31,7 @@ $white-background: rgb(255, 255, 255);
 		border-radius: 10px;
 		padding: 10px 15px 10px;
 		background-color: $white-background;
+		font-family: 'CustomFont';
 		transition: all 1s ease-in-out;
 		&.active {
 			form {
