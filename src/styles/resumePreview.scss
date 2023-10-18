@@ -6,7 +6,6 @@ $white-background: rgb(255, 255, 255);
    position: relative;
    justify-self: center;
    .resume-container{
-      box-sizing: border-box; /* Not sure why the body's box-sizing isn't being applied here*/
       padding: 30px;
       background-color: $white-background;
       width: 8.5in;

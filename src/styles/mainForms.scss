@@ -20,6 +20,7 @@ $white-background: rgb(255, 255, 255);
 	min-height: 100vh;
 	transition: all 0.5s ease-in-out;
 	overflow-y: auto;
+	overscroll-behavior: contain;
 	box-shadow: 1px 1px 10px 0px rgb(163, 161, 161);
 	/* Hides the 'preview' btn for smaller screens */
 	&.hidden {
@@ -123,7 +124,7 @@ $white-background: rgb(255, 255, 255);
 		&.hidden {
 			overflow: auto;
 			width: auto;
-			padding: 2rem 0 2rem 1.5rem;
+			padding: 2rem;
 		}
 	}
 }
