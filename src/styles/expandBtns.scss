@@ -4,7 +4,7 @@ $white-background: white;
    position: fixed;
    right: 0;
    bottom: 0;
-   margin: 35px;
+   margin: 25px 15px 35px 25px;
    z-index: 2;
    border: none;
    border-radius: 50%;
@@ -24,6 +24,7 @@ $white-background: white;
 }
 
 button.expandBtn {
+   cursor: pointer;
    border: none;
    background-color: $white-background;
    height: 30px;
@@ -37,5 +38,21 @@ button.expandBtn {
    }
    &.active{
       transform: rotate(0deg);
+      &:hover{
+         animation: bellshake .5s cubic-bezier(.36,.07,.19,.97) both;
+         backface-visibility: hidden;
+      }
    }
 }
+
+@keyframes bellshake {
+   0% { transform: rotate(0); }
+   15% { transform: rotate(9deg); }
+   30% { transform: rotate(-9deg); }
+   45% { transform: rotate(4deg); }
+   60% { transform: rotate(-4deg); }
+   75% { transform: rotate(2deg); }
+   85% { transform: rotate(-2deg); }
+   92% { transform: rotate(1deg); }
+   100% { transform: rotate(0); }
+ }

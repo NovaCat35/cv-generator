@@ -26,14 +26,15 @@ $white-background: rgb(255, 255, 255);
 	}
 	.form-container {
 		border-radius: 10px;
-		padding: 15px 15px 10px;
+		padding: 10px 15px 35px;
 		background-color: $white-background;
-		transition: all .5s ease-in-out;
-		height: auto;
-		&:not(.active){
-			height: 30px;
-			form{
-				visibility: hidden;
+		transition: all 1s ease-in-out;
+		overflow: hidden; /* Hide overflowing content */
+		&.active {
+			overflow: visible;
+			padding: 15px 15px 10px;
+			form {
+				display: flex;
 			}
 		}
 		h1 {
@@ -45,7 +46,7 @@ $white-background: rgb(255, 255, 255);
 			align-items: center;
 		}
 		form {
-			display: flex;
+			display: none;
 			flex-direction: column;
 			gap: 3px;
 			div {
@@ -56,7 +57,7 @@ $white-background: rgb(255, 255, 255);
 					font-size: clamp(0.7rem, 2vw, 0.95rem);
 					position: relative;
 					left: 8px;
-					top: 10px;
+					top: 9px;
 					padding: 1px 5px;
 					align-self: flex-start;
 					border-radius: 5px;
@@ -84,6 +85,7 @@ $white-background: rgb(255, 255, 255);
 				}
 			}
 			button[type="submit"] {
+				cursor: pointer;
 				margin-top: 10px;
 				appearance: none;
 				-webkit-appearance: none;
@@ -94,7 +96,7 @@ $white-background: rgb(255, 255, 255);
 				padding: 5px;
 				width: 90%;
 				align-self: center;
-				transition: all .3s ease-in-out;
+				transition: all 0.3s ease-in-out;
 				&:hover {
 					border: 2px solid rgb(53, 132, 174);
 					background-color: #9cbddf;
@@ -116,6 +118,7 @@ $white-background: rgb(255, 255, 255);
 		padding: 2rem;
 		/* Ignores the hidden set by the 'preview' btn for bigger screens so we don't hide the left side's inputs */
 		&.hidden {
+			overflow: auto;
 			width: auto;
 			padding: 2rem 0 2rem 1.5rem;
 		}
