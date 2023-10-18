@@ -108,8 +108,8 @@ function App() {
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
-				<EducationForm isActive={activeIndex === 0} onExpand={() => setActiveIndex(0)} onChange={handleChange} currState={education} setState={setEducation} />
-				<ExperienceForm isActive={activeIndex === 1} onExpand={() => setActiveIndex(1)} handleSubmitChange={setCollectionList} currState={experience} setState={setExperience} />
+				<EducationForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} activeIndex={0} onChange={handleChange} currState={education} setState={setEducation} />
+				<ExperienceForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} activeIndex={1} handleSubmitChange={setCollectionList} currState={experience} setState={setExperience} />
 			</div>
 			<div className="resume-preview">
 				<ResumePreview personInfo={person} educationInfo={education} experienceInfo={experience} />

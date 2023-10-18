@@ -26,15 +26,12 @@ $white-background: rgb(255, 255, 255);
 	}
 	.form-container {
 		border-radius: 10px;
-		padding: 10px 15px 35px;
+		padding: 10px 15px 10px;
 		background-color: $white-background;
 		transition: all 1s ease-in-out;
-		overflow: hidden; /* Hide overflowing content */
 		&.active {
-			overflow: visible;
-			padding: 15px 15px 10px;
 			form {
-				display: flex;
+				height: auto;
 			}
 		}
 		h1 {
@@ -46,7 +43,9 @@ $white-background: rgb(255, 255, 255);
 			align-items: center;
 		}
 		form {
-			display: none;
+			height: 0;
+			overflow: hidden;
+			display: flex;
 			flex-direction: column;
 			gap: 3px;
 			div {
@@ -66,7 +65,7 @@ $white-background: rgb(255, 255, 255);
 				}
 				input:not(input[type="checkbox"]) {
 					font-size: clamp(0.7rem, 2vw, 1rem);
-					background-color: rgb(238, 238, 238);
+					background-color: rgb(243, 243, 243);
 					appearance: none;
 					border: 1.5px solid transparent;
 					border-radius: 5px;
@@ -113,7 +112,7 @@ $white-background: rgb(255, 255, 255);
 	@media screen and (min-width: 550px) {
 		grid-column: 1 / 2;
 		position: relative;
-		background-color: rgb(173, 176, 183);
+		background-color: rgb(242, 242, 243);
 		width: auto;
 		padding: 2rem;
 		/* Ignores the hidden set by the 'preview' btn for bigger screens so we don't hide the left side's inputs */

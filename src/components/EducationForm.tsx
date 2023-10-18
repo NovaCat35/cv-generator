@@ -7,13 +7,14 @@ import DisableDate from "./DisableDate.tsx";
 
 interface EducationFormProps {
 	isActive: boolean;
-	onExpand: () => void;
+	onExpand: (param:number) => void;
+	activeIndex: number;
 	onChange: (data: HandleChange) => void;
 	currState: Education;
 	setState: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export default function EducationForm({ isActive, onExpand, onChange, setState, currState }: EducationFormProps) {
+export default function EducationForm({ isActive, onExpand, activeIndex, onChange, setState, currState }: EducationFormProps) {
 	const [isChecked, setIsChecked] = useState(false);
 
 	const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,12 +24,15 @@ export default function EducationForm({ isActive, onExpand, onChange, setState, 
 		onChange({ value, keyName, setState, currState });
 	};
 
+	const handleClick = () => {
+		isActive ? onExpand(-1): onExpand(activeIndex);
+	}
 
 	return (
 		<div className={isActive ? 'form-container active' : 'form-container'}>
 			<div className="head">
 				<h1>Education</h1>
-				<button className={isActive ? 'expandBtn active' : 'expandBtn'} onClick={onExpand}><img src={ExpandSVG} alt="expand icon"/></button>
+				<button className={isActive ? 'expandBtn active' : 'expandBtn'} onClick={handleClick}><img src={ExpandSVG} alt="expand icon"/></button>
 			</div>
 			<form action="">
 				<Input label="School" keyName="school" placeholder="School Name" onChange={onChange} setState={setState} currState={currState} />
