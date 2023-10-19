@@ -3,6 +3,12 @@ Trying to get started with a basic resume template? Look no further, this CV gen
 
 Link: THIS PROJECT IS CURRENTLY A WORK IN PROGRESS ... ⚠️
 
+## FEATURES [Work in Progress]
+ - Print option
+ - Download as PDF
+ - Local Save
+ - Resume Example
+
 ## CHALLENGES
 In an effort to minimize redundancy in code with passing props and having template functions to cover many bases, I ran into a lot of typescript confusion with regards to state variables, passing setState as a parameter to components to be later use as callback, and good structure practices. So far, I keep progressing to fix these mistakes as I continue to change around variables and components as new features get added....
 

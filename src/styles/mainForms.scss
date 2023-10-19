@@ -3,7 +3,22 @@
 @import "./fonts.scss";
 
 $white-background: rgb(255, 255, 255);
-
+@mixin button() {
+	cursor: pointer;
+	margin-top: 10px;
+	appearance: none;
+	-webkit-appearance: none;
+	font-size: 1rem;
+	border-radius: 5px;
+	padding: 5px;
+	width: 90%;
+	align-self: center;
+	transition: all 0.4s ease-in-out;
+	text-shadow: 1px 1px 5px rgb(242, 242, 242);
+	&:active {
+		transform: translateY(3px);
+	}
+}
 .main-forms-container {
 	@include customScrollBars;
 	position: absolute;
@@ -32,10 +47,10 @@ $white-background: rgb(255, 255, 255);
 		border-radius: 10px;
 		padding: 10px 15px 10px;
 		background-color: $white-background;
-		font-family: 'CustomFont';
+		font-family: "CustomFont";
 		transition: all 1s ease-in-out;
 		&.active {
-			form {
+			form, .exp-opt-container {
 				height: auto;
 			}
 		}
@@ -88,29 +103,67 @@ $white-background: rgb(255, 255, 255);
 					}
 				}
 			}
-			button[type="submit"] {
-				cursor: pointer;
-				margin-top: 10px;
-				appearance: none;
-				-webkit-appearance: none;
-				font-size: 1rem;
-				border-radius: 5px;
-				border: 2px solid rgb(202, 224, 229);
-				background-color: #dee0e3;
-				padding: 5px;
-				width: 90%;
-				align-self: center;
-				transition: all 0.3s ease-in-out;
-				&:hover {
-					border: 2px solid rgb(53, 132, 174);
-					background-color: #9cbddf;
-					color: $white-background;
-					text-shadow: 1px 1px 5px rgb(90, 115, 170);
+			.button-container {
+				button[type="submit"] {
+					@include button();
+					border: 2px solid rgb(202, 224, 229);
+					background-color: #dee0e3;
+					&:hover {
+						border: 2px solid rgb(53, 132, 174);
+						background-color: #9cbddf;
+						color: $white-background;
+						text-shadow: 1px 1px 5px rgb(90, 115, 170);
+					}
+				}
+				button[type="button"] {
+					@include button();
+					border: 2px solid rgb(229, 202, 202);
+					background-color: #e3dede;
+					&:hover {
+						border: 2px solid rgb(174, 53, 53);
+						background-color: #dfa79c;
+						color: $white-background;
+						text-shadow: 1px 1px 5px rgb(196, 64, 64);
+					}
+				}
+				@media screen and (min-width: 750px) {
+					flex-direction: row;
+					gap: 20px;
 				}
 			}
 			@media screen and (min-width: 750px) {
 				gap: 10px;
 				margin: 0;
+			}
+		}
+		.exp-opt-container{
+			margin-top: 5px;
+			height: 0;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			.exp-details {
+				cursor: pointer;
+				padding: 10px;
+				border: 2px solid rgb(197, 190, 190);
+				border-radius: 10px;
+			}
+			/* Button container outside of forms (I don't mean outside form-container) */
+			.button-container {
+				display: flex;
+				justify-content: center;
+				button[type="button"] {
+					@include button();
+					border: 2px solid rgb(137, 195, 140);
+					background-color: #dfe3de;
+					&:hover {
+						border: 2px solid rgb(83, 174, 53);
+						background-color: #a2df9c;
+						color: $white-background;
+						text-shadow: 1px 1px 5px rgb(20, 101, 16);
+					}
+				}
 			}
 		}
 	}
@@ -119,12 +172,12 @@ $white-background: rgb(255, 255, 255);
 		position: relative;
 		background-color: rgb(242, 242, 243);
 		width: auto;
-		padding: 2rem;
+		padding: 1.7rem;
 		/* Ignores the hidden set by the 'preview' btn for bigger screens so we don't hide the left side's inputs */
 		&.hidden {
 			overflow: auto;
 			width: auto;
-			padding: 2rem;
+			padding: 1.7rem;
 		}
 	}
 }

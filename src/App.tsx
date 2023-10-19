@@ -27,6 +27,7 @@ export interface Education {
 }
 
 export interface ExperienceItem {
+	id: string;
 	company: string;
 	position: string;
 	location: string;
@@ -68,6 +69,7 @@ function App() {
 
 	const [experience, setExperience] = useState<Experience>([
 		{
+			id: 'abc123',
 			company: "Aperture Science, Inc.",
 			position: "Research Assistant",
 			location: 'USA',
@@ -76,6 +78,7 @@ function App() {
 			endDate: "April 1970",
 		},
 		{ 
+			id: 'pwd888',
 			company: "Amestrian State Military", 
 			position: "State Alchemist", 
 			location: 'Amestris, Central City',
@@ -85,13 +88,13 @@ function App() {
 		},
 	]);
 
-	const [isPreviewActive, setIsPreviewActive] = useState(false);
-	const [activeIndex, setActiveIndex] = useState(0);
+	const [isPreviewActive, setIsPreviewActive] = useState(false); // keeps state of a preview button for smaller screens
+	const [activeIndex, setActiveIndex] = useState(0); // This is for keeping track of active expanded forms
 
 	/**
 	 * This handleChange function covers the dynamic inputs from each component 'Forms'.
-	 * The setState and currState is the parameters unique to each form component that.
-	 * This way we can change the different states without having to create multiple handleChange for each 'form' component.
+	 * While the setState and currState is the parameters unique to each form component, this function is reusable in this regard.
+	 * Thus, we can change the different states without having to create multiple handleChange for each 'form' component.
 	 * */
 	const handleChange = ({ value, keyName, setState, currState }: HandleChange) => {
 		setState({ ...currState, [keyName]: value });
@@ -108,8 +111,8 @@ function App() {
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
-				<EducationForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} activeIndex={0} onChange={handleChange} currState={education} setState={setEducation} />
-				<ExperienceForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} activeIndex={1} handleSubmitChange={setCollectionList} currState={experience} setState={setExperience} />
+				<EducationForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)}  onChange={handleChange} currState={education} setState={setEducation} />
+				<ExperienceForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={setCollectionList} currState={experience} setState={setExperience} />
 			</div>
 			<div className="resume-preview">
 				<ResumePreview personInfo={person} educationInfo={education} experienceInfo={experience} />

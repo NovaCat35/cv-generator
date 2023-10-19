@@ -34,7 +34,7 @@ export default function ResumePreview({ personInfo, educationInfo, experienceInf
 				<div className="experience-container">
 					<h1>Career Experience</h1>
 					{experienceInfo.map((experience : ExperienceItem, index: number) => (
-						<div className={`exp-details`} key={uuidv4()}>
+						<div className={`exp-details`} key={experience.id}>
 							<div className="company">{experience.company}</div>
 							<div className="date-container">
 								<div className="startDate">{experience.startDate}</div>

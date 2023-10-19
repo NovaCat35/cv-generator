@@ -1,5 +1,6 @@
 import { HandleChange } from "../App.tsx";
-import formatDate from './DateFormatter.tsx'
+import {formatDate, revertFormatDate} from './DateFormatter.tsx'
+import { useState } from 'react';
 
 interface InputDateProps {
 	keyName: string;
@@ -7,19 +8,25 @@ interface InputDateProps {
 	setState: React.Dispatch<React.SetStateAction<any>>;
 	currState: any;
 	onChange: (data: HandleChange) => void;
+	dateValue?: string;
 }
 
-export function InputDate({ keyName, label, onChange, setState, currState }: InputDateProps) {
+export function InputDate({ keyName, label, onChange, setState, currState, dateValue='' }: InputDateProps) {
+	let reformattedDate = revertFormatDate(dateValue)
+	console.log(reformattedDate)
+	const [inputValue, setInputValue] = useState(reformattedDate);
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = formatDate(e.target.value);
-      console.log(value)
-		onChange({ value, keyName, setState, currState });
+      const newDateValue = formatDate(e.target.value);
+		setInputValue(newDateValue);
+		console.log(inputValue)
+		onChange({ value:inputValue, keyName, setState, currState });
 	};
 
 	return (
 		<div>
 			<label htmlFor={keyName}>{label}</label>
-			<input type="month" id={keyName} placeholder="hi" onChange={handleChange} required/>
+			<input type="month" id={keyName} value={inputValue} onChange={handleChange} required/>
 		</div>
 	);
 }
