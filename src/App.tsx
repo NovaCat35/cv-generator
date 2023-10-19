@@ -45,7 +45,7 @@ export interface HandleChange {
 }
 
 export interface HandleListChange {
-	setState: React.Dispatch<React.SetStateAction<any>>;
+	setState: React.Dispatch<React.SetStateAction<Experience>>;
 	currState: Experience;
 	newElement: ExperienceItem;
 }
@@ -100,11 +100,30 @@ function App() {
 		setState({ ...currState, [keyName]: value });
 	};
 	/**
-	 * handleCollectionList keeps track of a list of exp or skills added by form submits
-	 * While the individual 'forms'.tsx handle the adding of individual elements, we need to append them all here
+	 * The handleCollectionList keeps track of a list of exp or skills added by form submits
+	 * While the individual 'forms'.tsx handle the adding of individual elements, we need to update the state here with the submitted Info
 	 * */
-	const setCollectionList = ({ setState, currState, newElement }: HandleListChange) => {
-		setState([...currState, newElement]);
+	const updateInfoList = ({ setState, currState, newElement }: HandleListChange) => {
+		let foundId = false;
+
+		// Map through the current state to find and update the object with matching id
+		const updatedState = currState.map(exp => {
+			console.log(`exp: ${exp}`)
+			console.log(`newExp: ${newElement}`)
+			if(exp.id == newElement.id){
+				foundId = true;
+				return newElement; // Update the matching object
+			}
+			return exp; // Keep other objects unchanged
+		})
+		
+		// If no matching id was found, add the newElement to the state
+		if(!foundId) {
+			updatedState.push(newElement);
+		}
+
+    // Set the updated state
+    setState(updatedState);
 	};
 
 	return (
@@ -112,7 +131,7 @@ function App() {
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)}  onChange={handleChange} currState={education} setState={setEducation} />
-				<ExperienceForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={setCollectionList} currState={experience} setState={setExperience} />
+				<ExperienceForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={updateInfoList} currState={experience} setState={setExperience} />
 			</div>
 			<div className="resume-preview">
 				<ResumePreview personInfo={person} educationInfo={education} experienceInfo={experience} />

@@ -15,7 +15,7 @@ interface ExperienceFormProps {
 }
 
 export default function ExperienceForm({ isActive, onExpand, handleSubmitChange, setState, currState }: ExperienceFormProps) {
-	const [currExp, setCurrExp] = useState({
+	const initialExpState = {
 		id: "",
 		company: "",
 		position: "",
@@ -23,7 +23,8 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 		description: "",
 		startDate: "",
 		endDate: "",
-	});
+  };
+	const [currExp, setCurrExp] = useState(initialExpState);
 	const [isChecked, setIsChecked] = useState(false);
 	const [showForm, setShowForm] = useState(false);
 
@@ -34,8 +35,11 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		setShowForm(false);
+
+		// Change endDate and ID here because these information is now finalize at time of submission 
 		const updatedEndDate = isChecked ? "Present" : currExp.endDate;
-		const newElement = { ...currExp, endDate: updatedEndDate, id: uuidv4()};
+		const updatedID = (currExp.id != '') ? currExp.id : uuidv4();
+		const newElement = { ...currExp, endDate: updatedEndDate, id: updatedID};
 		handleSubmitChange({ setState, currState, newElement });
 	};
 
@@ -52,9 +56,11 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 	 * The 'handle clicks' functions below controls what is showing, either the main form or the exp-infos
 	 */
 	const handleCancelClick = () => {
+		setCurrExp(initialExpState);
 		setShowForm(false);
 	};
 	const handleAddExpClick = () => {
+		setCurrExp(initialExpState);
 		setShowForm(true);
 	};
 	const handleSeeExpClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

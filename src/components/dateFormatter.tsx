@@ -32,7 +32,6 @@ function revertFormatDate(rawDate: string) {
       
       // Reformat the date so that the input[type='month'] value can understand (e.g. Oct 2023 ---> 2023-10)
 		const parsedDate = parse(normalizedDate, "MMM yyyy", new Date());
-      console.log(`FUd: ${parsedDate}`)
 		const formattedDate = format(parsedDate, "yyyy-MM");
 		return formattedDate;
 	}
