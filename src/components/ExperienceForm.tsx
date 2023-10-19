@@ -39,13 +39,15 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 		handleSubmitChange({ setState, currState, newElement });
 	};
 
+	// Checkbox toggle handler for showing endDate container or not
 	const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setIsChecked(e.target.checked);
 	};
-
+	// Handles the expand/collapse btns by setting the curr index to expand on or -1 to collapse
 	const handleExpandClick = () => {
 		isActive ? onExpand(-1) : onExpand(1);
 	};
+
 	/**
 	 * The 'handle clicks' functions below controls what is showing, either the main form or the exp-infos
 	 */
@@ -62,7 +64,6 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 		setCurrExp({...targetObject});
 
 		// Setup toggle btns and dates
-		console.log(targetObject.endDate)
 		if(targetObject.endDate != 'Present') {
 			setIsChecked(false)
 		} else {

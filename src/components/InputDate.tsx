@@ -1,5 +1,5 @@
 import { HandleChange } from "../App.tsx";
-import {formatDate, revertFormatDate} from './DateFormatter.tsx'
+import {formatDate, revertFormatDate} from './dateFormatter.tsx'
 import { useState } from 'react';
 
 interface InputDateProps {
@@ -12,15 +12,18 @@ interface InputDateProps {
 }
 
 export function InputDate({ keyName, label, onChange, setState, currState, dateValue='' }: InputDateProps) {
-	let reformattedDate = revertFormatDate(dateValue)
-	console.log(reformattedDate)
-	const [inputValue, setInputValue] = useState(reformattedDate);
+	const [inputValue, setInputValue] = useState(revertFormatDate(dateValue));
+
+	// let reformattedDate = revertFormatDate(dateValue);
+	// setInputValue(reformattedDate);
+	// console.log(reformattedDate);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newDateValue = formatDate(e.target.value);
+      const newDateValue = e.target.value;
 		setInputValue(newDateValue);
-		console.log(inputValue)
-		onChange({ value:inputValue, keyName, setState, currState });
+		const formatNewDateValue = formatDate(newDateValue)
+		// console.log(formatNewDateValue)
+		onChange({ value:formatNewDateValue, keyName, setState, currState });
 	};
 
 	return (

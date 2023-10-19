@@ -21,14 +21,18 @@ const monthAbbreviations: { [key: string]: string } = {
 	October: "Oct",
 	November: "Nov",
 	December: "Dec",
+   Sept: "Sep", // Additional abbreviation for September
 };
 
 function revertFormatDate(rawDate: string) {
 	// Parse the ISO date string to a Date object
 	if (rawDate !== "") {
-		// Convert full month names to standard abbreviations (MMM)
-		const normalizedDate = rawDate.replace(/\b(\w+)\b/g, (match) => monthAbbreviations[match] || match);
+      // Convert full month names to standard abbreviations (MMM) if possible
+      const monthRegex = /\b(January|February|March|April|May|June|July|August|September|October|November|December|Sept)\b/g;
+      const normalizedDate = rawDate.replace(monthRegex, (match) => monthAbbreviations[match] || match);
+      console.log(normalizedDate)
       
+      // Reformat to date so input value can understand (e.g. Oct 2023 ---> 2023-10)
 		const parsedDate = parse(normalizedDate, "MMM yyyy", new Date());
 		const formattedDate = format(parsedDate, "yyyy-MM");
 		return formattedDate;
