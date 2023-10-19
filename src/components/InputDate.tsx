@@ -14,15 +14,10 @@ interface InputDateProps {
 export function InputDate({ keyName, label, onChange, setState, currState, dateValue='' }: InputDateProps) {
 	const [inputValue, setInputValue] = useState(revertFormatDate(dateValue));
 
-	// let reformattedDate = revertFormatDate(dateValue);
-	// setInputValue(reformattedDate);
-	// console.log(reformattedDate);
-
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newDateValue = e.target.value;
 		setInputValue(newDateValue);
 		const formatNewDateValue = formatDate(newDateValue)
-		// console.log(formatNewDateValue)
 		onChange({ value:formatNewDateValue, keyName, setState, currState });
 	};
 
