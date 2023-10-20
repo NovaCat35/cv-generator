@@ -1,20 +1,22 @@
+import { useState } from "react";
 import { Input } from "./Input.tsx";
 import { HandleListChange, Experience, ExperienceItem, HandleChange } from "../App.tsx";
-import { useState } from "react";
 import { InputDate } from "./InputDate.tsx";
 import DisableDate from "./DisableDate.tsx";
 import ExpandSVG from "../assets/expand.svg";
+import CloseSVG from "../assets/close.svg"
 import { v4 as uuidv4 } from 'uuid';
 
 interface ExperienceFormProps {
 	isActive: boolean;
 	onExpand: (param: number) => void;
 	handleSubmitChange: (data: HandleListChange) => void;
+	handleRemoveChange: (targetId: string) => void;
 	currState: Experience;
 	setState: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export default function ExperienceForm({ isActive, onExpand, handleSubmitChange, setState, currState }: ExperienceFormProps) {
+export default function ExperienceForm({ isActive, onExpand, handleSubmitChange, handleRemoveChange, setState, currState }: ExperienceFormProps) {
 	const initialExpState = {
 		id: "",
 		company: "",
@@ -63,13 +65,13 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 		setCurrExp(initialExpState);
 		setShowForm(true);
 	};
-	const handleSeeExpClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+	const handleSeeExpClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		const targetId = e.currentTarget.getAttribute('id');
-		// Setup the currExp to copy over the object from targetId in currState
+		// Repopulate currExp base on information from currState if the ID match
 		const [targetObject] = currState.filter(exp => exp.id == targetId);
 		setCurrExp({...targetObject});
 
-		// Setup toggle btns and dates
+		// Setup toggle btn to be checked or not
 		if(targetObject.endDate != 'Present') {
 			setIsChecked(false)
 		} else {
@@ -77,6 +79,22 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 		}
 		setShowForm(true);
 	};
+
+	// Remove experience from the currState
+	const removeExperience = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.stopPropagation();
+		const targetID = (e.currentTarget.parentNode as HTMLElement).getAttribute('id');
+		/**
+		 * Typescript getting type error, saying 'getAttribute('id') can return a string or null.'
+		 * Thus, I need to explicitly check if targetID is not null 
+		 * */ 
+		console.log('HEYYYY')
+		if (targetID !== null) {
+			handleRemoveChange(targetID);
+	  } else {
+			console.error('Error: Target ID is null.');
+	  }
+	}
 
 	return (
 		<div className={isActive ? "form-container active" : "form-container"}>
@@ -105,9 +123,11 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 				</form>
 			) : (
 				<div className="exp-opt-container">
+					{/* Populates the main exp-container with the individual exp stored in currState*/}
 					{currState.map((experience: ExperienceItem, index: number) => (
 						<div className={`exp-details`} id={experience.id} key={experience.id} onClick={handleSeeExpClick}>
 							<div>{experience.company}</div>
+							<button className="closeBtn" onClick={removeExperience}><img src={CloseSVG} alt="close button"/></button>
 						</div>
 					))}
 					<div className="button-container">

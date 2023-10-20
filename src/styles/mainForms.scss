@@ -144,10 +144,21 @@ $white-background: rgb(255, 255, 255);
 			flex-direction: column;
 			gap: 10px;
 			.exp-details {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 				cursor: pointer;
 				padding: 10px;
 				border: 2px solid rgb(197, 190, 190);
 				border-radius: 10px;
+				.closeBtn{
+					cursor: pointer;
+					border: none;
+					background-color: $white-background;
+					height: 30px;
+					width: 30px;
+					padding: 0;
+				}
 			}
 			/* Button container outside of forms (I don't mean outside form-container) */
 			.button-container {

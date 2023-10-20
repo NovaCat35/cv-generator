@@ -116,7 +116,6 @@ function App() {
 			}
 			return exp; // Keep other objects unchanged
 		})
-		
 		// If no matching id was found, add the newElement to the state
 		if(!foundId) {
 			updatedState.push(newElement);
@@ -126,12 +125,17 @@ function App() {
     setState(updatedState);
 	};
 
+	const removeIDFromList = (targetId : string) => {
+		const filterExpList = experience.filter(exp => exp.id !== targetId)
+		setExperience(filterExpList);
+	}
+ 
 	return (
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)}  onChange={handleChange} currState={education} setState={setEducation} />
-				<ExperienceForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={updateInfoList} currState={experience} setState={setExperience} />
+				<ExperienceForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={updateInfoList} handleRemoveChange={removeIDFromList} currState={experience} setState={setExperience} />
 			</div>
 			<div className="resume-preview">
 				<ResumePreview personInfo={person} educationInfo={education} experienceInfo={experience} />
