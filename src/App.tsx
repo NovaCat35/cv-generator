@@ -57,6 +57,12 @@ export interface HandleListChange {
 	newElement: ExperienceItem;
 }
 
+export interface HandleListRemove {
+	setState: React.Dispatch<React.SetStateAction<Experience>>;
+	currState: any;
+	targetId: string;
+}
+
 function App() {
 	const [person, setPerson] = useState<Person>({
 		name: "Edward Elric",
@@ -118,12 +124,12 @@ function App() {
 	const updateInfoList = ({ setState, currState, newElement }: HandleListChange) => {
 		let foundId = false;
 		// Map through the current state to find and update the object with matching id
-		const updatedState = currState.map((exp) => {
-			if (exp.id == newElement.id) {
+		const updatedState = currState.map((item) => {
+			if (item.id == newElement.id) {
 				foundId = true;
 				return newElement; // Update the matching object
 			}
-			return exp; // Keep other objects unchanged
+			return item; // Keep other objects unchanged
 		});
 		// If no matching id was found, add the newElement to the state
 		if (!foundId) {
@@ -137,9 +143,9 @@ function App() {
 	 * @param targetId 
 	 * Targets the experience and skills setState so that we can remove specific elements base on ID
 	 */
-	const removeIDFromList = (targetId: string) => {
-		const filterExpList = experience.filter((exp) => exp.id !== targetId);
-		setExperience(filterExpList);
+	const removeIDFromList = ({setState, currState, targetId} : HandleListRemove) => {
+		const filterExpList = currState.filter((exp) => exp.id !== targetId);
+		setState(filterExpList);
 	};
 	
 

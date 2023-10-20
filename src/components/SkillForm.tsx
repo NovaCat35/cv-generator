@@ -1,11 +1,11 @@
 import Header from "./Header.tsx";
-import {HandleListChange, Skills} from "../App.tsx";
+import {HandleListChange, Skills, HandleListRemove} from "../App.tsx";
 
 interface SkillFormProps {
 	isActive: boolean;
 	onExpand: (param: number) => void;
    handleSubmitChange: (data: HandleListChange) => void;
-   handleRemoveChange: (targetId: string) => void;
+   handleRemoveChange: (targetId: HandleListRemove) => void;
 	currState: Skills;
 	setState: React.Dispatch<React.SetStateAction<any>>;
 }

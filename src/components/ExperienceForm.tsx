@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Input } from "./Input.tsx";
-import { HandleListChange, Experience, ExperienceItem, HandleChange } from "../App.tsx";
+import { HandleListChange, HandleListRemove, Experience, ExperienceItem, HandleChange } from "../App.tsx";
 import { InputDate } from "./InputDate.tsx";
 import DisableDate from "./DisableDate.tsx";
 import Header from './Header.tsx'
@@ -11,7 +11,7 @@ interface ExperienceFormProps {
 	isActive: boolean;
 	onExpand: (param: number) => void;
 	handleSubmitChange: (data: HandleListChange) => void;
-	handleRemoveChange: (targetId: string) => void;
+	handleRemoveChange: (date: HandleListRemove) => void;
 	currState: Experience;
 	setState: React.Dispatch<React.SetStateAction<any>>;
 }
@@ -89,7 +89,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 		 * Thus, I need to explicitly check if targetID is not null 
 		 * */ 
 		if (targetID !== null) {
-			handleRemoveChange(targetID);
+			handleRemoveChange({setState, currState, targetId:targetID});
 	  } else {
 			console.error('Error: Target ID is null.');
 	  }
