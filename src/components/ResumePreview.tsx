@@ -35,7 +35,7 @@ export default function ResumePreview({ personInfo, educationInfo, skillInfo, ex
 				<div className='skill-container'>
 					<h1>Skills</h1>
 					{skillInfo.map((info: SkillItem) => (
-						<div className="skill-detail">{info.skill}</div>
+						<div className="skill-detail" key={info.id}>{info.skill}</div>
 					))}
 				</div>
 				<div className="experience-container">

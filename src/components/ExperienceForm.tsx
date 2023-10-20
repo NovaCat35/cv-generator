@@ -30,6 +30,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 	const [isChecked, setIsChecked] = useState(false);
 	const [showForm, setShowForm] = useState(false);
 
+	// Because we can't change the resume directly and must wait for the form to submit, we can only change the current exp 
 	const onChange = ({ value, keyName }: HandleChange) => {
 		setCurrExp({ ...currExp, [keyName]: value });
 	};

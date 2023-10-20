@@ -52,13 +52,13 @@ export interface HandleChange {
 }
 
 export interface HandleListChange {
-	setState: React.Dispatch<React.SetStateAction<Experience>>;
-	currState: Experience;
-	newElement: ExperienceItem;
+	setState: React.Dispatch<React.SetStateAction<any>>;
+	currState: any;
+	newElement: any;
 }
 
 export interface HandleListRemove {
-	setState: React.Dispatch<React.SetStateAction<Experience>>;
+	setState: React.Dispatch<React.SetStateAction<any>>;
 	currState: any;
 	targetId: string;
 }
@@ -124,7 +124,7 @@ function App() {
 	const updateInfoList = ({ setState, currState, newElement }: HandleListChange) => {
 		let foundId = false;
 		// Map through the current state to find and update the object with matching id
-		const updatedState = currState.map((item) => {
+		const updatedState = currState.map((item:any) => {
 			if (item.id == newElement.id) {
 				foundId = true;
 				return newElement; // Update the matching object
@@ -144,7 +144,7 @@ function App() {
 	 * Targets the experience and skills setState so that we can remove specific elements base on ID
 	 */
 	const removeIDFromList = ({setState, currState, targetId} : HandleListRemove) => {
-		const filterExpList = currState.filter((exp) => exp.id !== targetId);
+		const filterExpList = currState.filter((item:any) => item.id !== targetId);
 		setState(filterExpList);
 	};
 	

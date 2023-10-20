@@ -16,7 +16,7 @@ export function Input({ keyName, label, placeholder, onChange, setState, currSta
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = e.target.value;
-		setInputValue(newValue); // Update the local state with the new input value
+		setInputValue(newValue); // Update the local state with the new input[type="text"]'s value
 		onChange({ value: newValue, keyName, setState, currState });
 	};
 
