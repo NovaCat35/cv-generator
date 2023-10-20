@@ -1,12 +1,13 @@
-import { Person, Education, Experience, ExperienceItem } from "../App.tsx";
+import { Person, Education, Experience, Skills, ExperienceItem, SkillItem } from "../App.tsx";
 import { v4 as uuidv4 } from 'uuid';
 
 interface ResumePreviewProps {
 	personInfo: Person;
 	educationInfo: Education;
+	skillInfo: Skills;
 	experienceInfo: Experience;
 }
-export default function ResumePreview({ personInfo, educationInfo, experienceInfo }: ResumePreviewProps) {
+export default function ResumePreview({ personInfo, educationInfo, skillInfo, experienceInfo }: ResumePreviewProps) {
 	return (
 		<div className='resume-container'>
 			<header>
@@ -30,6 +31,12 @@ export default function ResumePreview({ personInfo, educationInfo, experienceInf
 						<div className="study">{educationInfo.study}</div>
 						<div className="location">{educationInfo.location}</div>
 					</div>
+				</div>
+				<div className='skill-container'>
+					<h1>Skills</h1>
+					{skillInfo.map((info: SkillItem) => (
+						<div className="skill-detail">{info.skill}</div>
+					))}
 				</div>
 				<div className="experience-container">
 					<h1>Career Experience</h1>

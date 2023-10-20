@@ -3,7 +3,7 @@ import { Input } from "./Input.tsx";
 import { HandleListChange, Experience, ExperienceItem, HandleChange } from "../App.tsx";
 import { InputDate } from "./InputDate.tsx";
 import DisableDate from "./DisableDate.tsx";
-import ExpandSVG from "../assets/expand.svg";
+import Header from './Header.tsx'
 import CloseSVG from "../assets/close.svg"
 import { v4 as uuidv4 } from 'uuid';
 
@@ -49,9 +49,9 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 	const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setIsChecked(e.target.checked);
 	};
-	// Handles the expand/collapse btns by setting the curr index to expand on or -1 to collapse
+	// Handles the expand/collapse btns by collapsing current component if already active, otherwise expand!
 	const handleExpandClick = () => {
-		isActive ? onExpand(-1) : onExpand(1);
+		isActive ? onExpand(-1) : onExpand(2);
 	};
 
 	/**
@@ -88,7 +88,6 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 		 * Typescript getting type error, saying 'getAttribute('id') can return a string or null.'
 		 * Thus, I need to explicitly check if targetID is not null 
 		 * */ 
-		console.log('HEYYYY')
 		if (targetID !== null) {
 			handleRemoveChange(targetID);
 	  } else {
@@ -98,12 +97,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 
 	return (
 		<div className={isActive ? "form-container active" : "form-container"}>
-			<div className="head">
-				<h1>Experience</h1>
-				<button className={isActive ? "expandBtn active" : "expandBtn"} onClick={handleExpandClick}>
-					<img src={ExpandSVG} alt="expand icon" />
-				</button>
-			</div>
+			<Header name='Experience' isActive={isActive} handleExpandClick={handleExpandClick}/>
 			{showForm ? (
 				<form onSubmit={handleSubmit}>
 					<Input label="Company Name" keyName="company" placeholder="Company Name" onChange={onChange} setState={setState} currState={currState} propValue={currExp.company}/>

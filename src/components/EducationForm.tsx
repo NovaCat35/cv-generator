@@ -2,7 +2,7 @@ import { Input } from "./Input.tsx";
 import { InputDate } from "./InputDate.tsx";
 import { Education, HandleChange } from "../App.tsx";
 import { useState } from "react";
-import ExpandSVG from "../assets/expand.svg";
+import Header from './Header.tsx'
 import DisableDate from "./DisableDate.tsx";
 
 interface EducationFormProps {
@@ -29,10 +29,7 @@ export default function EducationForm({ isActive, onExpand, onChange, setState, 
 
 	return (
 		<div className={isActive ? 'form-container active' : 'form-container'}>
-			<div className="head">
-				<h1>Education</h1>
-				<button className={isActive ? 'expandBtn active' : 'expandBtn'} onClick={handleExpandClick}><img src={ExpandSVG} alt="expand icon"/></button>
-			</div>
+			<Header name='Education' isActive={isActive} handleExpandClick={handleExpandClick}/>
 			<form action="">
 				<Input label="School" keyName="school" placeholder="School Name" onChange={onChange} setState={setState} currState={currState} />
 				<Input label="Location" keyName="location" placeholder="School Name" onChange={onChange} setState={setState} currState={currState} />
