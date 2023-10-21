@@ -59,7 +59,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitChange, hand
                ))}
             </div>
 				<form className="skill-input-container" onSubmit={handleSubmit}>
-					<input type="text" onChange={handleChange} value={currSkill.skill} required />
+					<input type="text" placeholder='Add Skill' onChange={handleChange} value={currSkill.skill} required />
 					<button type="submit">Add</button>
 				</form>
 			</div>

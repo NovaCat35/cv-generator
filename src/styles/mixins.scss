@@ -1,0 +1,32 @@
+$white-background: rgb(255, 255, 255);
+@mixin button() {
+	cursor: pointer;
+	margin-top: 10px;
+	appearance: none;
+	-webkit-appearance: none;
+	font-size: 1rem;
+	border-radius: 5px;
+	padding: 5px;
+	width: 90%;
+	align-self: center;
+	transition: all 0.4s ease-in-out;
+	text-shadow: 1px 1px 5px rgb(242, 242, 242);
+	&:active {
+		transform: translateY(3px);
+	}
+}
+@mixin input() {
+	font-size: clamp(0.7rem, 2vw, 1rem);
+	background-color: rgb(243, 243, 243);
+	appearance: none;
+	border: 1.5px solid transparent;
+	border-radius: 5px;
+	padding: 3px;
+	&:focus {
+		outline: none !important;
+		border: 1.5px solid transparent;
+		background: linear-gradient(white, white) padding-box,
+		linear-gradient(to right, rgb(58, 205, 227), rgb(147, 193, 231)) border-box;
+		// box-shadow: 0 0 1px #75a7dd;
+	}
+}
