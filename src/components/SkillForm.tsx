@@ -27,6 +27,8 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 	const [currSkillsList, setCurrSkillsList] = useState(initSkillList);
 	const [currSkill, setCurrSkill] = useState(initSkill);
 	const [showForm, setShowForm] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
+
 
 	// Handles the expand/collapse btns by setting the curr index to expand on or -1 to collapse
 	const handleExpandClick = () => {
@@ -50,8 +52,13 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 			skill: currSkill.skill,
 		};
 
-		setCurrSkillsList([...currSkillsList, newSkillItem]);
-		setCurrSkill(initSkill);
+		if(newSkillItem.skill != "") {
+			setCurrSkillsList([...currSkillsList, newSkillItem]);
+			setCurrSkill(initSkill);
+			setErrorMessage(""); // RESETS empty skill error if applicable		
+		} else {
+			setErrorMessage("Please add a skill!")
+		}	
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
@@ -59,29 +66,37 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 		const newHeader = { ...currSkillHeader };
 		handleSubmitHeader({ setState: setStateHeader, currState: currStateHeader, newElement: newHeader });
 
-		handleSubmitList({ setState: setStateSkills, currState: currStateItem, newElement: currSkillsList });
-
-		setCurrSkillHeader(initHeader); //reset
-		setShowForm(false);
+		if(currSkillsList.length > 0) {
+			handleSubmitList({ setState: setStateSkills, currState: currStateItem, newElement: currSkillsList });
+			// --v RESET v--
+			setCurrSkillHeader(initHeader); 
+			setErrorMessage("")
+			setShowForm(false);
+		} else {
+			setErrorMessage("Please add a skill!")
+		}
 	};
 
-	const removeSkill = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const removeSkillCard = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 		const targetID = (e.currentTarget.parentNode as HTMLElement).getAttribute("id");
 		if (targetID !== null) {
-			// handleRemoveChange({setState, currStateHeader, targetId:targetID});
+			const newSkillList = currSkillsList.filter(skill => skill.id != targetID)
+			setCurrSkillsList(newSkillList);
 		} else {
 			console.error("Error: Target ID is null.");
 		}
 	};
 
-	/**
-	 * The 'handle clicks' functions below controls what is showing on the MAIN Banner page
-	 */
+
 	const handleCancelClick = () => {
 		setCurrSkill(initSkill);
 		setShowForm(false);
 	};
+
+	/**
+	 * The 'handle clicks' functions below controls what is showing on the MAIN Banner page
+	 */
 	const handleAddSkillClick = () => {
 		setShowForm(true);
 		setCurrSkill(initSkill); // reset input value
@@ -121,7 +136,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 						{currSkillsList.map((item) => (
 							<div className="skill-details" id={item.id} key={item.id}>
 								<div>{item.skill}</div>
-								<button className="closeBtn" onClick={removeSkill}>
+								<button className="closeBtn" onClick={removeSkillCard}>
 									<img src={CloseSVG} alt="close button" />
 								</button>
 							</div>
@@ -136,6 +151,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 								<img src={AddSVG} alt="add button img" />
 							</button>
 						</div>
+						{errorMessage && <div className="error"> {errorMessage} </div>}
 						<button className="submitBtn" type="submit">
 							Add Category
 						</button>
