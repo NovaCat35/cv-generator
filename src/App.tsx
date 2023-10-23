@@ -66,7 +66,7 @@ export interface HandleListRemove {
 	setState: React.Dispatch<React.SetStateAction<any>>;
 	currState: any;
 	targetId: string;
-	typeId: string;
+	typeId?: string;
 }
 
 function App() {
@@ -169,7 +169,7 @@ function App() {
 	 * @param targetId
 	 * Targets the id\headerId setState so that we can remove specific elements base on targetID
 	 */
-	const removeIDFromList = ({ setState, currState, targetId, typeId }: HandleListRemove) => {
+	const removeIDFromList = ({ setState, currState, targetId, typeId='id' }: HandleListRemove) => {
 		const filterList = (typeId == 'headerId') ? (
 			currState.filter((item: any) => item.headerId !== targetId)
 		) : (

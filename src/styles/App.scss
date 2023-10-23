@@ -6,7 +6,7 @@ $white-background: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
   // A reminder that setting a height here means the parent wont extend down to child when overflow
-  @media screen and (min-width: 550px) {
+  @media screen and (min-width: 635px) {
     display: grid;
     grid-template-columns: 1fr 2fr;
   }

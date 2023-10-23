@@ -1,5 +1,8 @@
 @import "./mixins.scss";
 
+$white-filter-background: invert(98%) sepia(75%) saturate(5977%) hue-rotate(207deg) brightness(130%) contrast(110%);
+
+
 .main-skill-container {
    display: flex;
    flex-direction: column;
@@ -39,7 +42,6 @@
       gap: 0;
       input{
          @include input();
-         padding: 10px;
       }
       button {
          @include button();
@@ -51,6 +53,44 @@
             color: $white-background;
             text-shadow: 1px 1px 5px rgb(158, 90, 170);
          }
+      }
+      .add-skill-input-container{
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         background-color: rgb(243, 243, 243);
+         border-radius: 5px;
+         padding: 5px;
+         margin-top: 10px;
+         input{
+            flex: 1;
+         }
+         input:focus ~ button{
+            background-color: rgb(185, 211, 219);
+         }
+         button{
+            margin: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            padding: 0;
+            border: 2px solid rgb(169, 186, 216);
+            background-color: #cdd9ed;
+            &:hover {
+               border: 2px solid rgb(80, 121, 235);
+               background-color: #6b8ff1;
+               color: $white-background;
+               text-shadow: 1px 1px 5px rgb(90, 127, 170);
+               img{
+                  filter: $white-filter-background;
+               }
+            }
+         }
+      }
+      .error {
+         text-align: center;
+         font-weight: 700;
+         color: rgb(214, 95, 95);
       }
    }
 }
