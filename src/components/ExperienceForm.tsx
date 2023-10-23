@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Input } from "./Input.tsx";
 import { HandleListChange, HandleListRemove, Experience, ExperienceItem, HandleChange } from "../App.tsx";
 import { InputDate } from "./InputDate.tsx";
+import BannerOptions from "./BannerOptions.tsx"
 import DisableDate from "./DisableDate.tsx";
 import Header from './Header.tsx'
 import CloseSVG from "../assets/close.svg"
@@ -117,18 +118,19 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 					</div>
 				</form>
 			) : (
-				<div className="exp-opt-container">
-					{/* Populates the main exp-container with the individual exp stored in currState*/}
-					{currState.map((experience: ExperienceItem, index: number) => (
-						<div className={`exp-details`} id={experience.id} key={experience.id} onClick={handleSeeExpClick}>
-							<div>{experience.company}</div>
-							<button className="closeBtn" onClick={removeExperience}><img src={CloseSVG} alt="close button"/></button>
-						</div>
-					))}
-					<div className="button-container">
-						<button type="button" onClick={handleAddExpClick}>Add Experience</button>
-					</div>
-				</div>
+				<BannerOptions mainName="exp-opt-container" type='experience' currState={currState} handleSeeBanner={handleSeeExpClick} handleAddClick={handleAddExpClick} handleRemoveClick={removeExperience} />
+				// <div className="exp-opt-container">
+				// 	{/* Populates the main exp-container with the individual exp stored in currState*/}
+				// 	{currState.map((experience: ExperienceItem, index: number) => (
+				// 		<div className={`exp-details`} id={experience.id} key={experience.id} onClick={handleSeeExpClick}>
+				// 			<div>{experience.company}</div>
+				// 			<button className="closeBtn" onClick={removeExperience}><img src={CloseSVG} alt="close button"/></button>
+				// 		</div>
+				// 	))}
+				// 	<div className="button-container">
+				// 		<button type="button" onClick={handleAddExpClick}>Add Experience</button>
+				// 	</div>
+				// </div>
 			)}
 		</div>
 	);

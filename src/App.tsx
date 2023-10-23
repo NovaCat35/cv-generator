@@ -27,11 +27,16 @@ export interface Education {
 	endDate?: string;
 }
 
+export interface SkillHeader {
+	id: string;
+	header: string;
+}
 export interface SkillItem {
 	id: string;
+	headerId: string;
 	skill: string;
 }
-export interface Skills extends Array<SkillItem> {}
+
 
 export interface ExperienceItem {
 	id: string;
@@ -80,11 +85,20 @@ function App() {
 		endDate: "May 1917",
 	});
 
-	const [skills, setSkills] = useState<Skills>([
-		{id: 'nova789', skill: 'Transmutation'}, 
-		{id:'efg456', skill:'Biology'}, 
-		{id:'han23', skill:'Alchemy'},
-	])
+	const [skillHeaders, setSkillHeaders] = useState<SkillHeader[]>([
+		{ id: "header1", header: "Scientific Disciplines" },
+		{ id: "header2", header: "Adventure Expertise" },
+	]);
+	
+	const [skills, setSkills] = useState<SkillItem[]>([
+		{ id: "nova789", headerId: "header1", skill: "Transmutation" },
+		{ id: "efg456", headerId: "header1", skill: "Biology" },
+		{ id: "han23", headerId: "header1", skill: "Alchemy" },
+		{ id: "head23", headerId: "header2", skill: "Climbing" },
+		{ id: "sans23", headerId: "header2", skill: "Swimming" },
+		{ id: "did89", headerId: "header2", skill: "Fighting" },
+	]);
+	
 
 	const [experience, setExperience] = useState<Experience>([
 		{
@@ -124,7 +138,7 @@ function App() {
 	const updateInfoList = ({ setState, currState, newElement }: HandleListChange) => {
 		let foundId = false;
 		// Map through the current state to find and update the object with matching id
-		const updatedState = currState.map((item:any) => {
+		const updatedState = currState.map((item: any) => {
 			if (item.id == newElement.id) {
 				foundId = true;
 				return newElement; // Update the matching object
@@ -140,21 +154,21 @@ function App() {
 	};
 
 	/**
-	 * @param targetId 
+	 * @param targetId
 	 * Targets the experience and skills setState so that we can remove specific elements base on ID
 	 */
-	const removeIDFromList = ({setState, currState, targetId} : HandleListRemove) => {
-		const filterExpList = currState.filter((item:any) => item.id !== targetId);
+	const removeIDFromList = ({ setState, currState, targetId }: HandleListRemove) => {
+		const filterExpList = currState.filter((item: any) => item.id !== targetId);
 		setState(filterExpList);
 	};
-	
 
 	return (
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
+				<h1 className="title">CV Generator</h1>
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
-				<SkillForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={updateInfoList} handleRemoveChange={removeIDFromList} currState={skills} setState={setSkills} />
+				<SkillForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={updateInfoList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
 				<ExperienceForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={updateInfoList} handleRemoveChange={removeIDFromList} currState={experience} setState={setExperience} />
 			</div>
 			<div className="resume-preview">

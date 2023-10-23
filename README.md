@@ -12,7 +12,7 @@ Link: THIS PROJECT IS CURRENTLY A WORK IN PROGRESS ... ⚠️
 ## CHALLENGES
 In an effort to minimize redundancy in code with passing props and having template functions to cover many bases, I ran into a lot of typescript confusion with regards to state variables, passing setState as a parameter to components to be later use as callback, and good structure practices. So far, I keep progressing to fix these mistakes as I continue to change around variables and components as new features get added....
 
-Learning to manage adding new components better and keeping things separate so old features that gets changed around is easier to modify.
+As new features and plans are added and changed, I learn how important it is to keep separate components for reusability. 
 
 ## BUILD WITH
  - React + Vite

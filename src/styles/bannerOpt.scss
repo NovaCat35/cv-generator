@@ -1,0 +1,68 @@
+// Containers the styling for the banner
+@mixin optContainer() {
+	margin-top: 5px;
+	height: 0;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	.details {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		cursor: pointer;
+		padding: 10px;
+		border: 2px solid transparent;
+		border-radius: 10px;
+		background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(93, 202, 15), rgb(203, 196, 104)) border-box;
+		.closeBtn {
+			cursor: pointer;
+			border: none;
+			background-color: $white-background;
+			height: 30px;
+			width: 30px;
+			padding: 0;
+		}
+	}
+}
+
+.skill-opt-container {
+	@include optContainer();
+	.details {
+		background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(42, 42, 201), darkorchid) border-box;
+	}
+	.button-container {
+		display: flex;
+		justify-content: center;
+      button[type="button"]  {
+         @include button();
+         border: 2px solid rgb(204, 175, 198);
+         background-color: #e9dce9;
+         &:hover {
+            border: 2px solid rgb(138, 53, 174);
+            background-color: #d89cdf;
+            color: $white-background;
+            text-shadow: 1px 1px 5px rgb(158, 90, 170);
+         }
+      }
+	}
+}
+
+.exp-opt-container {
+	@include optContainer;
+	.button-container {
+		display: flex;
+		justify-content: center;
+		button[type="button"] {
+			@include button();
+			border: 2px solid rgb(184, 208, 185);
+			background-color: #dfe3de;
+			&:hover {
+				border: 2px solid rgb(83, 174, 53);
+				background-color: #a2df9c;
+				color: $white-background;
+				text-shadow: 1px 1px 5px rgb(20, 101, 16);
+			}
+		}
+	}
+}
