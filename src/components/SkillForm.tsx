@@ -69,8 +69,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 		if(currSkillsList.length > 0) {
 			handleSubmitList({ setState: setStateSkills, currState: currStateItem, newElement: currSkillsList });
 			// --v RESET v--
-			setCurrSkillHeader(initHeader); 
-			setErrorMessage("")
+			resetInit();
 			setShowForm(false);
 		} else {
 			setErrorMessage("Please add a skill!")
@@ -90,7 +89,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 
 
 	const handleCancelClick = () => {
-		setCurrSkill(initSkill);
+		resetInit();
 		setShowForm(false);
 	};
 
@@ -126,6 +125,13 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 		}
 	};
 
+	function resetInit() {
+		setCurrSkillHeader(initHeader); 
+		setCurrSkillsList(initSkillList);
+		setCurrSkill(initSkill);
+		setErrorMessage("");
+	}
+
 	return (
 		<div className={isActive ? "form-container active" : "form-container"}>
 			<Header name="Skills" isActive={isActive} handleExpandClick={handleExpandClick} />
@@ -152,9 +158,14 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 							</button>
 						</div>
 						{errorMessage && <div className="error"> {errorMessage} </div>}
-						<button className="submitBtn" type="submit">
-							Add Category
+						<div className="button-container">
+						<button className="cancel-btn" type="button" onClick={handleCancelClick}>
+							Cancel
 						</button>
+						<button className="submit-btn" type="submit">
+							Submit
+						</button>
+					</div>
 					</form>
 				</div>
 			) : (
