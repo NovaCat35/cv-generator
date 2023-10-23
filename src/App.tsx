@@ -66,6 +66,7 @@ export interface HandleListRemove {
 	setState: React.Dispatch<React.SetStateAction<any>>;
 	currState: any;
 	targetId: string;
+	typeId: string;
 }
 
 function App() {
@@ -89,7 +90,6 @@ function App() {
 		{ id: "header1", header: "Scientific Disciplines" },
 		{ id: "header2", header: "Adventure Expertise" },
 	]);
-	
 	const [skills, setSkills] = useState<SkillItem[]>([
 		{ id: "nova789", headerId: "header1", skill: "Transmutation" },
 		{ id: "efg456", headerId: "header1", skill: "Biology" },
@@ -132,7 +132,7 @@ function App() {
 		setState({ ...currState, [keyName]: value });
 	};
 	/**
-	 * The handleCollectionList keeps track of a list of exp or skills added by form submits
+	 * The handleCollectionList updates the currState list by adding the new object by form submits
 	 * While the individual 'forms'.tsx handle the adding of individual elements, we need to update the state here with the submitted Info
 	 * */
 	const updateInfoList = ({ setState, currState, newElement }: HandleListChange) => {
@@ -154,13 +154,30 @@ function App() {
 	};
 
 	/**
-	 * @param targetId
-	 * Targets the experience and skills setState so that we can remove specific elements base on ID
+	 * We handle all header and subchild of header here (e.g. skillHeader and individual skills)
+	 * First we remove all instance of subchild related to header and just add the new changes from subchilds
 	 */
-	const removeIDFromList = ({ setState, currState, targetId }: HandleListRemove) => {
-		const filterExpList = currState.filter((item: any) => item.id !== targetId);
-		setState(filterExpList);
+	const updateHeaderCategoryList =  ({ setState, currState, newElement }: HandleListChange) => {
+		// Map through the current state any delete(reset) all matching newElement[0]'s headerId
+		const updatedState = currState.filter((item: any) => item.headerId !== newElement[0].headerId);
+		const newState = [...updatedState, ...newElement];
+		// Set the updated state
+		setState(newState);
+	}
+
+	/**
+	 * @param targetId
+	 * Targets the id\headerId setState so that we can remove specific elements base on targetID
+	 */
+	const removeIDFromList = ({ setState, currState, targetId, typeId }: HandleListRemove) => {
+		const filterList = (typeId == 'headerId') ? (
+			currState.filter((item: any) => item.headerId !== targetId)
+		) : (
+			currState.filter((item: any) => item.id !== targetId)
+		);
+		setState(filterList);
 	};
+
 
 	return (
 		<>
@@ -168,7 +185,7 @@ function App() {
 				<h1 className="title">CV Generator</h1>
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
-				<SkillForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={updateInfoList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
+				<SkillForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
 				<ExperienceForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={updateInfoList} handleRemoveChange={removeIDFromList} currState={experience} setState={setExperience} />
 			</div>
 			<div className="resume-preview">
@@ -189,5 +206,6 @@ function App() {
 		</>
 	);
 }
+
 
 export default App;

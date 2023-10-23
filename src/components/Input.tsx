@@ -1,5 +1,5 @@
 import { HandleChange } from "../App.tsx";
-import { useState } from 'react';
+import { useState } from "react";
 
 interface InputProps {
 	keyName: string;
@@ -9,9 +9,10 @@ interface InputProps {
 	currState: any;
 	onChange: (data: HandleChange) => void;
 	propValue?: string;
+	required?: boolean;
 }
 
-export function Input({ keyName, label, placeholder, onChange, setState, currState, propValue='' }: InputProps) {
+export function Input({ keyName, label, placeholder, onChange, setState, currState, propValue = "", required = false }: InputProps) {
 	const [inputValue, setInputValue] = useState(propValue);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +24,7 @@ export function Input({ keyName, label, placeholder, onChange, setState, currSta
 	return (
 		<div>
 			<label htmlFor={keyName}>{label}</label>
-			<input type="text" id={keyName} placeholder={placeholder} onChange={handleChange} value={inputValue}/>
+			{required ? <input type="text" id={keyName} placeholder={placeholder} onChange={handleChange} value={inputValue} required /> : <input type="text" id={keyName} placeholder={placeholder} onChange={handleChange} value={inputValue} />}
 		</div>
 	);
 }

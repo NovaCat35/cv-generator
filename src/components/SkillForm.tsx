@@ -10,7 +10,8 @@ import { v4 as uuidv4 } from "uuid";
 interface SkillFormProps {
 	isActive: boolean;
 	onExpand: (param: number) => void;
-	handleSubmitChange: (data: HandleListChange) => void;
+	handleSubmitHeader: (data: HandleListChange) => void;
+	handleSubmitList: (data: HandleListChange) => void;
 	handleRemoveChange: (targetId: HandleListRemove) => void;
 	currStateHeader: SkillHeader[];
 	currStateItem: SkillItem[];
@@ -18,10 +19,10 @@ interface SkillFormProps {
 	setStateSkills: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export default function SkillForm({ isActive, onExpand, handleSubmitChange, handleRemoveChange, currStateHeader, currStateItem, setStateHeader, setStateSkills }: SkillFormProps) {
-	const initHeader: SkillHeader = { id: "", header: uuidv4() };
+export default function SkillForm({ isActive, onExpand, handleSubmitHeader, handleSubmitList, handleRemoveChange, currStateHeader, currStateItem, setStateHeader, setStateSkills }: SkillFormProps) {
+	const initHeader: SkillHeader = { id: uuidv4(), header: "" };
 	const initSkillList: SkillItem[] = [];
-	const initSkill:SkillItem = { id: "", headerId: "", skill: "" };
+	const initSkill: SkillItem = { id: "", headerId: "", skill: "" };
 	const [currSkillHeader, setCurrSkillHeader] = useState(initHeader);
 	const [currSkillsList, setCurrSkillsList] = useState(initSkillList);
 	const [currSkill, setCurrSkill] = useState(initSkill);
@@ -36,7 +37,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitChange, hand
 		setCurrSkillHeader({ ...currSkillHeader, [keyName]: value });
 	};
 
-	// Changes the currSkill only, we don't initialize the ID and headerID until we decide to submit 
+	// Changes the currSkill only, we don't initialize the ID and headerID until we decide to submit
 	const onChangeSkill = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = e.target.value;
 		setCurrSkill({ ...currSkill, skill: newValue });
@@ -44,21 +45,24 @@ export default function SkillForm({ isActive, onExpand, handleSubmitChange, hand
 	// On adding a new skill to our currSkillsList, we initialize only the id of the skill, then we can add the new skill back to the list
 	const onAddSkillToList = () => {
 		const newSkillItem: SkillItem = {
-			id: uuidv4(),
 			headerId: currSkillHeader.id,
-			skill: currSkill.skill 
-		 };
-	  
+			id: uuidv4(),
+			skill: currSkill.skill,
+		};
+
 		setCurrSkillsList([...currSkillsList, newSkillItem]);
 		setCurrSkill(initSkill);
-	}
+	};
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
+		const newHeader = { ...currSkillHeader };
+		handleSubmitHeader({ setState: setStateHeader, currState: currStateHeader, newElement: newHeader });
+
+		handleSubmitList({ setState: setStateSkills, currState: currStateItem, newElement: currSkillsList });
+
+		setCurrSkillHeader(initHeader); //reset
 		setShowForm(false);
-		const newElement = { ...currSkillsList, id: uuidv4() };
-		// handleSubmitChange({ setState, currStateHeader, newElement });
-		setCurrSkill(initSkill); //reset
 	};
 
 	const removeSkill = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -72,15 +76,15 @@ export default function SkillForm({ isActive, onExpand, handleSubmitChange, hand
 	};
 
 	/**
-	 * The 'handle clicks' functions below controls what is showing, either the main form or the exp-infos
+	 * The 'handle clicks' functions below controls what is showing on the MAIN Banner page
 	 */
 	const handleCancelClick = () => {
 		setCurrSkill(initSkill);
 		setShowForm(false);
 	};
 	const handleAddSkillClick = () => {
-		setCurrSkill(initSkill);
 		setShowForm(true);
+		setCurrSkill(initSkill); // reset input value
 	};
 
 	// This function brings up the form and shows all skills item and header base on targetID
@@ -90,21 +94,18 @@ export default function SkillForm({ isActive, onExpand, handleSubmitChange, hand
 		setCurrSkillHeader({ ...targetHeader });
 		// Use the same targetId to find all matching headerID in our currStateItem
 		const targetSkills = currStateItem.filter((skill) => skill.headerId == targetId);
+		setCurrSkillsList(targetSkills);
 
-		setCurrSkillsList([...currSkillsList, ...targetSkills]);
-
+		setCurrSkill(initSkill); // reset
 		setShowForm(true);
 	};
 
-	const removeSkillHeader = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const removeSkillBanner = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 		const targetID = (e.currentTarget.parentNode as HTMLElement).getAttribute("id");
-		/**
-		 * Typescript getting type error, saying 'getAttribute('id') can return a string or null.'
-		 * Thus, I need to explicitly check if targetID is not null
-		 * */
 		if (targetID !== null) {
-			handleRemoveChange({ setState: setStateHeader, currState: currStateHeader, targetId: targetID });
+			handleRemoveChange({ setState: setStateHeader, currState: currStateHeader, targetId: targetID, typeId:'id' });
+			handleRemoveChange({ setState: setStateSkills, currState: currStateItem, targetId: targetID, typeId:'headerId' });
 		} else {
 			console.error("Error: Target ID is null.");
 		}
@@ -126,18 +127,22 @@ export default function SkillForm({ isActive, onExpand, handleSubmitChange, hand
 							</div>
 						))}
 					</div>
-					<form className="skill-input-container" onSubmit={handleSubmit}> 
-						<Input label="Skill Category" keyName="skill" placeholder="Title" onChange={onChangeHeader} setState={setCurrSkillHeader} currState={currSkillHeader} propValue={currSkillHeader.header}/>
+					<form className="skill-input-container" onSubmit={handleSubmit}>
+						<Input label="Skill Category" keyName="header" placeholder="Title" onChange={onChangeHeader} setState={setCurrSkillHeader} currState={currSkillHeader} propValue={currSkillHeader.header} required={true} />
 
 						<div className="add-skill-input-container">
-							<input type="text" placeholder="Add Skill" onChange={onChangeSkill} value={currSkill.skill} required />
-							<button className='addBtn' type="button" onClick={onAddSkillToList}><img src={AddSVG} alt="add button img" /></button>
+							<input type="text" placeholder="Add Skill" onChange={onChangeSkill} value={currSkill.skill} />
+							<button className="addBtn" type="button" onClick={onAddSkillToList}>
+								<img src={AddSVG} alt="add button img" />
+							</button>
 						</div>
-						<button className='submitBtn' type="submit">Add Category</button>
+						<button className="submitBtn" type="submit">
+							Add Category
+						</button>
 					</form>
 				</div>
 			) : (
-				<BannerOptions mainName="skill-opt-container" type="skill" currState={currStateHeader} handleSeeBanner={handleSeeSkillClick} handleAddClick={handleAddSkillClick} handleRemoveClick={removeSkillHeader} />
+				<BannerOptions mainName="skill-opt-container" type="skill" currState={currStateHeader} handleSeeBanner={handleSeeSkillClick} handleAddClick={handleAddSkillClick} handleRemoveClick={removeSkillBanner} />
 			)}
 		</div>
 	);
