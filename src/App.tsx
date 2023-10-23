@@ -91,13 +91,19 @@ function App() {
 		{ id: "header2", header: "Adventure Expertise" },
 	]);
 	const [skills, setSkills] = useState<SkillItem[]>([
-		{ id: "nova789", headerId: "header1", skill: "Transmutation" },
-		{ id: "efg456", headerId: "header1", skill: "Biology" },
-		{ id: "han23", headerId: "header1", skill: "Alchemy" },
-		{ id: "head23", headerId: "header2", skill: "Climbing" },
-		{ id: "sans23", headerId: "header2", skill: "Swimming" },
-		{ id: "did89", headerId: "header2", skill: "Fighting" },
-	]);
+		{ id: "nova789", headerId: "header1", skill: "transmutation" },
+		{ id: "efg456", headerId: "header1", skill: "biology" },
+		{ id: "han23", headerId: "header1", skill: "alchemy mastery" },
+		{ id: "abc456", headerId: "header1", skill: "metal manipulation" },
+		{ id: "metal321", headerId: "header1", skill: "metal bending" },
+		{ id: "head23", headerId: "header2", skill: "climbing" },
+		{ id: "sans23", headerId: "header2", skill: "swimming" },
+		{ id: "did89", headerId: "header2", skill: "fighting" },
+		{ id: "magic234", headerId: "header2", skill: "spell casting" },
+		{ id: "stealth678", headerId: "header2", skill: "stealth" },
+		{ id: "leadership432", headerId: "header2", skill: "leadership" },
+	 ]);
+	 
 	
 
 	const [experience, setExperience] = useState<Experience>([
@@ -189,7 +195,7 @@ function App() {
 				<ExperienceForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={updateInfoList} handleRemoveChange={removeIDFromList} currState={experience} setState={setExperience} />
 			</div>
 			<div className="resume-preview">
-				<ResumePreview personInfo={person} educationInfo={education} skillInfo={skills} experienceInfo={experience} />
+				<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} />
 			</div>
 			<button
 				className={isPreviewActive ? "previewBtn active" : "previewBtn"}

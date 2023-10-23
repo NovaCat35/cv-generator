@@ -1,84 +1,101 @@
 $white-background: rgb(255, 255, 255);
 
 .resume-preview {
-   height: 100vh;
-   padding: 1rem;
-   position: relative;
-   justify-self: center;
-   .resume-container{
-      padding: 30px;
-      background-color: $white-background;
-      width: 8.5in;
-      height: 11in; 
-      position: absolute; 
-      top: 50%; 
-      left: 50%; 
-      transform: translate(-50%, -50%) scale(0.43);
-      box-shadow: 0 15px 25px -5px rgba(50,50,93,.1), 0 8px 16px -8px rgba(0,0,0,.25);
-      display: grid;
-      grid-template-rows: 100px 1fr;
-      header{
-         display: grid;
-         grid-template-columns: 2fr 1fr;
-         grid-template-rows: 50px;
-         .name {
-            font-size: 3rem;
-         }
-         .contact-info {
-            display: grid;
-            grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-            column-gap: 10px;
-         }
-      }
-      main {
-         display: grid;
-         grid-template-rows: repeat(2, 1fr);
-         h1 {
-            font-size: 2rem;
-         }
-         .education-container {
-            .education-details {
-               display: grid;
-               grid-template: repeat(2, 20px)/ 2fr 160px;
-              .study {
-                  display: list-item; /* This has to be "list-item"                                          */
-                  margin-left : 1rem;
-              }
-            }
-         }
-         .experience-container {
-            .exp-details{
-               display: grid;
-               margin-bottom: 15px;
-               grid-template: repeat(2, 20px) 1fr / 1fr 160px;
-               .company{
-                  font-weight: 700;
-               }
-               .description {
-                  grid-row: 3 / -1;
-                  display: list-item;
-                  margin-left: 1rem;
-               }
-            }
-         }
-      }
-      @media screen and (min-width: 550px) {
-         transform: translate(-50%, -50%) scale(.45);
-      }
-      @media screen and (min-width: 700px) {
-         transform: translate(-50%, -50%) scale(.6);
-      }
-   }
-   @media screen and (min-width: 550px) {
+	height: 100vh;
+	padding: 1rem;
+	position: relative;
+	justify-self: center;
+	.resume-container {
+		padding: 30px;
+		background-color: $white-background;
+		width: 8.5in;
+		height: 11in;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) scale(0.43);
+		box-shadow: 0 15px 25px -5px rgba(50, 50, 93, 0.1), 0 8px 16px -8px rgba(0, 0, 0, 0.25);
+		display: grid;
+		grid-template-rows: 100px 1fr;
+		header {
+			display: grid;
+			grid-template-columns: 2fr 1fr;
+			grid-template-rows: 50px;
+			.name {
+				font-size: 3rem;
+			}
+			.contact-info {
+				display: grid;
+				grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+				column-gap: 10px;
+			}
+		}
+		main {
+			display: grid;
+			grid-template-rows: repeat(2, 1fr);
+			h1 {
+				font-size: 2rem;
+			}
+			.education-container {
+				.education-details {
+					display: grid;
+					grid-template: repeat(2, 20px) / 2fr 160px;
+					.study {
+						display: list-item; /* This has to be "list-item"                                          */
+						margin-left: 1rem;
+					}
+				}
+			}
+			.skill-container {
+				.skill-header-detail {
+					display: flex;
+					font-weight: 700;
+					.skill-detail {
+						font-weight: 100;
+						&::before {
+							content: ", ";
+						}
+						&:first-child {
+							margin-left: 30px;
+							&::before {
+								content: "";
+							}
+						}
+					}
+				}
+			}
+			.experience-container {
+				.exp-details {
+					display: grid;
+					margin-bottom: 15px;
+					grid-template: repeat(2, 20px) 1fr / 1fr 160px;
+					.company {
+						font-weight: 700;
+					}
+					.description {
+						grid-row: 3 / -1;
+						display: list-item;
+						margin-left: 1rem;
+					}
+				}
+			}
+		}
+		@media screen and (min-width: 550px) {
+			transform: translate(-50%, -50%) scale(0.45);
+		}
+		@media screen and (min-width: 700px) {
+			transform: translate(-50%, -50%) scale(0.6);
+		}
+	}
+	@media screen and (min-width: 550px) {
+	}
+}
 
-   }
- }
-
- .date-container {
-   display: flex;
-   font-weight: 700;
-   .startDate::after {
-      content: '-';
-      margin: 0 5px;
-   }
+.date-container {
+	display: flex;
+	font-weight: 700;
+	.startDate::after {
+		content: "-";
+		margin: 0 5px;
+	}
 }

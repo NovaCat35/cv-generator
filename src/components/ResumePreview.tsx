@@ -1,15 +1,16 @@
-import { Person, Education, Experience, Skills, ExperienceItem, SkillItem } from "../App.tsx";
-import { v4 as uuidv4 } from 'uuid';
+import { Person, Education, Experience, SkillHeader, SkillItem, ExperienceItem } from "../App.tsx";
+import { v4 as uuidv4 } from "uuid";
 
 interface ResumePreviewProps {
 	personInfo: Person;
 	educationInfo: Education;
-	skillInfo: Skills;
+	skillHeaderInfo: SkillHeader[];
+	skillListInfo: SkillItem[];
 	experienceInfo: Experience;
 }
-export default function ResumePreview({ personInfo, educationInfo, skillInfo, experienceInfo }: ResumePreviewProps) {
+export default function ResumePreview({ personInfo, educationInfo, skillHeaderInfo, skillListInfo, experienceInfo }: ResumePreviewProps) {
 	return (
-		<div className='resume-container'>
+		<div className="resume-container">
 			<header>
 				<div className="name">{personInfo.name}</div>
 				<div className="contact-info">
@@ -32,15 +33,24 @@ export default function ResumePreview({ personInfo, educationInfo, skillInfo, ex
 						<div className="location">{educationInfo.location}</div>
 					</div>
 				</div>
-				<div className='skill-container'>
+				<div className="skill-container">
 					<h1>Skills</h1>
-					{skillInfo.map((info: SkillItem) => (
-						<div className="skill-detail" key={info.id}>{info.skill}</div>
+					{skillHeaderInfo.map((category) => (
+						<div className="skill-header-detail" key={category.id}>
+							{category.header}:
+							{skillListInfo
+								.filter((info) => info.headerId === category.id)
+								.map((info) => (
+									<div className="skill-detail" key={info.id}>
+										{info.skill}
+									</div>
+								))}
+						</div>
 					))}
 				</div>
 				<div className="experience-container">
 					<h1>Career Experience</h1>
-					{experienceInfo.map((experience : ExperienceItem, index: number) => (
+					{experienceInfo.map((experience: ExperienceItem, index: number) => (
 						<div className={`exp-details`} key={experience.id}>
 							<div className="company">{experience.company}</div>
 							<div className="date-container">
