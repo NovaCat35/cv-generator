@@ -5,6 +5,8 @@ import { InputDate } from "./InputDate.tsx";
 import BannerOptions from "./BannerOptions.tsx"
 import DisableDate from "./DisableDate.tsx";
 import Header from './Header.tsx'
+import FormButtons from './FormButtons.tsx'
+import CardList from './CardList.tsx'
 import CloseSVG from "../assets/close.svg"
 import { v4 as uuidv4 } from 'uuid';
 
@@ -108,29 +110,10 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitChange,
 					<DisableDate onToggle={handleToggle} checked={isChecked}/>
 					<InputDate label="Start Date *" keyName="startDate" onChange={onChange} setState={setState} currState={currState} dateValue={currExp.startDate}/>
 					{isChecked ? "" : <InputDate label="End Date *" keyName="endDate" onChange={onChange} setState={setState} currState={currState} dateValue={currExp.endDate}/>}
-					<div className="button-container">
-						<button className="cancel-btn" type="button" onClick={handleCancelClick}>
-							Cancel
-						</button>
-						<button className="submit-btn" type="submit">
-							Submit
-						</button>
-					</div>
+					<FormButtons handleCancelClick={handleCancelClick}/>
 				</form>
 			) : (
 				<BannerOptions mainName="exp-opt-container" type='experience' currState={currState} handleSeeBanner={handleSeeExpClick} handleAddClick={handleAddExpClick} handleRemoveClick={removeExperience} />
-				// <div className="exp-opt-container">
-				// 	{/* Populates the main exp-container with the individual exp stored in currState*/}
-				// 	{currState.map((experience: ExperienceItem, index: number) => (
-				// 		<div className={`exp-details`} id={experience.id} key={experience.id} onClick={handleSeeExpClick}>
-				// 			<div>{experience.company}</div>
-				// 			<button className="closeBtn" onClick={removeExperience}><img src={CloseSVG} alt="close button"/></button>
-				// 		</div>
-				// 	))}
-				// 	<div className="button-container">
-				// 		<button type="button" onClick={handleAddExpClick}>Add Experience</button>
-				// 	</div>
-				// </div>
 			)}
 		</div>
 	);

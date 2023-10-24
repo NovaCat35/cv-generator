@@ -38,6 +38,11 @@ export interface SkillItem {
 }
 
 
+export interface ExperienceBulletPts{
+	id: string;
+	expId: string;
+	bulletPoint: string;
+}
 export interface ExperienceItem {
 	id: string;
 	company: string;
@@ -82,8 +87,8 @@ function App() {
 		school: "Amestrian State Military",
 		location: "Amestris, Central City",
 		study: "Master of State Alchemy",
-		startDate: "Sept 1911",
-		endDate: "May 1917",
+		startDate: "Oct 1911",
+		endDate: "May 1913",
 	});
 
 	const [skillHeaders, setSkillHeaders] = useState<SkillHeader[]>([
@@ -105,7 +110,7 @@ function App() {
 	 ]);
 	 
 	
-
+	
 	const [experience, setExperience] = useState<Experience>([
 		{
 			id: "abc123",
@@ -124,6 +129,33 @@ function App() {
 			description: "Utilized alchemical expertise and innovative problem-solving to investigate and resolve complex alchemical mysteries. Demonstrated exceptional skill in both theoretical and practical alchemy, ensuring the safety and security of Amestris through pioneering advancements in alchemical techniques.",
 			startDate: "Sept 1911",
 			endDate: "May 1917",
+		},
+	]);
+	const [expBulletPts, setExpBulletPts] = useState<ExperienceBulletPts[]>([
+		{
+			id: 'bullet1',
+			expId: 'abc123',
+			bulletPoint: 'Conducted extensive research on quantum mechanics and theoretical physics to support the development of innovative technologies.',
+		},
+		{
+			id: 'bullet2',
+			expId: 'abc123',
+			bulletPoint: 'Collaborated with a multidisciplinary team of scientists and engineers to solve complex scientific challenges related to portal technology.',
+		},
+		{
+			id: 'b3ll3t3',
+			expId: 'pwd888',
+			bulletPoint: 'Investigated and resolved intricate alchemical mysteries, utilizing a deep understanding of alchemical principles and techniques to uncover hidden truths and solve complex problems.',
+		},
+		{
+			id: 'bullet4',
+			expId: 'pwd888',
+			bulletPoint: 'Actively participated in intelligence missions, employing alchemical skills to decrypt codes, decipher ancient texts, and gain insights into the enemy\'s alchemical capabilities.',
+		},
+		{
+			id: 'bu5et5',
+			expId: 'pwd888',
+			bulletPoint: 'Conducted public demonstrations and educational outreach programs to raise awareness about alchemy, its applications, and its ethical use, promoting understanding and cooperation within the community.',
 		},
 	]);
 
@@ -188,14 +220,14 @@ function App() {
 	return (
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
-				<h1 className="title">CV Generator</h1>
+				<h1 className="title">My CV Generator</h1>
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
 				<SkillForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
 				<ExperienceForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitChange={updateInfoList} handleRemoveChange={removeIDFromList} currState={experience} setState={setExperience} />
 			</div>
 			<div className="resume-preview">
-				<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} />
+				<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts}/>
 			</div>
 			<button
 				className={isPreviewActive ? "previewBtn active" : "previewBtn"}

@@ -1,5 +1,7 @@
 # CV Generator
-Trying to get started with a basic resume template? Look no further, this CV generator will help you fill in the essential details and give you a basic layout as you seek out on your job hunting journey.
+While looking for a job can often feel frustrating, making a resume shouldn't be. This CV generator will help you fill in the essential details and give you a basic layout as you persevere on your job hunting journey. 
+
+~ GANBATTE がんばって !
 
 Link: THIS PROJECT IS CURRENTLY A WORK IN PROGRESS ... ⚠️
 

@@ -85,12 +85,30 @@ $white-filter-background: invert(98%) sepia(75%) saturate(5977%) hue-rotate(207d
                   filter: $white-filter-background;
                }
             }
+            img {
+               width: 100%; /* This will make sure the image takes up 100% of the container width */
+               height: auto; /* To maintain the aspect ratio */
+            }
          }
       }
       .error {
          text-align: center;
          font-weight: 700;
          color: rgb(214, 95, 95);
+         animation: shake 0.3s ease-in-out;
       }
    }
 }
+
+@keyframes shake {
+   0% { transform: translateX(0); }
+   25% { transform: translateX(-10px); }
+   50% { transform: translateX(10px); }
+   75% { transform: translateX(-10px); }
+   100% { transform: translateX(0); }
+ }
+ 
+ .shake-animation {
+   animation: shake 0.5s ease-in-out;
+ }
+ 

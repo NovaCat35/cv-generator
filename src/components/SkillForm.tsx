@@ -3,7 +3,8 @@ import Header from "./Header.tsx";
 import { HandleListChange, SkillHeader, SkillItem, HandleListRemove, HandleChange } from "../App.tsx";
 import BannerOptions from "./BannerOptions.tsx";
 import { Input } from "./Input.tsx";
-import CloseSVG from "../assets/close.svg";
+import FormButtons from './FormButtons.tsx'
+import CardList from './CardList.tsx'
 import AddSVG from "../assets/add.svg";
 import { v4 as uuidv4 } from "uuid";
 
@@ -57,7 +58,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 			setCurrSkill(initSkill);
 			setErrorMessage(""); // RESETS empty skill error if applicable		
 		} else {
-			setErrorMessage("Please add a skill!")
+			setErrorMessage("You can't add an empty skill!")
 		}	
 	};
 
@@ -68,7 +69,6 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 
 		if(currSkillsList.length > 0) {
 			handleSubmitList({ setState: setStateSkills, currState: currStateItem, newElement: currSkillsList });
-			// --v RESET v--
 			resetInit();
 			setShowForm(false);
 		} else {
@@ -138,16 +138,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 			{showForm ? (
 				<div className="main-skill-container">
 					{/* Add individual skills down below */}
-					<div className="skill-list-container">
-						{currSkillsList.map((item) => (
-							<div className="skill-details" id={item.id} key={item.id}>
-								<div>{item.skill}</div>
-								<button className="closeBtn" onClick={removeSkillCard}>
-									<img src={CloseSVG} alt="close button" />
-								</button>
-							</div>
-						))}
-					</div>
+					<CardList currList={currSkillsList} mainName="skill" handleRemoveCard={removeSkillCard} />
 					<form className="skill-input-container" onSubmit={handleSubmit}>
 						<Input label="Skill Category" keyName="header" placeholder="Title" onChange={onChangeHeader} setState={setCurrSkillHeader} currState={currSkillHeader} propValue={currSkillHeader.header} required={true} />
 
@@ -158,14 +149,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 							</button>
 						</div>
 						{errorMessage && <div className="error"> {errorMessage} </div>}
-						<div className="button-container">
-						<button className="cancel-btn" type="button" onClick={handleCancelClick}>
-							Cancel
-						</button>
-						<button className="submit-btn" type="submit">
-							Submit
-						</button>
-					</div>
+						<FormButtons handleCancelClick={handleCancelClick}/>
 					</form>
 				</div>
 			) : (

@@ -69,13 +69,20 @@ $white-background: rgb(255, 255, 255);
 					display: grid;
 					margin-bottom: 15px;
 					grid-template: repeat(2, 20px) 1fr / 1fr 160px;
+					grid-auto-rows: minmax(20px, auto);
 					.company {
 						font-weight: 700;
 					}
 					.description {
-						grid-row: 3 / -1;
+						// grid-row: 3 / -1;
+						grid-column: 1 / -1;
+						margin-left: 1rem;
+					}
+					.bullet-point {
+						padding: 5px 0;
 						display: list-item;
 						margin-left: 1rem;
+						grid-column: 1 / -1;
 					}
 				}
 			}

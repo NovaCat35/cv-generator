@@ -1,4 +1,4 @@
-import { Person, Education, Experience, SkillHeader, SkillItem, ExperienceItem } from "../App.tsx";
+import { Person, Education, Experience, SkillHeader, SkillItem, ExperienceItem, ExperienceBulletPts } from "../App.tsx";
 import { v4 as uuidv4 } from "uuid";
 
 interface ResumePreviewProps {
@@ -7,8 +7,9 @@ interface ResumePreviewProps {
 	skillHeaderInfo: SkillHeader[];
 	skillListInfo: SkillItem[];
 	experienceInfo: Experience;
+	expBulletPoints: ExperienceBulletPts[];
 }
-export default function ResumePreview({ personInfo, educationInfo, skillHeaderInfo, skillListInfo, experienceInfo }: ResumePreviewProps) {
+export default function ResumePreview({ personInfo, educationInfo, skillHeaderInfo, skillListInfo, experienceInfo, expBulletPoints }: ResumePreviewProps) {
 	return (
 		<div className="resume-container">
 			<header>
@@ -59,6 +60,12 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 							</div>
 							<div className="position">{experience.position}</div>
 							<div className="description">{experience.description}</div>
+							{ expBulletPoints
+								.filter(bullet => bullet.expId == experience.id)
+								.map(bullet => (
+									<div className="bullet-point" key={bullet.id}>{bullet.bulletPoint}</div>
+								))
+							}
 						</div>
 					))}
 				</div>
