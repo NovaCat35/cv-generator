@@ -7,6 +7,7 @@
 		flex-wrap: wrap;
 		gap: 8px;
 		.details {
+			width: 100%;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -30,11 +31,27 @@
 		}
 	}
 }
+
+
+$red-filter-background: invert(31%) sepia(37%) saturate(1946%) hue-rotate(232deg) brightness(96%) contrast(82%);
+// Special color for deleteSVG within expContainer
+form {
+	.details {
+		.closeBtn {
+			img{
+				filter: $red-filter-background;
+			}
+		}
+	}
+}
+
 .error {
 	text-align: center;
 	font-weight: 700;
 	color: rgb(214, 95, 95);
-	animation: shake 0.3s ease-in-out;
+	&.alert {
+		animation: shake 0.3s ease-in-out;
+	}
 }
 
 @keyframes shake {

@@ -6,6 +6,7 @@ import { Input } from "./Input.tsx";
 import FormButtons from './FormButtons.tsx'
 import CardList from './CardList.tsx'
 import InputCards from './InputCards.tsx'
+import ErrorText from './ErrorText.tsx'
 import { v4 as uuidv4 } from "uuid";
 
 interface SkillFormProps {
@@ -29,7 +30,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 	const [currSkill, setCurrSkill] = useState(initSkill);
 	const [showForm, setShowForm] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
-
+   const [errorAlert, setErrorAlert] = useState(false);
 
 	// Handles the expand/collapse btns by setting the curr index to expand on or -1 to collapse
 	const handleExpandClick = () => {
@@ -59,6 +60,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 			setErrorMessage(""); // RESETS empty skill error if applicable		
 		} else {
 			setErrorMessage("You can't add an empty skill!")
+			setErrorAlert(true);
 		}	
 	};
 
@@ -73,6 +75,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 			setShowForm(false);
 		} else {
 			setErrorMessage("Please add a skill!")
+			setErrorAlert(true);
 		}
 	};
 
@@ -142,7 +145,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 						<Input label="Skill Category" keyName="header" placeholder="Title" onChange={onChangeHeader} setState={setCurrSkillHeader} currState={currSkillHeader} propValue={currSkillHeader.header} required={true} />
 
 						<InputCards type='skill' currState={currSkill} onChange={onChangeSkill} onAddToList={onAddSkillToList}/>
-						{errorMessage && <div className="error"> {errorMessage} </div>}
+						{errorMessage && <ErrorText errorMessage={errorMessage} alertStatus={errorAlert} setAlert={(status) => setErrorAlert(status)} />}
 
 						<FormButtons handleCancelClick={handleCancelClick}/>
 					</form>

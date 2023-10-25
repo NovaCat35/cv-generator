@@ -8,6 +8,7 @@ import Header from './Header.tsx'
 import FormButtons from './FormButtons.tsx'
 import CardList from './CardList.tsx'
 import InputCards from './InputCards.tsx'
+import ErrorText from './ErrorText.tsx'
 import { v4 as uuidv4 } from 'uuid';
 
 interface ExperienceFormProps {
@@ -45,6 +46,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitHeader,
 	const [isChecked, setIsChecked] = useState(false);
 	const [showForm, setShowForm] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
+	const [errorAlert, setErrorAlert] = useState(false);
 
 	// Because we can't change the resume directly and must wait for the form to submit, we can only change the current exp 
 	const onChangeExp = ({ value, keyName }: HandleChange) => {
@@ -70,6 +72,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitHeader,
 			setErrorMessage(""); 
 		} else {
 			setErrorMessage("Can't add an empty bullet points!")
+			setErrorAlert(true);
 		}	
 	}
 
@@ -99,6 +102,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitHeader,
 			setShowForm(false);
 		} else {
 			setErrorMessage("Please add a skill!");
+			setErrorAlert(true);
 		}
 	};
 
@@ -177,7 +181,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitHeader,
 
 					<CardList currList={currBulletPtList} mainName="experience" handleRemoveCard={removeBulletCard} />
 					<InputCards type='experience' currState={currBulletPt} onChange={onChangeBulletPt} onAddToList={onAddBulletPtToList}/>
-					{errorMessage && <div className="error"> {errorMessage} </div>}
+					{errorMessage && <ErrorText errorMessage={errorMessage} alertStatus={errorAlert} setAlert={(status) => setErrorAlert(status)} />}
 
 					<FormButtons handleCancelClick={handleCancelClick}/>
 				</form>

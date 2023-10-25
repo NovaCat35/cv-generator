@@ -23,7 +23,7 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 			</header>
 			<main>
 				<div className="education-container">
-					<h1>Education</h1>
+				{Object.values(educationInfo).some(value => value.trim() !== "")  && <h1>Education</h1>}
 					<div className="education-details">
 						<div className="school">{educationInfo.school}</div>
 						<div className="date-container">
@@ -35,7 +35,7 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 					</div>
 				</div>
 				<div className="skill-container">
-					<h1>Skills</h1>
+					{skillListInfo.length != 0 && <h1>Skills</h1>}
 					{skillHeaderInfo.map((category) => (
 						<div className="skill-header-detail" key={category.id}>
 							{category.header}:
@@ -50,7 +50,7 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 					))}
 				</div>
 				<div className="experience-container">
-					<h1>Career Experience</h1>
+					{experienceInfo.length != 0 && <h1>Career Experience</h1>}
 					{experienceInfo.map((experience: ExperienceItem, index: number) => (
 						<div className={`exp-details`} key={experience.id}>
 							<div className="company">{experience.company}</div>

@@ -16,12 +16,12 @@ $white-background: rgb(255, 255, 255);
 	}
 }
 @mixin input() {
-	font-size: clamp(0.7rem, 2vw, 1rem);
+	font-size: clamp(0.8rem, 2vw, 1rem);
 	background-color: rgb(243, 243, 243);
 	appearance: none;
 	border: 1.5px solid transparent;
 	border-radius: 5px;
-	padding: 3px;
+	padding: 7px 3px;
 	&:focus {
 		outline: none !important;
 		border: 1.5px solid transparent;
