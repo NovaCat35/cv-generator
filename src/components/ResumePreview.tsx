@@ -61,7 +61,7 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 							<div className="position">{experience.position}</div>
 							<div className="description">{experience.description}</div>
 							{ expBulletPoints
-								.filter(bullet => bullet.expId == experience.id)
+								.filter(bullet => bullet.headerId == experience.id)
 								.map(bullet => (
 									<div className="bullet-point" key={bullet.id}>{bullet.bulletPoint}</div>
 								))

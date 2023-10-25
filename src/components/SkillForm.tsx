@@ -1,11 +1,11 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import Header from "./Header.tsx";
 import { HandleListChange, SkillHeader, SkillItem, HandleListRemove, HandleChange } from "../App.tsx";
 import BannerOptions from "./BannerOptions.tsx";
 import { Input } from "./Input.tsx";
 import FormButtons from './FormButtons.tsx'
 import CardList from './CardList.tsx'
-import AddSVG from "../assets/add.svg";
+import InputCards from './InputCards.tsx'
 import { v4 as uuidv4 } from "uuid";
 
 interface SkillFormProps {
@@ -40,7 +40,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 		setCurrSkillHeader({ ...currSkillHeader, [keyName]: value });
 	};
 
-	// Changes the currSkill only, we don't initialize the ID and headerID until we decide to submit
+	// Changes the currSkill only, not finalize though. We still need to add it to list
 	const onChangeSkill = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = e.target.value;
 		setCurrSkill({ ...currSkill, skill: newValue });
@@ -137,18 +137,13 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 			<Header name="Skills" isActive={isActive} handleExpandClick={handleExpandClick} />
 			{showForm ? (
 				<div className="main-skill-container">
-					{/* Add individual skills down below */}
 					<CardList currList={currSkillsList} mainName="skill" handleRemoveCard={removeSkillCard} />
 					<form className="skill-input-container" onSubmit={handleSubmit}>
 						<Input label="Skill Category" keyName="header" placeholder="Title" onChange={onChangeHeader} setState={setCurrSkillHeader} currState={currSkillHeader} propValue={currSkillHeader.header} required={true} />
 
-						<div className="add-skill-input-container">
-							<input type="text" placeholder="Add Skill" onChange={onChangeSkill} value={currSkill.skill} />
-							<button className="addBtn" type="button" onClick={onAddSkillToList}>
-								<img src={AddSVG} alt="add button img" />
-							</button>
-						</div>
+						<InputCards type='skill' currState={currSkill} onChange={onChangeSkill} onAddToList={onAddSkillToList}/>
 						{errorMessage && <div className="error"> {errorMessage} </div>}
+
 						<FormButtons handleCancelClick={handleCancelClick}/>
 					</form>
 				</div>

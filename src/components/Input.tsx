@@ -23,7 +23,7 @@ export function Input({ keyName, label, placeholder, onChange, setState, currSta
 
 	return (
 		<div>
-			<label htmlFor={keyName}>{label}</label>
+			<label htmlFor={keyName}>{label} {required && <span>*</span>}</label>
 			{required ? <input type="text" id={keyName} placeholder={placeholder} onChange={handleChange} value={inputValue} required /> : <input type="text" id={keyName} placeholder={placeholder} onChange={handleChange} value={inputValue} />}
 		</div>
 	);
