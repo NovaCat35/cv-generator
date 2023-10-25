@@ -1,0 +1,43 @@
+.form-container {
+	form {
+		.add-experience-input-container.add-card-container {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			background-color: rgb(243, 243, 243);
+			border-radius: 5px;
+			padding: 5px;
+			margin-top: 10px;
+			input {
+				flex: 1;
+				width: 100%;
+			}
+			input:focus ~ button {
+				background-color: rgb(185, 211, 219);
+			}
+			button {
+            @include button();
+				margin: 0;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				padding: 0;
+				border: 2px solid rgb(169, 186, 216);
+				background-color: #cdd9ed;
+				&:hover {
+					border: 2px solid rgb(80, 121, 235);
+					background-color: #6b8ff1;
+					color: $white-background;
+					text-shadow: 1px 1px 5px rgb(90, 127, 170);
+					img {
+						filter: $white-filter-background;
+					}
+				}
+				img {
+					width: 100%; /* This will make sure the image takes up 100% of the container width */
+					height: auto; /* To maintain the aspect ratio */
+				}
+			}
+		}
+	}
+}

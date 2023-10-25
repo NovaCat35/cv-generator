@@ -8,7 +8,7 @@ interface InputCardsProps {
 }
 export default function InputCards({type, currState, onChange, onAddToList} : InputCardsProps) {
 	return (
-		<div className={`add-${type}-input-container`}>
+		<div className={`add-${type}-input-container add-card-container`}>
 			<input type="text" placeholder={(type == 'skill') ? "Add Skill" : "Add Bullet Point"} onChange={onChange} value={(type == 'skill') ? currState.skill : currState.bulletPoint} />
 			<button className="addBtn" type="button" onClick={onAddToList}>
 				<img src={AddSVG} alt="add button img" />

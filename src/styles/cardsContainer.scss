@@ -1,0 +1,60 @@
+@import "./mixins.scss";
+
+.form-container {
+	.list-container {
+		margin-top: 5px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		.details {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 2px;
+			padding: 3px 5px;
+			border: 2px solid transparent;
+			border-radius: 10px;
+			background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(42, 42, 201), darkorchid) border-box;
+			.closeBtn {
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				border: none;
+				background-color: $white-background;
+				padding: 0;
+				img {
+					height: 20px;
+					width: 20px;
+				}
+			}
+		}
+	}
+}
+.error {
+	text-align: center;
+	font-weight: 700;
+	color: rgb(214, 95, 95);
+	animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+	0% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-10px);
+	}
+	50% {
+		transform: translateX(10px);
+	}
+	75% {
+		transform: translateX(-10px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+.shake-animation {
+	animation: shake 0.5s ease-in-out;
+}
