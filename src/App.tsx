@@ -4,6 +4,7 @@ import ResumePreview from "./components/ResumePreview.tsx";
 import EducationForm from "./components/EducationForm.tsx";
 import ExperienceForm from "./components/ExperienceForm.tsx";
 import SkillForm from "./components/SkillForm.tsx";
+import AdditionalForm from "./components/AdditionalForm.tsx";
 import "./styles/App.scss";
 import "./styles/mainForms.scss";
 import "./styles/resumePreview.scss";
@@ -37,8 +38,8 @@ export interface SkillItem {
 	skill: string;
 }
 
-
-export interface ExperienceBulletPts{
+// --- Experience ---
+export interface ExperienceBulletPts {
 	id: string;
 	headerId: string;
 	bulletPoint: string;
@@ -54,6 +55,29 @@ export interface ExperienceItem {
 }
 export interface Experience extends Array<ExperienceItem> {}
 
+// --Additional Info
+interface BulletPoint {
+	id: string;
+	subHeaderId: string;
+	bulletPoint: string;
+ }
+ interface SubHeader {
+	id: string;
+	categoryId: string;
+	name: string;
+	bulletPointIds: string[];
+ }
+ interface Category {
+	id: string;
+	name: string;
+ }
+export interface AdditionalInfo {
+	categories: Category[];
+	subHeaders: SubHeader[];
+	bulletPoints: BulletPoint[];
+ }
+
+ // -- HANDLE function interfaces --
 export interface HandleChange {
 	value: string;
 	keyName: string;
@@ -107,10 +131,8 @@ function App() {
 		{ id: "magic234", headerId: "header2", skill: "spell casting" },
 		{ id: "stealth678", headerId: "header2", skill: "stealth" },
 		{ id: "leadership432", headerId: "header2", skill: "leadership" },
-	 ]);
-	 
-	
-	
+	]);
+
 	const [experience, setExperience] = useState<Experience>([
 		{
 			id: "abc123",
@@ -133,31 +155,49 @@ function App() {
 	]);
 	const [expBulletPts, setExpBulletPts] = useState<ExperienceBulletPts[]>([
 		{
-			id: 'bullet1',
-			headerId: 'abc123',
-			bulletPoint: 'Conducted extensive research on quantum mechanics and theoretical physics to support the development of innovative technologies.',
+			id: "bullet1",
+			headerId: "abc123",
+			bulletPoint: "Conducted extensive research on quantum mechanics and theoretical physics to support the development of innovative technologies.",
 		},
 		{
-			id: 'bullet2',
-			headerId: 'abc123',
-			bulletPoint: 'Collaborated with a multidisciplinary team of scientists and engineers to solve complex scientific challenges related to portal technology.',
+			id: "bullet2",
+			headerId: "abc123",
+			bulletPoint: "Collaborated with a multidisciplinary team of scientists and engineers to solve complex scientific challenges related to portal technology.",
 		},
 		{
-			id: 'b3ll3t3',
-			headerId: 'pwd888',
-			bulletPoint: 'Investigated and resolved intricate alchemical mysteries, utilizing a deep understanding of alchemical principles and techniques to uncover hidden truths and solve complex problems.',
+			id: "b3ll3t3",
+			headerId: "pwd888",
+			bulletPoint: "Investigated and resolved intricate alchemical mysteries, utilizing a deep understanding of alchemical principles and techniques to uncover hidden truths and solve complex problems.",
 		},
 		{
-			id: 'bullet4',
-			headerId: 'pwd888',
-			bulletPoint: 'Actively participated in intelligence missions, employing alchemical skills to decrypt codes, decipher ancient texts, and gain insights into the enemy\'s alchemical capabilities.',
+			id: "bullet4",
+			headerId: "pwd888",
+			bulletPoint: "Actively participated in intelligence missions, employing alchemical skills to decrypt codes, decipher ancient texts, and gain insights into the enemy's alchemical capabilities.",
 		},
 		{
-			id: 'bu5et5',
-			headerId: 'pwd888',
-			bulletPoint: 'Conducted public demonstrations and educational outreach programs to raise awareness about alchemy, its applications, and its ethical use, promoting understanding and cooperation within the community.',
+			id: "bu5et5",
+			headerId: "pwd888",
+			bulletPoint: "Conducted public demonstrations and educational outreach programs to raise awareness about alchemy, its applications, and its ethical use, promoting understanding and cooperation within the community.",
 		},
 	]);
+
+	const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo>({
+		categories: [
+			{ id: "123", name: "Personal Projects" },
+			{ id: "456", name: "Testing" },
+		],
+		subHeaders: [
+			{ id: "pwa", categoryId: "123", name:'Forbidden Knowledge', bulletPointIds: ['hol3', 'fed'] },
+			{ id: "234d", categoryId: "123", name:'Growth Alchemy', bulletPointIds: ['see3', 'asdf'] },
+			{ id: "2df", categoryId: "456", name:'Growth Alchemy', bulletPointIds: ['see3', 'asdf'] },
+		],
+		bulletPoints: [
+			{ id: "hol3", subHeaderId: "pwa", bulletPoint: "Did a thing" },
+			{ id: "fed", subHeaderId: "pwa", bulletPoint: "Did others stuff" },
+			{ id: "see3", subHeaderId: "234d", bulletPoint: "heh, not here..." },
+			{ id: "asdf", subHeaderId: "2df", bulletPoint: "HEy no peaking" },
+		],
+	});
 
 	const [isPreviewActive, setIsPreviewActive] = useState(false); // keeps state of a preview button for smaller screens
 	const [activeIndex, setActiveIndex] = useState(0); // This is for keeping track of active expanded forms
@@ -195,27 +235,22 @@ function App() {
 	 * We handle all header and subchild of header here (e.g. skillHeader and individual skills)
 	 * First we remove all instance of subchild related to header and just add the new changes from subchilds
 	 */
-	const updateHeaderCategoryList =  ({ setState, currState, newElement }: HandleListChange) => {
+	const updateHeaderCategoryList = ({ setState, currState, newElement }: HandleListChange) => {
 		// Map through the current state any delete(reset) all matching newElement[0]'s headerId
 		const updatedState = currState.filter((item: any) => item.headerId !== newElement[0].headerId);
 		const newState = [...updatedState, ...newElement];
 		// Set the updated state
 		setState(newState);
-	}
+	};
 
 	/**
 	 * @param targetId
 	 * Targets the id\headerId setState so that we can remove specific elements base on targetID
 	 */
-	const removeIDFromList = ({ setState, currState, targetId, typeId='id' }: HandleListRemove) => {
-		const filterList = (typeId == 'headerId') ? (
-			currState.filter((item: any) => item.headerId !== targetId)
-		) : (
-			currState.filter((item: any) => item.id !== targetId)
-		);
+	const removeIDFromList = ({ setState, currState, targetId, typeId = "id" }: HandleListRemove) => {
+		const filterList = typeId == "headerId" ? currState.filter((item: any) => item.headerId !== targetId) : currState.filter((item: any) => item.id !== targetId);
 		setState(filterList);
 	};
-
 
 	return (
 		<>
@@ -224,10 +259,11 @@ function App() {
 				<GeneralForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
 				<SkillForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
-				<ExperienceForm isActive={activeIndex === 3} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateExp={experience} currStateBulletPts={expBulletPts} setStateExp={setExperience} setStateBulletPts={setExpBulletPts}/>
+				<ExperienceForm isActive={activeIndex === 3} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateExp={experience} currStateBulletPts={expBulletPts} setStateExp={setExperience} setStateBulletPts={setExpBulletPts} />
+				<AdditionalForm isActive={activeIndex === 4} onExpand={(param) => setActiveIndex(param)} currState={additionalInfo} setState={setActiveIndex} />
 			</div>
 			<div className="resume-preview">
-				<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts}/>
+				<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo}/>
 			</div>
 			<button
 				className={isPreviewActive ? "previewBtn active" : "previewBtn"}
@@ -244,6 +280,5 @@ function App() {
 		</>
 	);
 }
-
 
 export default App;

@@ -1,4 +1,4 @@
-import { Person, Education, Experience, SkillHeader, SkillItem, ExperienceItem, ExperienceBulletPts } from "../App.tsx";
+import { Person, Education, Experience, SkillHeader, SkillItem, ExperienceItem, ExperienceBulletPts, AdditionalInfo } from "../App.tsx";
 import { v4 as uuidv4 } from "uuid";
 
 interface ResumePreviewProps {
@@ -8,24 +8,25 @@ interface ResumePreviewProps {
 	skillListInfo: SkillItem[];
 	experienceInfo: Experience;
 	expBulletPoints: ExperienceBulletPts[];
+	additionalInfo: AdditionalInfo;
 }
-export default function ResumePreview({ personInfo, educationInfo, skillHeaderInfo, skillListInfo, experienceInfo, expBulletPoints }: ResumePreviewProps) {
+export default function ResumePreview({ personInfo, educationInfo, skillHeaderInfo, skillListInfo, experienceInfo, expBulletPoints, additionalInfo }: ResumePreviewProps) {
 	return (
 		<div className="resume-container">
 			<header>
 				<div className="name">{personInfo.name}</div>
 				<div className="contact-info">
-					{personInfo.email !='' && <div className="email">{personInfo.email}</div>}
-					{personInfo.phone !='' && <div className="phone">{personInfo.phone}</div>}
+					{personInfo.email != "" && <div className="email">{personInfo.email}</div>}
+					{personInfo.phone != "" && <div className="phone">{personInfo.phone}</div>}
 					<div className="bottom-container">
-						{personInfo.location !='' && <div className="location">{personInfo.location}</div>}
-						{personInfo.website !='' && <div className="website">{personInfo.website}</div>}
+						{personInfo.location != "" && <div className="location">{personInfo.location}</div>}
+						{personInfo.website != "" && <div className="website">{personInfo.website}</div>}
 					</div>
 				</div>
 			</header>
 			<main>
 				<div className="education-container">
-				{Object.values(educationInfo).some(value => value.trim() !== "")  && <h1>Education</h1>}
+					{Object.values(educationInfo).some((value) => value.trim() !== "") && <h1>Education</h1>}
 					<div className="education-details">
 						<div className="school">{educationInfo.school}</div>
 						<div className="date-container">
@@ -62,12 +63,33 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 							</div>
 							<div className="position">{experience.position}</div>
 							<div className="description">{experience.description}</div>
-							{ expBulletPoints
-								.filter(bullet => bullet.headerId == experience.id)
-								.map(bullet => (
-									<div className="bullet-point" key={bullet.id}>{bullet.bulletPoint}</div>
-								))
-							}
+							{expBulletPoints
+								.filter((bullet) => bullet.headerId == experience.id)
+								.map((bullet) => (
+									<div className="bullet-point" key={bullet.id}>
+										{bullet.bulletPoint}
+									</div>
+								))}
+						</div>
+					))}
+				</div>
+				<div className="additional-info-container">
+					{additionalInfo["categories"].map((category) => (
+						<div className='main-category-container' key={category.id}>
+							<div className="category-name">{category.name}</div>
+							{additionalInfo["subHeaders"]
+								.filter((subHeader: any) => subHeader.categoryId == category.id)
+								.map((subHeader: any) => (
+									<div className="subheader-container" key={subHeader.id}>
+										<div className="subheader-name">{subHeader.name}</div>
+										{additionalInfo['bulletPoints']
+											.filter((bulletPt) => bulletPt.subHeaderId == subHeader.id)
+											.map((bulletPt) =>  (
+												<div className="bulletpoint">{bulletPt.bulletPoint}</div>
+											))
+										}
+									</div>
+								))}
 						</div>
 					))}
 				</div>
