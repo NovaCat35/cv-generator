@@ -35,7 +35,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 
 	// Handles the expand/collapse btns by setting the curr index to expand on or -1 to collapse
 	const handleExpandClick = () => {
-		isActive ? onExpand(-1) : onExpand(1);
+		isActive ? onExpand(-1) : onExpand(2);
 	};
 
 	const onChangeHeader = ({ value, keyName }: HandleChange) => {

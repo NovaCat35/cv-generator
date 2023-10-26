@@ -25,7 +25,7 @@ export default function EducationForm({ isActive, onExpand, onChange, setState, 
 	};
 
 	const handleExpandClick = () => {
-		isActive ? onExpand(-1): onExpand(0);
+		isActive ? onExpand(-1): onExpand(1);
 	}
 
 	return (

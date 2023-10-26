@@ -7,11 +7,11 @@ interface HeaderProps {
 	imgSrc? : string;
 }
 
-export default function Header({ name, isActive, handleExpandClick, imgSrc }: HeaderProps) {
+export default function Header({ name, isActive, handleExpandClick, imgSrc='' }: HeaderProps) {
 	return (
 		<div className="head">
 			<div className='left-container'>
-				<img className='header-icon' src={imgSrc} alt="header icon" />
+				{imgSrc !='' && <img className='header-icon' src={imgSrc} alt="header icon" />}
 				<h1>{name}</h1>
 			</div>
 			<button className={isActive ? "expandBtn active" : "expandBtn"} onClick={handleExpandClick}>

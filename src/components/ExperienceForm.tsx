@@ -114,7 +114,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitHeader,
 	};
 	// Handles the expand/collapse btns by collapsing current component if already active, otherwise expand!
 	const handleExpandClick = () => {
-		isActive ? onExpand(-1) : onExpand(2);
+		isActive ? onExpand(-1) : onExpand(3);
 	};
 
 	/**
