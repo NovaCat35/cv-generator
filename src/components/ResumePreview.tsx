@@ -76,7 +76,7 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 				<div className="additional-info-container">
 					{additionalInfo["categories"].map((category) => (
 						<div className='main-category-container' key={category.id}>
-							<div className="category-name">{category.name}</div>
+							<h1 className="category-name">{category.name}</h1>
 							{additionalInfo["subHeaders"]
 								.filter((subHeader: any) => subHeader.categoryId == category.id)
 								.map((subHeader: any) => (

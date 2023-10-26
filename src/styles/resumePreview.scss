@@ -11,6 +11,17 @@ $special-font-color: #105581;
 		content: "|";
 	}
 }
+
+@mixin spaceArea() {
+	margin-bottom: 10px;
+	&:first-of-type {
+		margin-top: 5px;
+	}
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
 .resume-preview {
 	height: 100vh;
 	padding: 1rem;
@@ -100,8 +111,8 @@ $special-font-color: #105581;
 			}
 			.experience-container {
 				.exp-details {
+					@include spaceArea();
 					display: grid;
-					margin-bottom: 10px;
 					grid-template: repeat(2, 20px) 1fr / 1fr 165px;
 					grid-auto-rows: minmax(20px, auto);
 					.company {
@@ -120,8 +131,21 @@ $special-font-color: #105581;
 						margin-left: 1rem;
 						grid-column: 1 / -1;
 					}
-					&:first-of-type {
-						margin-top: 5px;
+				}
+			}
+			.additional-info-container {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				.subheader-container {
+					@include spaceArea();
+					.subheader-name{
+						font-weight: 700;
+						color: $special-font-color;
+					}
+					.bulletpoint{
+						display: list-item;
+						margin-left: 1rem;
 					}
 				}
 			}
