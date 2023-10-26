@@ -1,9 +1,9 @@
 # CV Generator
 While looking for a job can often feel frustrating, making a resume shouldn't be. This CV generator will help you fill in the essential details and give you a basic layout as you persevere on your job hunting journey. 
 
-~ GANBATTE がんばって !
+GANBATTE がんばって !
 
-Link: THIS PROJECT IS CURRENTLY A WORK IN PROGRESS ... ⚠️
+Link: THIS PROJECT IS CURRENTLY A WORK IN PROGRESS ... ⚠️ 📝💻
 
 ## FEATURES [Work in Progress]
  - Print option
@@ -30,4 +30,6 @@ As new features and plans are added and changed, I learn how important it is to 
 4) npm run dev
 ```
 
-## Sources
+## Sources & Icons
+ - https://www.svgrepo.com/
+ - https://fonts.google.com/icons

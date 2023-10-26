@@ -1,5 +1,5 @@
 $white-background: white;
-
+$darkblue-filter-background: invert(21%) sepia(8%) saturate(7191%) hue-rotate(169deg) brightness(90%) contrast(93%);
 @mixin stopGhostImg() {
    -webkit-user-select: none;
    -khtml-user-select: none;
@@ -34,6 +34,7 @@ $white-background: white;
       box-shadow: 0px 3px 5px -6px rgb(54, 141, 123);
    }
    img {
+      filter: $darkblue-filter-background;
       width: 100%; /* This will make sure the image takes up 100% of the container width */
       height: auto; /* To maintain the aspect ratio */
    }

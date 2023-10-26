@@ -37,6 +37,11 @@ $red-filter-background: invert(31%) sepia(37%) saturate(1946%) hue-rotate(232deg
 // Special color for deleteSVG within expContainer
 form {
 	.details {
+		div{
+			@include customScrollBars($custom: true);
+			overflow: auto;
+			max-height: 70px;
+		}
 		.closeBtn {
 			img{
 				filter: $red-filter-background;

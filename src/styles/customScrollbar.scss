@@ -1,18 +1,38 @@
-@mixin customScrollBars() {
-   /* Style the scrollbar */
-	&::-webkit-scrollbar {
-		width: 4px; /* Set the width of the scrollbar */
+@mixin customScrollBars($custom: false) {
+	@if $custom == false {
+		/* Style the scrollbar */
+		&::-webkit-scrollbar {
+			width: 4px; /* Set the width of the scrollbar */
+		}
+		/* Track */
+		&::-webkit-scrollbar-track {
+			background: #e4e6e7; /* Color of the track */
+		}
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: #888; /* Color of the thumb */
+		}
+		/* Handle on hover */
+		&::-webkit-scrollbar-thumb:hover {
+			background: #555; 
+		}
 	}
-	/* Track */
-	&::-webkit-scrollbar-track {
-		background: #e4e6e7; /* Color of the track */
-	}
-	/* Handle */
-	&::-webkit-scrollbar-thumb {
-		background: #888; /* Color of the thumb */
-	}
-	/* Handle on hover */
-	&::-webkit-scrollbar-thumb:hover {
-		background: #555; 
+	@else {
+		/* Style the scrollbar */
+		&::-webkit-scrollbar {
+			width: 3px; /* Set the width of the scrollbar */
+		}
+		/* Track */
+		&::-webkit-scrollbar-track {
+			background: #e4e6e7; /* Color of the track */
+		}
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: #748bca; /* Color of the thumb */
+		}
+		/* Handle on hover */
+		&::-webkit-scrollbar-thumb:hover {
+			background: #3142af; 
+		}
 	}
 }

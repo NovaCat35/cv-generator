@@ -15,10 +15,12 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 			<header>
 				<div className="name">{personInfo.name}</div>
 				<div className="contact-info">
-					<div className="email">{personInfo.email}</div>
-					<div className="phone">{personInfo.phone}</div>
-					<div className="location">{personInfo.location}</div>
-					<div className="website">{personInfo.website}</div>
+					{personInfo.email !='' && <div className="email">{personInfo.email}</div>}
+					{personInfo.phone !='' && <div className="phone">{personInfo.phone}</div>}
+					<div className="bottom-container">
+						{personInfo.location !='' && <div className="location">{personInfo.location}</div>}
+						{personInfo.website !='' && <div className="website">{personInfo.website}</div>}
+					</div>
 				</div>
 			</header>
 			<main>

@@ -220,7 +220,7 @@ function App() {
 	return (
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
-				<h1 className="title">My CV Generator</h1>
+				<h1 className="title">MY CV Generator</h1>
 				<GeneralForm onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
 				<SkillForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />

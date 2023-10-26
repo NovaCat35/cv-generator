@@ -3,10 +3,11 @@ import Header from "./Header.tsx";
 import { HandleListChange, SkillHeader, SkillItem, HandleListRemove, HandleChange } from "../App.tsx";
 import BannerOptions from "./BannerOptions.tsx";
 import { Input } from "./Input.tsx";
-import FormButtons from './FormButtons.tsx'
-import CardList from './CardList.tsx'
-import InputCards from './InputCards.tsx'
-import ErrorText from './ErrorText.tsx'
+import FormButtons from "./FormButtons.tsx";
+import CardList from "./CardList.tsx";
+import InputCards from "./InputCards.tsx";
+import ErrorText from "./ErrorText.tsx";
+import skillsSvg from "../assets/skills.svg";
 import { v4 as uuidv4 } from "uuid";
 
 interface SkillFormProps {
@@ -30,7 +31,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 	const [currSkill, setCurrSkill] = useState(initSkill);
 	const [showForm, setShowForm] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
-   const [errorAlert, setErrorAlert] = useState(false);
+	const [errorAlert, setErrorAlert] = useState(false);
 
 	// Handles the expand/collapse btns by setting the curr index to expand on or -1 to collapse
 	const handleExpandClick = () => {
@@ -54,14 +55,14 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 			skill: currSkill.skill,
 		};
 
-		if(newSkillItem.skill != "") {
+		if (newSkillItem.skill != "") {
 			setCurrSkillsList([...currSkillsList, newSkillItem]);
 			setCurrSkill(initSkill);
-			setErrorMessage(""); // RESETS empty skill error if applicable		
+			setErrorMessage(""); // RESETS empty skill error if applicable
 		} else {
-			setErrorMessage("You can't add an empty skill!")
+			setErrorMessage("You can't add an empty skill!");
 			setErrorAlert(true);
-		}	
+		}
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
@@ -69,12 +70,12 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 		const newHeader = { ...currSkillHeader };
 		handleSubmitHeader({ setState: setStateHeader, currState: currStateHeader, newElement: newHeader });
 
-		if(currSkillsList.length > 0) {
+		if (currSkillsList.length > 0) {
 			handleSubmitList({ setState: setStateSkills, currState: currStateItem, newElement: currSkillsList });
 			resetInit();
 			setShowForm(false);
 		} else {
-			setErrorMessage("Please add a skill!")
+			setErrorMessage("Please add a skill!");
 			setErrorAlert(true);
 		}
 	};
@@ -83,13 +84,12 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 		e.stopPropagation();
 		const targetID = (e.currentTarget.parentNode as HTMLElement).getAttribute("id");
 		if (targetID !== null) {
-			const newSkillList = currSkillsList.filter(skill => skill.id != targetID)
+			const newSkillList = currSkillsList.filter((skill) => skill.id != targetID);
 			setCurrSkillsList(newSkillList);
 		} else {
 			console.error("Error: Target ID is null.");
 		}
 	};
-
 
 	const handleCancelClick = () => {
 		resetInit();
@@ -121,15 +121,15 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 		e.stopPropagation();
 		const targetID = (e.currentTarget.parentNode as HTMLElement).getAttribute("id");
 		if (targetID !== null) {
-			handleRemoveChange({ setState: setStateHeader, currState: currStateHeader, targetId: targetID, typeId:'id' });
-			handleRemoveChange({ setState: setStateSkills, currState: currStateItem, targetId: targetID, typeId:'headerId' });
+			handleRemoveChange({ setState: setStateHeader, currState: currStateHeader, targetId: targetID, typeId: "id" });
+			handleRemoveChange({ setState: setStateSkills, currState: currStateItem, targetId: targetID, typeId: "headerId" });
 		} else {
 			console.error("Error: Target ID is null.");
 		}
 	};
 
 	function resetInit() {
-		setCurrSkillHeader(initHeader); 
+		setCurrSkillHeader(initHeader);
 		setCurrSkillsList(initSkillList);
 		setCurrSkill(initSkill);
 		setErrorMessage("");
@@ -137,17 +137,17 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 
 	return (
 		<div className={isActive ? "form-container active" : "form-container"}>
-			<Header name="Skills" isActive={isActive} handleExpandClick={handleExpandClick} />
+			<Header name="Skills" isActive={isActive} handleExpandClick={handleExpandClick} imgSrc={skillsSvg} />
 			{showForm ? (
 				<div className="main-skill-container">
 					<CardList currList={currSkillsList} mainName="skill" handleRemoveCard={removeSkillCard} />
 					<form className="skill-input-container" onSubmit={handleSubmit}>
 						<Input label="Skill Category" keyName="header" placeholder="Title" onChange={onChangeHeader} setState={setCurrSkillHeader} currState={currSkillHeader} propValue={currSkillHeader.header} required={true} />
 
-						<InputCards type='skill' currState={currSkill} onChange={onChangeSkill} onAddToList={onAddSkillToList}/>
+						<InputCards type="skill" currState={currSkill} onChange={onChangeSkill} onAddToList={onAddSkillToList} />
 						{errorMessage && <ErrorText errorMessage={errorMessage} alertStatus={errorAlert} setAlert={(status) => setErrorAlert(status)} />}
 
-						<FormButtons handleCancelClick={handleCancelClick}/>
+						<FormButtons handleCancelClick={handleCancelClick} />
 					</form>
 				</div>
 			) : (

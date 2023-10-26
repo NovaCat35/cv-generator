@@ -4,12 +4,16 @@ interface HeaderProps {
 	name: string;
 	isActive: boolean;
 	handleExpandClick: () => void;
+	imgSrc? : string;
 }
 
-export default function Header({ name, isActive, handleExpandClick }: HeaderProps) {
+export default function Header({ name, isActive, handleExpandClick, imgSrc }: HeaderProps) {
 	return (
 		<div className="head">
-			<h1>{name}</h1>
+			<div className='left-container'>
+				<img className='header-icon' src={imgSrc} alt="header icon" />
+				<h1>{name}</h1>
+			</div>
 			<button className={isActive ? "expandBtn active" : "expandBtn"} onClick={handleExpandClick}>
 				<img src={ExpandSVG} alt="expand icon" />
 			</button>

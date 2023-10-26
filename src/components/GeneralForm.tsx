@@ -1,5 +1,6 @@
 import {Input} from "./Input.tsx";
 import { HandleChange, Person } from "../App.tsx";
+import profileSvg from "../assets/profile.svg";
 
 interface GeneralFormProps {
 	onChange: (data: HandleChange) => void;
