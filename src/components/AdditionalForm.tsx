@@ -25,6 +25,8 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 	};
 	const [currInfo, setCurrInfo] = useState(initInfo);
 	const [showForm, setShowForm] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
+	const [errorAlert, setErrorAlert] = useState(false);
 
 	const handleExpandClick = () => {
 		isActive ? onExpand(-1) : onExpand(4);
@@ -58,10 +60,17 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 		// }
 		setShowForm(true);
 	};
+
 	const handleAddExpClick = () => {
 		setShowForm(true);
 	};
 
+   const handleCancelClick = () => {
+		resetInit();
+		setShowForm(false);
+	};
+
+   // In order to removes the info banner from the main page and resume preview, we pass in an unique typeId to target the category header
 	const removeInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 		const targetID = (e.currentTarget.parentNode as HTMLElement).getAttribute("id");
@@ -76,6 +85,11 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 		}
 	};
 
+   const resetInit = () => {
+		setCurrInfo(initInfo);
+		setErrorMessage("");
+	};
+
 	return (
 		<div className={isActive ? "form-container active" : "form-container"}>
 			<Header name="Other Info" isActive={isActive} handleExpandClick={handleExpandClick} imgSrc={infoSvg} />
@@ -86,9 +100,9 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 
 					{/* <CardList currList={currBulletPtList} mainName="experience" handleRemoveCard={removeBulletCard} />
 					<InputCards type="experience" currState={currBulletPt} onChange={onChangeBulletPt} onAddToList={onAddBulletPtToList} />
-					{errorMessage && <ErrorText errorMessage={errorMessage} alertStatus={errorAlert} setAlert={(status) => setErrorAlert(status)} />}
+					{errorMessage && <ErrorText errorMessage={errorMessage} alertStatus={errorAlert} setAlert={(status) => setErrorAlert(status)} />} */}
 
-					<FormButtons handleCancelClick={handleCancelClick} /> */}
+					<FormButtons handleCancelClick={handleCancelClick} />
 				</form>
 			) : (
 				<BannerOptions mainName="info-container" type="additionalInfo" currState={currState["categories"]} handleSeeBanner={handleSeeExpClick} handleAddClick={handleAddExpClick} handleRemoveClick={removeInfo} />

@@ -245,13 +245,20 @@ function App() {
 
 	/**
 	 * @param targetId
-	 * Targets the id\headerId for skills\exp & categoryId for addtionalInfo setState so that we can remove specific elements base on targetID
+	 * Targets the id for main header objects and the headerId targets the subsequence bullet lists. 
+	 * Special case for categoryId, addtionalInfo's bullet list is within the object (not collapsed) needs to remove main header, subheader, and bullet points
 	 */
 	const removeIDFromList = ({ setState, currState, targetId, typeId = "id" }: HandleListRemove) => {
 		let filterList;
 		if (typeId === "categoryId") {
-			filterList = currState['categories'].filter((item: any) => item.id !== targetId);
-			setState({ ...currState, categories: filterList });
+			const updatedCategories = currState['categories'].filter((item: any) => item.id !== targetId);
+			const updatedSubHeaders = currState['subHeaders'].filter((item: any) => item.categoryId !== targetId);
+			const updatedBulletPoints = currState['bulletPoints'].filter((item: any) => {
+				// For every item, we check to find the subHeader that matches its subHeaderId, then we can use that subHeader.categoryId to match & ignore targetID
+            const subHeader = currState['subHeaders'].find((subHeader: any) => subHeader.id === item.subHeaderId);
+				return subHeader && subHeader.categoryId !== targetId;
+			});
+			setState({ ...currState, categories: updatedCategories, subHeaders: updatedSubHeaders, bulletPoints: updatedBulletPoints});
 			console.log(filterList);
 			console.log(currState)
 			return;

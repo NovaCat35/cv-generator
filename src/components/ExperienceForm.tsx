@@ -153,7 +153,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitHeader,
 		setShowForm(true);
 	};
 
-	// Remove experience from the currState, this will impact the main App and Resume output
+	// Remove experience from the currState, this will impact the main App and Resume output by removing the banner
 	const removeExperience = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 		const targetID = (e.currentTarget.parentNode as HTMLElement).getAttribute("id");
@@ -163,7 +163,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitHeader,
 		 * */
 		if (targetID !== null) {
 			handleRemoveChange({ setState: setStateExp, currState: currStateExp, targetId: targetID });
-			handleRemoveChange({ setState: setStateBulletPts, currState: currStateBulletPts, targetId: targetID });
+			handleRemoveChange({ setState: setStateBulletPts, currState: currStateBulletPts, targetId: targetID, typeId: "headerId"});
 		} else {
 			console.error("Error: Target ID is null.");
 		}
