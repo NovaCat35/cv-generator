@@ -142,7 +142,6 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitHeader,
 
 		// Repopulate the bulletPts of the selected experience base on targetID
 		const targetBulletPts = currStateBulletPts.filter((bulletPt) => bulletPt.headerId == targetId);
-		console.log(targetBulletPts);
 		setCurrBulletPtList(targetBulletPts);
 
 		// Setup toggle btn to be checked or not
@@ -164,6 +163,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitHeader,
 		 * */
 		if (targetID !== null) {
 			handleRemoveChange({ setState: setStateExp, currState: currStateExp, targetId: targetID });
+			handleRemoveChange({ setState: setStateBulletPts, currState: currStateBulletPts, targetId: targetID });
 		} else {
 			console.error("Error: Target ID is null.");
 		}

@@ -69,7 +69,7 @@ interface BulletPoint {
  }
  interface Category {
 	id: string;
-	name: string;
+	header: string;
  }
 export interface AdditionalInfo {
 	categories: Category[];
@@ -183,8 +183,8 @@ function App() {
 
 	const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo>({
 		categories: [
-			{ id: "123", name: "Personal Projects" },
-			{ id: "456", name: "Testing" },
+			{ id: "123", header: "Personal Projects" },
+			{ id: "456", header: "Testing" },
 		],
 		subHeaders: [
 			{ id: "pwa", categoryId: "123", name:'Forbidden Knowledge', bulletPointIds: ['hol3', 'fed'] },
@@ -245,10 +245,21 @@ function App() {
 
 	/**
 	 * @param targetId
-	 * Targets the id\headerId setState so that we can remove specific elements base on targetID
+	 * Targets the id\headerId for skills\exp & categoryId for addtionalInfo setState so that we can remove specific elements base on targetID
 	 */
 	const removeIDFromList = ({ setState, currState, targetId, typeId = "id" }: HandleListRemove) => {
-		const filterList = typeId == "headerId" ? currState.filter((item: any) => item.headerId !== targetId) : currState.filter((item: any) => item.id !== targetId);
+		let filterList;
+		if (typeId === "categoryId") {
+			filterList = currState['categories'].filter((item: any) => item.id !== targetId);
+			setState({ ...currState, categories: filterList });
+			console.log(filterList);
+			console.log(currState)
+			return;
+		} else if (typeId === "headerId") {
+		  filterList = currState.filter((item: any) => item.headerId !== targetId);
+		} else {
+		  filterList = currState.filter((item: any) => item.id !== targetId);
+		}
 		setState(filterList);
 	};
 
@@ -260,7 +271,7 @@ function App() {
 				<EducationForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
 				<SkillForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
 				<ExperienceForm isActive={activeIndex === 3} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateExp={experience} currStateBulletPts={expBulletPts} setStateExp={setExperience} setStateBulletPts={setExpBulletPts} />
-				<AdditionalForm isActive={activeIndex === 4} onExpand={(param) => setActiveIndex(param)} currState={additionalInfo} setState={setActiveIndex} />
+				<AdditionalForm isActive={activeIndex === 4} onExpand={(param) => setActiveIndex(param)} currState={additionalInfo} setState={setAdditionalInfo} handleRemoveChange={removeIDFromList}/>
 			</div>
 			<div className="resume-preview">
 				<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo}/>

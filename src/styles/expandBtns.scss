@@ -38,7 +38,8 @@ $darkblue-filter-background: invert(21%) sepia(8%) saturate(7191%) hue-rotate(16
       width: 100%; /* This will make sure the image takes up 100% of the container width */
       height: auto; /* To maintain the aspect ratio */
    }
-   @media screen and (min-width: 635px) {
+   // MOBILE --> Desktop
+   @media screen and (min-width: 750px) {
       display: none;
    }   
 }

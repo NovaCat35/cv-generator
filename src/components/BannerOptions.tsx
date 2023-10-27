@@ -23,7 +23,7 @@ export default function BannerOptions({ mainName, type, currState, handleSeeBann
 			))}
 			<div className="button-container">
 				<button type="button" onClick={handleAddClick}>
-					{(type =='experience') ? 'Add Experience' : 'Add SKill'}
+					{(type =='experience') ? 'Add Experience' : (type =='skill') ? 'Add SKill' : 'Add Additional Info'}
 				</button>
 			</div>
 		</div>

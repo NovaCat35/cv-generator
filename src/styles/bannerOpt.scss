@@ -14,7 +14,6 @@
 		padding: 10px;
 		border: 2px solid transparent;
 		border-radius: 10px;
-		background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(93, 202, 15), rgb(203, 196, 104)) border-box;
 		.closeBtn {
 			cursor: pointer;
 			border: none;
@@ -26,6 +25,7 @@
 	}
 }
 
+// SKILLS container
 .skill-opt-container {
 	@include optContainer();
 	.details {
@@ -48,8 +48,12 @@
 	}
 }
 
+// EXPERIENCE container
 .exp-opt-container {
 	@include optContainer;
+	.details {
+		background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(93, 202, 15), rgb(203, 196, 104)) border-box;
+	}
 	.button-container {
 		display: flex;
 		justify-content: center;
@@ -62,6 +66,29 @@
 				background-color: #a2df9c;
 				color: $white-background;
 				text-shadow: 1px 1px 5px rgb(20, 101, 16);
+			}
+		}
+	}
+}
+
+// OTHER INFO container
+.info-container {
+	@include optContainer();
+	.details {
+		background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(245, 187, 12), rgb(196, 68, 109)) border-box;
+	}
+	.button-container {
+		display: flex;
+		justify-content: center;
+		button[type="button"] {
+			@include button();
+			border: 2px solid rgb(208, 191, 184);
+			background-color: #e3e1de;
+			&:hover {
+				border: 2px solid rgb(211, 129, 92);
+				background-color: #dfae9c;
+				color: $white-background;
+				text-shadow: 1px 1px 5px rgb(101, 29, 16);
 			}
 		}
 	}
