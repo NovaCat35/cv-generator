@@ -10,7 +10,6 @@ import CardList from "./CardList.tsx";
 import InputCards from "./InputCards.tsx";
 import ErrorText from "./ErrorText.tsx";
 import expSvg from "../assets/experience.svg";
-
 import { v4 as uuidv4 } from "uuid";
 
 interface ExperienceFormProps {

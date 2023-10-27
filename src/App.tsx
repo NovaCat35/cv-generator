@@ -56,18 +56,18 @@ export interface ExperienceItem {
 export interface Experience extends Array<ExperienceItem> {}
 
 // --Additional Info
-interface BulletPoint {
+export interface BulletPoint {
 	id: string;
 	subHeaderId: string;
 	bulletPoint: string;
  }
- interface SubHeader {
+export interface SubHeader {
 	id: string;
 	categoryId: string;
 	name: string;
 	bulletPointIds: string[];
  }
- interface Category {
+export interface Category {
 	id: string;
 	header: string;
  }
