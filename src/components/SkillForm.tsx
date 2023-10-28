@@ -140,7 +140,7 @@ export default function SkillForm({ isActive, onExpand, handleSubmitHeader, hand
 			<Header name="Skills" isActive={isActive} handleExpandClick={handleExpandClick} imgSrc={skillsSvg} />
 			{showForm ? (
 				<div className="main-skill-container">
-					<CardList currList={currSkillsList} mainName="skill" handleRemoveCard={removeSkillCard} />
+					<CardList currBulletList={currSkillsList} mainName="skill" handleRemoveCard={removeSkillCard} />
 					<form className="skill-input-container" onSubmit={handleSubmit}>
 						<Input label="Skill Category" keyName="header" placeholder="Title" onChange={onChangeHeader} setState={setCurrSkillHeader} currState={currSkillHeader} propValue={currSkillHeader.header} required={true} />
 

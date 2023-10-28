@@ -180,7 +180,7 @@ export default function ExperienceForm({ isActive, onExpand, handleSubmitHeader,
 					<InputDate label="Start Date *" keyName="startDate" onChange={onChangeExp} setState={setStateExp} currState={currStateExp} dateValue={currExp.startDate} />
 					{isChecked ? "" : <InputDate label="End Date *" keyName="endDate" onChange={onChangeExp} setState={setStateExp} currState={currStateExp} dateValue={currExp.endDate} />}
 
-					<CardList currList={currBulletPtList} mainName="experience" handleRemoveCard={removeBulletCard} />
+					<CardList currBulletList={currBulletPtList} mainName="experience" handleRemoveCard={removeBulletCard} />
 					<InputCards type="experience" currState={currBulletPt} onChange={onChangeBulletPt} onAddToList={onAddBulletPtToList} />
 					{errorMessage && <ErrorText errorMessage={errorMessage} alertStatus={errorAlert} setAlert={(status) => setErrorAlert(status)} />}
 

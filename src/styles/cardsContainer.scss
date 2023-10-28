@@ -1,5 +1,8 @@
 @import "./mixins.scss";
 
+$purple-filter-background: invert(31%) sepia(37%) saturate(1946%) hue-rotate(232deg) brightness(96%) contrast(82%);
+$orange-filter-background: invert(50%) sepia(48%) saturate(7386%) hue-rotate(10deg) brightness(99%) contrast(101%);
+
 .form-container {
 	.list-container {
 		margin-top: 5px;
@@ -16,8 +19,19 @@
 			border: 2px solid transparent;
 			border-radius: 10px;
 			background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(42, 42, 201), darkorchid) border-box;
+			div:not(.sub-header) {
+				@include customScrollBars($custom: true);
+				overflow: auto;
+				max-height: 70px;
+			}
+			.sub-header {
+				padding: 5px 0;
+				text-align: center;
+				border-bottom: 2px double rgb(93, 98, 194);
+				margin-bottom: 5px;
+			}
 			&.additional-info-details {
-				background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(217, 161, 29), rgb(204, 50, 171)) border-box;
+				background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(238, 192, 87), rgb(205, 142, 238)) border-box;
 			}
 			.closeBtn {
 				display: flex;
@@ -29,30 +43,15 @@
 				img {
 					height: 20px;
 					width: 20px;
+					filter: $purple-filter-background; 
 				}
 			}
-		}
-	}
-}
-
-$purple-filter-background: invert(31%) sepia(37%) saturate(1946%) hue-rotate(232deg) brightness(96%) contrast(82%);
-$orange-filter-background: invert(50%) sepia(48%) saturate(7386%) hue-rotate(10deg) brightness(99%) contrast(101%);
-// Special color for deleteSVG within expContainer
-form {
-	.details {
-		div {
-			@include customScrollBars($custom: true);
-			overflow: auto;
-			max-height: 70px;
-		}
-		.closeBtn {
-			img {
-				filter: $purple-filter-background;
-			}
-		}
-		&.additional-info-details {
-			img {
-				filter: $orange-filter-background;
+			&.additional-info-details {
+				.closeBtn {
+					img {
+						filter: $orange-filter-background; 
+					}
+				}
 			}
 		}
 	}
