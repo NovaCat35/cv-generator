@@ -16,6 +16,9 @@
 			border: 2px solid transparent;
 			border-radius: 10px;
 			background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(42, 42, 201), darkorchid) border-box;
+			&.additional-info-details {
+				background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(217, 161, 29), rgb(204, 50, 171)) border-box;
+			}
 			.closeBtn {
 				display: flex;
 				align-items: center;
@@ -32,19 +35,24 @@
 	}
 }
 
-
-$red-filter-background: invert(31%) sepia(37%) saturate(1946%) hue-rotate(232deg) brightness(96%) contrast(82%);
+$purple-filter-background: invert(31%) sepia(37%) saturate(1946%) hue-rotate(232deg) brightness(96%) contrast(82%);
+$orange-filter-background: invert(50%) sepia(48%) saturate(7386%) hue-rotate(10deg) brightness(99%) contrast(101%);
 // Special color for deleteSVG within expContainer
 form {
 	.details {
-		div{
+		div {
 			@include customScrollBars($custom: true);
 			overflow: auto;
 			max-height: 70px;
 		}
 		.closeBtn {
-			img{
-				filter: $red-filter-background;
+			img {
+				filter: $purple-filter-background;
+			}
+		}
+		&.additional-info-details {
+			img {
+				filter: $orange-filter-background;
 			}
 		}
 	}

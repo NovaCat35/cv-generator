@@ -35,6 +35,7 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
    const initSubHeader = {
       id: '',
       categoryId: '',
+      headerName: '',
       bulletPointsId: [],
    }
    const initBulletPoint = {
@@ -49,7 +50,6 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 	const [errorMessage, setErrorMessage] = useState("");
 	const [errorAlert, setErrorAlert] = useState(false);
 
-   console.log(currMainInfo)
 	const handleExpandClick = () => {
 		isActive ? onExpand(-1) : onExpand(4);
 	};
@@ -84,7 +84,7 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
     * We thus keep a record of the currSubHeader.id if there is one, otherwise we can't add the bulletPoint to any empty subHeader!!
     */
    const onAddBulletPtToList = () => {
-      if(currSubHeader.id != '') {
+      if(currSubHeader.headerName != '') {
          const newBulletPt: BulletPoint = {
             id: uuidv4(),
             subHeaderId: currSubHeader.id,
@@ -178,10 +178,14 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 				<form onSubmit={handleSubmit}>
 					<Input label="Category Name" keyName="category" placeholder="Company Name" onChange={onChangeInputInfo} setState={setCurrMainInfo} currState={currMainInfo} propValue={currMainInfo.categoryName} required={true} />
 
-               
-					<Input label="Subheader Name" keyName="bulletPoint" placeholder="Position" onChange={onChangeInputInfo} setState={setCurrSubHeader} currState={currSubHeader} propValue={currBulletPt.bulletPoint} />
-					<CardList currList={currMainInfo.subHeaders} mainName="additional-info" handleRemoveCard={removeBulletCard} />
-					<InputCards type="additional-info" currState={currBulletPt} onChange={onChangeBulletPt} onAddToList={onAddBulletPtToList} />
+					<CardList type='subheader' currSubHeaderList={currMainInfo.subHeaders} currBulletList={currMainInfo.bulletPoints} mainName="additional-info" handleRemoveCard={removeBulletCard} />
+               <div className="subheader-container bullet-pt-container">
+                  <div className="connector"></div>
+                  <div className="inputs-container">
+                     <Input label="Subheader" keyName="headerName" placeholder="Add Name" onChange={onChangeInputInfo} setState={setCurrSubHeader} currState={currSubHeader} propValue={currBulletPt.bulletPoint} />
+                     <InputCards type="additional-info" currState={currBulletPt} onChange={onChangeBulletPt} onAddToList={onAddBulletPtToList} />
+                  </div>
+               </div>
 					{errorMessage && <ErrorText errorMessage={errorMessage} alertStatus={errorAlert} setAlert={(status) => setErrorAlert(status)} />}
 
 					<FormButtons handleCancelClick={handleCancelClick} />

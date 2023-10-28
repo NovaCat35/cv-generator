@@ -1,6 +1,6 @@
 .form-container {
 	form {
-		.add-experience-input-container.add-card-container {
+		.add-input-container.add-card-container {
 			display: flex;
 			flex-direction: row;
 			justify-content: center;
@@ -37,6 +37,22 @@
 					width: 100%; /* This will make sure the image takes up 100% of the container width */
 					height: auto; /* To maintain the aspect ratio */
 				}
+			}
+		}
+		.subheader-container.bullet-pt-container {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			.connector {
+				border: 3px solid rgb(238, 177, 44);
+				border-right: none;
+				padding: 5px;
+				height: 80px;
+				width: 10px;
+			}
+			.inputs-container{
+				width: 100%;
 			}
 		}
 	}

@@ -183,19 +183,19 @@ function App() {
 
 	const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo>({
 		categories: [
-			{ id: "123", header: "Personal Projects" },
-			{ id: "456", header: "Testing" },
+			{ id: "cat1", header: "Personal Projects" },
+			{ id: "cat2", header: "Testing" },
 		],
 		subHeaders: [
-			{ id: "pwa", categoryId: "123", name:'Forbidden Knowledge', bulletPointIds: ['hol3', 'fed'] },
-			{ id: "234d", categoryId: "123", name:'Growth Alchemy', bulletPointIds: ['see3', 'asdf'] },
-			{ id: "2df", categoryId: "456", name:'Growth Alchemy', bulletPointIds: ['see3', 'asdf'] },
+			{ id: "sub1", categoryId: "cat1", name:'Alchemy Mastery: Unveiling the Secrets of Philosopher\'s Stone', bulletPointIds: ['hol3', 'fed'] },
+			{ id: "sub2", categoryId: "cat1", name:'Automail Revolution: Crafting Enhanced Prosthetics', bulletPointIds: ['see3'] },
+			{ id: "s3b3", categoryId: "cat2", name:'Alchemy Creations', bulletPointIds: ['asdf'] },
 		],
 		bulletPoints: [
-			{ id: "hol3", subHeaderId: "pwa", bulletPoint: "Did a thing" },
-			{ id: "fed", subHeaderId: "pwa", bulletPoint: "Did others stuff" },
-			{ id: "see3", subHeaderId: "234d", bulletPoint: "heh, not here..." },
-			{ id: "asdf", subHeaderId: "2df", bulletPoint: "HEy no peaking" },
+			{ id: "hol3", subHeaderId: "sub1", bulletPoint: "Researched ancient alchemical manuscripts and decoded complex symbols, advancing the understanding of Philosopher's Stone synthesis." },
+			{ id: "fed", subHeaderId: "sub1", bulletPoint: "Developed a groundbreaking technique for Philosopher's Stone synthesis, demonstrating expertise in advanced alchemy." },
+			{ id: "see3", subHeaderId: "sub2", bulletPoint: "Worked closely with renowned automail expert Winry Rockbell, contributing expertise in alchemical principles to improve compatibility and integration with the human body." },
+			{ id: "asdf", subHeaderId: "s3b3", bulletPoint: "HEy no peaking" },
 		],
 	});
 
