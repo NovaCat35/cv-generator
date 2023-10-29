@@ -36,7 +36,6 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
       id: '',
       categoryId: '',
       headerName: '',
-      bulletPointsId: [],
    }
    const initBulletPoint = {
       id: '',
@@ -64,14 +63,14 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 	};
 
    const removeBulletCard = (e: React.MouseEvent<HTMLButtonElement>) => {
-		// e.stopPropagation();
-		// const targetID = (e.currentTarget.parentNode as HTMLElement).getAttribute("id");
-		// if (targetID !== null) {
-		// 	const newSkillList = currInfo['bulletPoints'].filter((bullet) => bullet.subHeaderId != targetID);
-		// 	setCurrBulletPtList(newSkillList);
-		// } else {
-		// 	console.error("Error: Target ID is null.");
-		// }
+		e.stopPropagation();
+		const targetID = (e.currentTarget.parentNode as HTMLElement).getAttribute("id");
+		if (targetID !== null) {
+			const newSkillList = currMainInfo['bulletPoints'].filter((bullet) => bullet.id != targetID);
+			setCurrMainInfo({...currMainInfo, bulletPoints: newSkillList});
+		} else {
+			console.error("Error: Target ID is null.");
+		}
 	};
 
    const onChangeBulletPt = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,20 +81,23 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
    /**
     * We need to pair bulletPoint to their specific subHeader, 
     * We thus keep a record of the currSubHeader.id if there is one, otherwise we can't add the bulletPoint to any empty subHeader!!
+    * In addition, the headerName will determine the grouping of each bulletPt
     */
    const onAddBulletPtToList = () => {
       if(currSubHeader.headerName != '') {
+         const updatedSubID= setSubHeaderID(); // first we populate the id 
          const newBulletPt: BulletPoint = {
             id: uuidv4(),
-            subHeaderId: currSubHeader.id,
+            subHeaderId: updatedSubID,
             bulletPoint: currBulletPt.bulletPoint,
          };
+         console.log(currSubHeader.id)
         // Creating a new array with the updated bullet points
         const updatedBulletPoints: BulletPoint[] = [...currMainInfo.bulletPoints, newBulletPt];
 
          // Can't add an empty bullet point
          if (newBulletPt.bulletPoint != "") {
-            setCurrMainInfo({...currMainInfo, bulletPoints: updatedBulletPoints});
+            setCurrMainInfo((prevState) => ({...prevState, bulletPoints: updatedBulletPoints}));
             // Reset below, we don't use resetInit since we don't want to reset entire form info
             setCurrBulletPt(initBulletPoint);
             setErrorMessage("");
@@ -108,6 +110,26 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
          setErrorAlert(true);
       }
 	};
+
+   /**
+    * Case 1: subheader's name already exist, reuse ID found in currMainInfo for our current subheader
+    * Case 2: new subheader, create a new ID for our current subheader & add to list
+    */
+   function setSubHeaderID() {
+      const subHeaderFound = currMainInfo['subHeaders'].find(subHeader => subHeader.name == currSubHeader.headerName)
+      if(subHeaderFound) {
+         // setCurrSubHeader({...currSubHeader, id: subHeaderFound.id})
+         return subHeaderFound.id;
+      } else {
+         const newSubHeader = { id: uuidv4(), name: currSubHeader.headerName, categoryId: currMainInfo.id };
+         const newSubHeaderList = [...currMainInfo.subHeaders, newSubHeader];
+         // I'm using prevState since we'll need to use the setCurrMainInfo again for adding bulletPt in onAddBulletPtToList()
+         setCurrMainInfo((prevState) => ({ ...prevState, subHeaders: newSubHeaderList })); 
+
+         // setCurrSubHeader({ ...currSubHeader, id: newSubHeader.id });
+         return newSubHeader.id;
+      }
+   }
 
 
 	const handleSeeExpClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -127,18 +149,6 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
       } else {
          console.error(`Category with ID ${targetId} not found.`);
       }
-
-		// // Repopulate the bulletPts of the selected experience base on targetID
-		// const targetBulletPts = currStateBulletPts.filter((bulletPt) => bulletPt.headerId == targetId);
-		// console.log(targetBulletPts);
-		// setCurrBulletPtList(targetBulletPts);
-
-		// // Setup toggle btn to be checked or not
-		// if (targetObject.endDate != "Present") {
-		// 	setIsChecked(false);
-		// } else {
-		// 	setIsChecked(true);
-		// }
 		setShowForm(true);
 	};
 
@@ -155,10 +165,6 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 	const removeInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 		const targetID = (e.currentTarget.parentNode as HTMLElement).getAttribute("id");
-		/**
-		 * Typescript getting type error, saying 'getAttribute('id') can return a string or null.'
-		 * Thus, I need to explicitly check if targetID is not null
-		 * */
 		if (targetID !== null) {
 			handleRemoveChange({ setState: setState, currState: currState, targetId: targetID, typeId: 'categoryId' });
 		} else {

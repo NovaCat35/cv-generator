@@ -65,7 +65,6 @@ export interface SubHeader {
 	id: string;
 	categoryId: string;
 	name: string;
-	bulletPointIds: string[];
  }
 export interface Category {
 	id: string;
@@ -187,9 +186,9 @@ function App() {
 			{ id: "cat2", header: "Testing" },
 		],
 		subHeaders: [
-			{ id: "sub1", categoryId: "cat1", name:'Alchemy Mastery: Philosopher\'s Stone Revelation', bulletPointIds: ['hol3', 'fed'] },
-			{ id: "sub2", categoryId: "cat1", name:'Automail Revolution: Crafting Enhanced Prosthetics', bulletPointIds: ['see3'] },
-			{ id: "s3b3", categoryId: "cat2", name:'Alchemy Creations', bulletPointIds: ['asdf'] },
+			{ id: "sub1", categoryId: "cat1", name:'Alchemy Mastery: Philosopher\'s Stone Revelation'},
+			{ id: "sub2", categoryId: "cat1", name:'Automail Revolution: Crafting Enhanced Prosthetics'},
+			{ id: "s3b3", categoryId: "cat2", name:'Alchemy Creations' },
 		],
 		bulletPoints: [
 			{ id: "hol3", subHeaderId: "sub1", bulletPoint: "Researched ancient alchemical manuscripts and decoded complex symbols, advancing the understanding of Philosopher's Stone synthesis." },

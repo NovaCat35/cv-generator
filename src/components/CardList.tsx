@@ -1,4 +1,5 @@
 import CloseSVG from "../assets/close.svg";
+import { v4 as uuidv4 } from "uuid";
 
 interface CardListProps {
 	type?: string;
@@ -27,7 +28,7 @@ export default function CardList({ type = "normal", currSubHeaderList, currBulle
 					<div className={`${mainName}-details details`} id={item.id} key={item.id}>
 						{/* Using the optional chaining operator (?.) to safely access properties on potentially undefined objects. */}						
 						{currSubHeaderList?.map((subHeader) => (
-							subHeader.id == item.subHeaderId && <div className="sub-header">{subHeader.name}</div>
+							subHeader.id == item.subHeaderId && <div className="sub-header" key={uuidv4()}>{subHeader.name}</div>
 						))}
 						<div>{mainName == "skill" ? item.skill : item.bulletPoint}</div>
 						<button className="closeBtn" onClick={handleRemoveCard}>

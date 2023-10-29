@@ -1,7 +1,7 @@
 @import "./mixins.scss";
 
 $purple-filter-background: invert(31%) sepia(37%) saturate(1946%) hue-rotate(232deg) brightness(96%) contrast(82%);
-$orange-filter-background: invert(50%) sepia(48%) saturate(7386%) hue-rotate(10deg) brightness(99%) contrast(101%);
+$blueish-filter-background: invert(28%) sepia(70%) saturate(2269%) hue-rotate(242deg) brightness(85%) contrast(116%);
 
 .form-container {
 	.list-container {
@@ -49,7 +49,7 @@ $orange-filter-background: invert(50%) sepia(48%) saturate(7386%) hue-rotate(10d
 			&.additional-info-details {
 				.closeBtn {
 					img {
-						filter: $orange-filter-background; 
+						filter: $blueish-filter-background; 
 					}
 				}
 			}
