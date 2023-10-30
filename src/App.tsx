@@ -60,23 +60,24 @@ export interface BulletPoint {
 	id: string;
 	subHeaderId: string;
 	bulletPoint: string;
- }
+}
 export interface SubHeader {
 	id: string;
 	categoryId: string;
-	name: string;
- }
+	headerName: string;
+	bulletPointIds: string[],
+}
 export interface Category {
 	id: string;
 	header: string;
- }
+}
 export interface AdditionalInfo {
 	categories: Category[];
 	subHeaders: SubHeader[];
 	bulletPoints: BulletPoint[];
- }
+}
 
- // -- HANDLE function interfaces --
+// -- HANDLE function interfaces --
 export interface HandleChange {
 	value: string;
 	keyName: string;
@@ -95,6 +96,13 @@ export interface HandleListRemove {
 	currState: any;
 	targetId: string;
 	typeId?: string;
+}
+
+export interface HandleAdditionalInfoUpdate {
+	setState: React.Dispatch<React.SetStateAction<any>>;
+	currState: AdditionalInfo;
+	targetId: string;
+	newElement: any;
 }
 
 function App() {
@@ -186,9 +194,9 @@ function App() {
 			{ id: "cat2", header: "Testing" },
 		],
 		subHeaders: [
-			{ id: "sub1", categoryId: "cat1", name:'Alchemy Mastery: Philosopher\'s Stone Revelation'},
-			{ id: "sub2", categoryId: "cat1", name:'Automail Revolution: Crafting Enhanced Prosthetics'},
-			{ id: "s3b3", categoryId: "cat2", name:'Alchemy Creations' },
+			{ id: "sub1", categoryId: "cat1", headerName: "Alchemy Mastery: Philosopher's Stone Revelation", bulletPointIds: ['hol3', 'fed'] },
+			{ id: "sub2", categoryId: "cat1", headerName: "Automail Revolution: Crafting Enhanced Prosthetics", bulletPointIds: ['see3'] },
+			{ id: "s3b3", categoryId: "cat2", headerName: "Alchemy Creations", bulletPointIds: ['asdf']},
 		],
 		bulletPoints: [
 			{ id: "hol3", subHeaderId: "sub1", bulletPoint: "Researched ancient alchemical manuscripts and decoded complex symbols, advancing the understanding of Philosopher's Stone synthesis." },
@@ -235,7 +243,7 @@ function App() {
 	 * First we remove all instance of subchild related to header and just add the new changes from subchilds
 	 */
 	const updateHeaderCategoryList = ({ setState, currState, newElement }: HandleListChange) => {
-		// Map through the current state any delete(reset) all matching newElement[0]'s headerId
+		// Map through the current state any remove all matching newElement[0]'s headerId
 		const updatedState = currState.filter((item: any) => item.headerId !== newElement[0].headerId);
 		const newState = [...updatedState, ...newElement];
 		// Set the updated state
@@ -243,28 +251,52 @@ function App() {
 	};
 
 	/**
+	 * Because I didn't separate the collapse additionalInfo into separate states for bulletPts (playing around with my code here), I made a new function just to deal with additionalInfo
+	 */
+	const updateAdditionalInfo = ({ setState, currState, targetId, newElement }: HandleAdditionalInfoUpdate) => {
+		// Remove elements with the specified targetId (Clean slate)
+		const updatedCategories = currState.categories.filter((item) => item.id !== targetId);
+		const updatedSubHeaders = currState.subHeaders.filter((item) => item.categoryId !== targetId);
+		const updatedBulletPoints = currState.bulletPoints.filter((item) => {
+			const subHeader = currState.subHeaders.find((subHeader) => subHeader.id === item.subHeaderId);
+			return subHeader && subHeader.categoryId !== targetId;
+		});
+
+		// Add new elements to the lists
+		updatedCategories.push({ id: newElement.id, header: newElement.categoryName });
+		updatedSubHeaders.push(...newElement.subHeaders);
+		updatedBulletPoints.push(...newElement.bulletPoints);
+
+		// Set the updated state
+		setState((prevState: AdditionalInfo) => ({
+			...prevState,
+			categories: updatedCategories,
+			subHeaders: updatedSubHeaders,
+			bulletPoints: updatedBulletPoints,
+		}));
+	};
+
+	/**
 	 * @param targetId
-	 * Targets the id for main header objects and the headerId targets the subsequence bullet lists. 
+	 * Targets the id for main header objects and the headerId targets the subsequence bullet lists.
 	 * Special case for categoryId, addtionalInfo's bullet list is within the object (not collapsed) needs to remove main header, subheader, and bullet points
 	 */
 	const removeIDFromList = ({ setState, currState, targetId, typeId = "id" }: HandleListRemove) => {
 		let filterList;
 		if (typeId === "categoryId") {
-			const updatedCategories = currState['categories'].filter((item: any) => item.id !== targetId);
-			const updatedSubHeaders = currState['subHeaders'].filter((item: any) => item.categoryId !== targetId);
-			const updatedBulletPoints = currState['bulletPoints'].filter((item: any) => {
+			const updatedCategories = currState["categories"].filter((item: any) => item.id !== targetId);
+			const updatedSubHeaders = currState["subHeaders"].filter((item: any) => item.categoryId !== targetId);
+			const updatedBulletPoints = currState["bulletPoints"].filter((item: any) => {
 				// For every item, we check to find the subHeader that matches its subHeaderId, then we can use that subHeader.categoryId to match & ignore targetID
-            const subHeader = currState['subHeaders'].find((subHeader: any) => subHeader.id === item.subHeaderId);
+				const subHeader = currState["subHeaders"].find((subHeader: any) => subHeader.id === item.subHeaderId);
 				return subHeader && subHeader.categoryId !== targetId;
 			});
-			setState({ ...currState, categories: updatedCategories, subHeaders: updatedSubHeaders, bulletPoints: updatedBulletPoints});
-			console.log(filterList);
-			console.log(currState)
+			setState({ ...currState, categories: updatedCategories, subHeaders: updatedSubHeaders, bulletPoints: updatedBulletPoints });
 			return;
 		} else if (typeId === "headerId") {
-		  filterList = currState.filter((item: any) => item.headerId !== targetId);
+			filterList = currState.filter((item: any) => item.headerId !== targetId);
 		} else {
-		  filterList = currState.filter((item: any) => item.id !== targetId);
+			filterList = currState.filter((item: any) => item.id !== targetId);
 		}
 		setState(filterList);
 	};
@@ -277,10 +309,10 @@ function App() {
 				<EducationForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
 				<SkillForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
 				<ExperienceForm isActive={activeIndex === 3} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateExp={experience} currStateBulletPts={expBulletPts} setStateExp={setExperience} setStateBulletPts={setExpBulletPts} />
-				<AdditionalForm isActive={activeIndex === 4} onExpand={(param) => setActiveIndex(param)} currState={additionalInfo} setState={setAdditionalInfo} handleRemoveChange={removeIDFromList}/>
+				<AdditionalForm isActive={activeIndex === 4} onExpand={(param) => setActiveIndex(param)} currState={additionalInfo} setState={setAdditionalInfo} handleRemoveChange={removeIDFromList} handleSubmitCategory={updateAdditionalInfo}/>
 			</div>
 			<div className="resume-preview">
-				<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo}/>
+				<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo} />
 			</div>
 			<button
 				className={isPreviewActive ? "previewBtn active" : "previewBtn"}

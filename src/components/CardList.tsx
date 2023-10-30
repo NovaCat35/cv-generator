@@ -28,7 +28,7 @@ export default function CardList({ type = "normal", currSubHeaderList, currBulle
 					<div className={`${mainName}-details details`} id={item.id} key={item.id}>
 						{/* Using the optional chaining operator (?.) to safely access properties on potentially undefined objects. */}						
 						{currSubHeaderList?.map((subHeader) => (
-							subHeader.id == item.subHeaderId && <div className="sub-header" key={uuidv4()}>{subHeader.name}</div>
+							subHeader.id == item.subHeaderId && <div className="sub-header" key={uuidv4()}>{subHeader.headerName}</div>
 						))}
 						<div>{mainName == "skill" ? item.skill : item.bulletPoint}</div>
 						<button className="closeBtn" onClick={handleRemoveCard}>

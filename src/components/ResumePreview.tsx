@@ -87,11 +87,11 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 								.filter((subHeader: any) => subHeader.categoryId == category.id)
 								.map((subHeader: any) => (
 									<div className="subheader-container" key={subHeader.id}>
-										<div className="subheader-name">{subHeader.name}</div>
+										<div className="subheader-name">{subHeader.headerName}</div>
 										{additionalInfo["bulletPoints"]
 											.filter((bulletPt) => bulletPt.subHeaderId == subHeader.id)
 											.map((bulletPt) => (
-												<div className="bulletpoint" key={bulletPt.id}>
+												<div className="bullet-point" key={bulletPt.id}>
 													{bulletPt.bulletPoint}
 												</div>
 											))}

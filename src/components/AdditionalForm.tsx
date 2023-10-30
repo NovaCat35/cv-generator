@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Input } from "./Input.tsx";
-import { HandleChange, AdditionalInfo, HandleListRemove, Category, BulletPoint, SubHeader } from "../App.tsx";
+import { HandleChange, AdditionalInfo, HandleListRemove, HandleAdditionalInfoUpdate, Category, BulletPoint, SubHeader } from "../App.tsx";
 import Header from "./Header.tsx";
 import FormButtons from "./FormButtons.tsx";
 import CardList from "./CardList.tsx";
@@ -16,6 +16,7 @@ interface AdditionalFormProps {
 	currState: AdditionalInfo;
 	setState: React.Dispatch<React.SetStateAction<any>>;
    handleRemoveChange: (date: HandleListRemove) => void;
+   handleSubmitCategory: (date: HandleAdditionalInfoUpdate) => void;
 }
 
 interface MainInfo {
@@ -25,7 +26,7 @@ interface MainInfo {
    bulletPoints: BulletPoint[];
 }
 
-export default function AdditionalForm({ isActive, onExpand, currState, setState, handleRemoveChange }: AdditionalFormProps) {
+export default function AdditionalForm({ isActive, onExpand, currState, setState, handleRemoveChange, handleSubmitCategory }: AdditionalFormProps) {
 	const initMainInfo = {
       id: "",
 		categoryName: "",
@@ -36,6 +37,7 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
       id: '',
       categoryId: '',
       headerName: '',
+      bulletPointIds: [],
    }
    const initBulletPoint = {
       id: '',
@@ -58,8 +60,17 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 		setState({ ...currState, [keyName]: value });
 	};
 
-	const handleSubmit = () => {
-		return;
+	const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+
+      if (currMainInfo['subHeaders'].length > 0) {
+			handleSubmitCategory({ setState, currState, targetId: currMainInfo.id, newElement: currMainInfo });
+			setShowForm(false);
+         resetInit();
+		} else {
+			setErrorMessage("Please add some info!");
+			setErrorAlert(true);
+		}
 	};
 
    const removeBulletCard = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -80,24 +91,26 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 
    /**
     * We need to pair bulletPoint to their specific subHeader, 
-    * We thus keep a record of the currSubHeader.id if there is one, otherwise we can't add the bulletPoint to any empty subHeader!!
+    * We thus keep a record of the currSubHeader.id if there is one, otherwise we make a new subheader since we can't add the bulletPoint to any empty subHeader!!
     * In addition, the headerName will determine the grouping of each bulletPt
     */
    const onAddBulletPtToList = () => {
       if(currSubHeader.headerName != '') {
-         const updatedSubID= setSubHeaderID(); // first we populate the id 
+         // we either find a current subheader or make a new subheader & get back the proper ID
+         const targetSubheader= setAndUpdateSubheaderID(); 
          const newBulletPt: BulletPoint = {
             id: uuidv4(),
-            subHeaderId: updatedSubID,
+            subHeaderId: targetSubheader.id,
             bulletPoint: currBulletPt.bulletPoint,
          };
-         console.log(currSubHeader.id)
-        // Creating a new array with the updated bullet points
-        const updatedBulletPoints: BulletPoint[] = [...currMainInfo.bulletPoints, newBulletPt];
 
+         // Update our target subheader's bulletPointIds list
+         updateBulletListID(targetSubheader, newBulletPt.id);
+         
          // Can't add an empty bullet point
          if (newBulletPt.bulletPoint != "") {
-            setCurrMainInfo((prevState) => ({...prevState, bulletPoints: updatedBulletPoints}));
+            const newBulletPtList: BulletPoint[] = [...currMainInfo.bulletPoints, newBulletPt];
+            setCurrMainInfo((prevState) => ({...prevState, bulletPoints: newBulletPtList}));
             // Reset below, we don't use resetInit since we don't want to reset entire form info
             setCurrBulletPt(initBulletPoint);
             setErrorMessage("");
@@ -115,22 +128,51 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
     * Case 1: subheader's name already exist, reuse ID found in currMainInfo for our current subheader
     * Case 2: new subheader, create a new ID for our current subheader & add to list
     */
-   function setSubHeaderID() {
-      const subHeaderFound = currMainInfo['subHeaders'].find(subHeader => subHeader.name == currSubHeader.headerName)
+   function setAndUpdateSubheaderID() {
+      const subHeaderFound = currMainInfo['subHeaders'].find(subHeader => subHeader.headerName == currSubHeader.headerName)
       if(subHeaderFound) {
-         // setCurrSubHeader({...currSubHeader, id: subHeaderFound.id})
-         return subHeaderFound.id;
-      } else {
-         const newSubHeader = { id: uuidv4(), name: currSubHeader.headerName, categoryId: currMainInfo.id };
+         // return subHeaderFound.id;
+         return subHeaderFound;
+      } 
+      // Create a new subheader if we can't find an existing one
+      else {
+         const newSubHeader = { id: uuidv4(), headerName: currSubHeader.headerName, categoryId: currMainInfo.id, bulletPointIds:[] };
          const newSubHeaderList = [...currMainInfo.subHeaders, newSubHeader];
-         // I'm using prevState since we'll need to use the setCurrMainInfo again for adding bulletPt in onAddBulletPtToList()
-         setCurrMainInfo((prevState) => ({ ...prevState, subHeaders: newSubHeaderList })); 
-
-         // setCurrSubHeader({ ...currSubHeader, id: newSubHeader.id });
-         return newSubHeader.id;
+         // I'm using prevState since we'll need to use the infos in setCurrMainInfo again when we callback to other functions
+         // setCurrMainInfo((prevState) => ({ ...prevState, subHeaders: [...prevState.subHeaders, newSubHeader] })); 
+         // return newSubHeader.id;
+         return newSubHeader;
       }
    }
 
+   /**
+    * Goal is to fill out the bulletListId in targetSubheader.
+    * We have to use targetSubheader's id to look for available subheader, otherwise we make a new one
+    */
+   function updateBulletListID(targetSubheader: SubHeader, currBulletID: string) {
+      let subheaderFound = false; // keeps track of existing subheader
+
+      // Attempt to find the subheader and add the new bulletList
+      const updatedSubheaderList = currMainInfo['subHeaders'].map((subheader) => {
+         if(subheader.id == targetSubheader.id) {
+            subheaderFound = true;
+            return { ...targetSubheader, bulletPointIds: [...subheader.bulletPointIds, currBulletID] };
+         }
+         return subheader;
+      })
+
+      // If we still don't have a subheader found, make a new one with the curr bulletPt ID added to its list
+      if (!subheaderFound) {
+         // Create a new subheader with the provided currBulletID
+         const newSubheader: SubHeader = {
+            ...targetSubheader,
+            bulletPointIds: [currBulletID],
+         };
+         updatedSubheaderList.push(newSubheader);
+      }
+      console.log(updatedSubheaderList)
+      setCurrMainInfo((prevState) => ({ ...prevState, subHeaders: [...updatedSubheaderList] })); 
+   }
 
 	const handleSeeExpClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		const targetId = e.currentTarget.getAttribute("id");
@@ -152,7 +194,7 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 		setShowForm(true);
 	};
 
-	const handleAddExpClick = () => {
+	const handleAddInfoClick = () => {
 		setShowForm(true);
 	};
 
@@ -174,6 +216,8 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 
    const resetInit = () => {
 		setCurrMainInfo(initMainInfo);
+		setCurrSubHeader(initSubHeader);
+		setCurrBulletPt(initBulletPoint);
 		setErrorMessage("");
 	};
 
@@ -182,7 +226,7 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 			<Header name="Other Info" isActive={isActive} handleExpandClick={handleExpandClick} imgSrc={infoSvg} />
 			{showForm ? (
 				<form onSubmit={handleSubmit}>
-					<Input label="Category Name" keyName="category" placeholder="Company Name" onChange={onChangeInputInfo} setState={setCurrMainInfo} currState={currMainInfo} propValue={currMainInfo.categoryName} required={true} />
+					<Input label="Category Name" keyName="categoryName" placeholder="Company Name" onChange={onChangeInputInfo} setState={setCurrMainInfo} currState={currMainInfo} propValue={currMainInfo.categoryName} required={true} />
 
 					<CardList type='subheader' currSubHeaderList={currMainInfo.subHeaders} currBulletList={currMainInfo.bulletPoints} mainName="additional-info" handleRemoveCard={removeBulletCard} />
                <div className="subheader-container bullet-pt-container">
@@ -197,7 +241,7 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 					<FormButtons handleCancelClick={handleCancelClick} />
 				</form>
 			) : (
-				<BannerOptions mainName="info-container" type="additionalInfo" currState={currState["categories"]} handleSeeBanner={handleSeeExpClick} handleAddClick={handleAddExpClick} handleRemoveClick={removeInfo} />
+				<BannerOptions mainName="info-container" type="additionalInfo" currState={currState["categories"]} handleSeeBanner={handleSeeExpClick} handleAddClick={handleAddInfoClick} handleRemoveClick={removeInfo} />
 			)}
 		</div>
 	);
