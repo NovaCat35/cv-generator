@@ -1,27 +1,30 @@
 # CV Generator
 While looking for a job can often feel frustrating, making a resume shouldn't be. This CV generator will help you fill in the essential details and give you a basic layout as you persevere on your job hunting journey. 
-
 GANBATTE がんばって !
 
 Link: THIS PROJECT IS CURRENTLY A WORK IN PROGRESS ... ⚠️ 📝💻
 
-## FEATURES [Work in Progress]
+> In progress screenshot:
+<img width="951" alt="Screenshot 2023-10-29 at 11 54 33 PM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/93efe195-4786-4968-b412-ff9db4d57074">
+
+
+## Features [Work in Progress]
  - Print option
  - Download as PDF
  - Local Save
  - Resume Example | Blank Slate option
 
-## CHALLENGES
-In an effort to minimize redundancy in code with passing props and having template functions to cover many bases, I ran into a lot of typescript confusion with regards to state variables, passing setState as a parameter to components to be later use as callback, and good structure practices. So far, I keep progressing to fix these mistakes as I continue to change around variables and components as new features get added....
+## Challenges
+In my pursuit to enhance code efficiency and reduce redundancy, I encountered challenges in TypeScript related to managing state variables, passing setState as a parameter to components for later use as a callback, and maintaining a well-structured codebase. As I continuously modify variables and components to accommodate new features, I persistently work to rectify these issues and improve the overall code quality.
 
 As new features and plans are added and changed, I learn how important it is to keep separate components for reusability. 
 
-## BUILD WITH
+## Build With
  - React + Vite
  - TypeScript
  - Sass
 
-## REACT SETUP
+## React Setup
 > To get setup with React, run the following in terminal
 ```
 1) npm create vite@latest projectName -- --template react-ts

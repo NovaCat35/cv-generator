@@ -191,18 +191,15 @@ function App() {
 	const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo>({
 		categories: [
 			{ id: "cat1", header: "Personal Projects" },
-			{ id: "cat2", header: "Testing" },
 		],
 		subHeaders: [
 			{ id: "sub1", categoryId: "cat1", headerName: "Alchemy Mastery: Philosopher's Stone Revelation", bulletPointIds: ['hol3', 'fed'] },
 			{ id: "sub2", categoryId: "cat1", headerName: "Automail Revolution: Crafting Enhanced Prosthetics", bulletPointIds: ['see3'] },
-			{ id: "s3b3", categoryId: "cat2", headerName: "Alchemy Creations", bulletPointIds: ['asdf']},
 		],
 		bulletPoints: [
 			{ id: "hol3", subHeaderId: "sub1", bulletPoint: "Researched ancient alchemical manuscripts and decoded complex symbols, advancing the understanding of Philosopher's Stone synthesis." },
 			{ id: "fed", subHeaderId: "sub1", bulletPoint: "Developed a groundbreaking technique for Philosopher's Stone synthesis, demonstrating expertise in advanced alchemy." },
 			{ id: "see3", subHeaderId: "sub2", bulletPoint: "Worked closely with renowned automail expert Winry Rockbell, contributing expertise in alchemical principles to improve compatibility and integration with the human body." },
-			{ id: "asdf", subHeaderId: "s3b3", bulletPoint: "Hey NO peaking!" },
 		],
 	});
 
