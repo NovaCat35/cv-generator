@@ -1,7 +1,7 @@
 import { Person, Education, Experience, SkillHeader, SkillItem, ExperienceItem, ExperienceBulletPts, AdditionalInfo } from "../App.tsx";
-import { v4 as uuidv4 } from "uuid";
+import React from "react";
 
-interface ResumePreviewProps {
+export interface ResumePreviewProps {
 	personInfo: Person;
 	educationInfo: Education;
 	skillHeaderInfo: SkillHeader[];
@@ -10,9 +10,11 @@ interface ResumePreviewProps {
 	expBulletPoints: ExperienceBulletPts[];
 	additionalInfo: AdditionalInfo;
 }
-export default function ResumePreview({ personInfo, educationInfo, skillHeaderInfo, skillListInfo, experienceInfo, expBulletPoints, additionalInfo }: ResumePreviewProps) {
+const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => {
+	const { personInfo, educationInfo, skillHeaderInfo, skillListInfo, experienceInfo, expBulletPoints, additionalInfo } = props;
+
 	return (
-		<div className="resume-container">
+		<div ref={ref} id="resume-container" className="resume-container">
 			<header>
 				<div className="name">{personInfo.name}</div>
 				<div className="contact-info">
@@ -41,7 +43,7 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 				)}
 				{skillListInfo.length != 0 && (
 					<div className="skill-container">
-						<h1>Skills</h1>
+						<h1>Skill Proficiencies</h1>
 						{skillHeaderInfo.map((category) => (
 							<div className="skill-header-detail" key={category.id}>
 								{category.header}:
@@ -103,4 +105,6 @@ export default function ResumePreview({ personInfo, educationInfo, skillHeaderIn
 			</main>
 		</div>
 	);
-}
+});
+
+export default ResumePreview;

@@ -5,6 +5,7 @@ import EducationForm from "./components/EducationForm.tsx";
 import ExperienceForm from "./components/ExperienceForm.tsx";
 import SkillForm from "./components/SkillForm.tsx";
 import AdditionalForm from "./components/AdditionalForm.tsx";
+import PrintComponent from "./components/PrintOption.tsx";
 import "./styles/App.scss";
 import "./styles/mainForms.scss";
 import "./styles/resumePreview.scss";
@@ -65,7 +66,7 @@ export interface SubHeader {
 	id: string;
 	categoryId: string;
 	headerName: string;
-	bulletPointIds: string[],
+	bulletPointIds: string[];
 }
 export interface Category {
 	id: string;
@@ -189,12 +190,10 @@ function App() {
 	]);
 
 	const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo>({
-		categories: [
-			{ id: "cat1", header: "Personal Projects" },
-		],
+		categories: [{ id: "cat1", header: "Personal Projects" }],
 		subHeaders: [
-			{ id: "sub1", categoryId: "cat1", headerName: "Alchemy Mastery: Philosopher's Stone Revelation", bulletPointIds: ['hol3', 'fed'] },
-			{ id: "sub2", categoryId: "cat1", headerName: "Automail Revolution: Crafting Enhanced Prosthetics", bulletPointIds: ['see3'] },
+			{ id: "sub1", categoryId: "cat1", headerName: "Alchemy Mastery: Philosopher's Stone Revelation", bulletPointIds: ["hol3", "fed"] },
+			{ id: "sub2", categoryId: "cat1", headerName: "Automail Revolution: Crafting Enhanced Prosthetics", bulletPointIds: ["see3"] },
 		],
 		bulletPoints: [
 			{ id: "hol3", subHeaderId: "sub1", bulletPoint: "Researched ancient alchemical manuscripts and decoded complex symbols, advancing the understanding of Philosopher's Stone synthesis." },
@@ -297,16 +296,18 @@ function App() {
 		}
 		setState(filterList);
 	};
+	
 
 	return (
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<h1 className="title">MY CV Generator</h1>
+				<PrintComponent personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo}/>
 				<GeneralForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
 				<SkillForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
 				<ExperienceForm isActive={activeIndex === 3} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateExp={experience} currStateBulletPts={expBulletPts} setStateExp={setExperience} setStateBulletPts={setExpBulletPts} />
-				<AdditionalForm isActive={activeIndex === 4} onExpand={(param) => setActiveIndex(param)} currState={additionalInfo} setState={setAdditionalInfo} handleRemoveChange={removeIDFromList} handleSubmitCategory={updateAdditionalInfo}/>
+				<AdditionalForm isActive={activeIndex === 4} onExpand={(param) => setActiveIndex(param)} currState={additionalInfo} setState={setAdditionalInfo} handleRemoveChange={removeIDFromList} handleSubmitCategory={updateAdditionalInfo} />
 			</div>
 			<div className="resume-preview">
 				<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo} />

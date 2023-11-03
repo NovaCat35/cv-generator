@@ -13,6 +13,7 @@
     "date-fns": "^2.30.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-to-print": "^2.14.15",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

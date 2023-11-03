@@ -22,142 +22,148 @@ $special-font-color: #105581;
 	}
 }
 
+// MAIN SURROUNDING AREA CONTAINER 
 .resume-preview {
 	height: 100vh;
 	padding: 1rem;
 	position: relative;
 	justify-self: center;
+	@media screen and (min-width: 550px) {
+	}
+}
+
+.resume-container {
+	padding: 55px 35px;
+	background-color: $white-background;
+	width: 8.5in;
+	height: 11in;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.43);
+	box-shadow: 0 15px 25px -5px rgba(50, 50, 93, 0.1), 0 8px 16px -8px rgba(0, 0, 0, 0.25);
+	display: grid;
+	grid-template-rows: 55px 1fr;
 	font-family: $detail-fonts;
-	.resume-container {
-		padding: 30px;
-		background-color: $white-background;
-		width: 8.5in;
-		height: 11in;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%) scale(0.43);
-		box-shadow: 0 15px 25px -5px rgba(50, 50, 93, 0.1), 0 8px 16px -8px rgba(0, 0, 0, 0.25);
+	header {
 		display: grid;
-		grid-template-rows: 65px 1fr;
-		header {
-			display: grid;
-			grid-template-columns: 2fr 1fr;
-			grid-template-rows: 50px;
-			.name {
-				font-size: 2rem;
-				font-family: $header-fonts;
-				color: $special-font-color;
-			}
-			.contact-info {
-				color: $special-font-color;
-				// display: grid;
-				// grid-template-columns: repeat(2, 1fr);
-				// column-gap: 5px;
-				display: flex;
-				flex-wrap: wrap;
-				gap: 5px;
-				div {
-					white-space: nowrap;
-					&:nth-child(2) {
-						@include divider();
-					}
+		grid-template-columns: 2fr 1fr;
+		grid-template-rows: 40px;
+		.name {
+			font-size: 2rem;
+			font-family: $header-fonts;
+			color: $special-font-color;
+		}
+		.contact-info {
+			color: $special-font-color;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 3px 5px;
+			div {
+				white-space: nowrap;
+				&:nth-child(2) {
+					@include divider();
 				}
-				.bottom-container{
-					display: flex;
-					gap: 5px;
+			}
+			.bottom-container{
+				display: flex;
+				gap: 5px;
+			}
+		}
+	}
+	main {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+		h1 {
+			color: $special-font-color;
+			font-size: 1.3rem;
+			font-weight: 700;
+			font-family: $header-fonts;
+		}
+		.education-container {
+			.education-details {
+				display: grid;
+				grid-template: repeat(2, 20px) / 2fr 165px;
+				.study {
+					display: list-item; /* This has to be "list-item"                                          */
+					margin-left: 1rem;
 				}
 			}
 		}
-		main {
+		.skill-container {
+			.skill-header-detail {
+				display: flex;
+				font-weight: 700;
+				color: $special-font-color;
+				.skill-detail {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					color: black;
+					font-weight: 100;
+					&::before {
+						content: ", ";
+					}
+					&:first-child {
+						margin-left: 30px;
+						&::before {
+							content: "";
+						}
+					}
+				}
+			}
+		}
+		.experience-container {
+			.exp-details {
+				@include spaceArea();
+				display: grid;
+				grid-template: repeat(2, 20px) 1fr / 1fr 165px;
+				grid-auto-rows: minmax(20px, auto);
+				.company {
+					color: $special-font-color;
+					font-weight: 700;
+				}
+				.description {
+					grid-column: 1 / -1;
+				}
+				.position {
+					color: $special-font-color;
+				}
+			}
+		}
+		.additional-info-container {
 			display: flex;
 			flex-direction: column;
-			gap: 25px;
-			h1 {
-				color: $special-font-color;
-				font-size: 1.3rem;
-				font-weight: 700;
-				font-family: $header-fonts;
-			}
-			.education-container {
-				.education-details {
-					display: grid;
-					grid-template: repeat(2, 20px) / 2fr 165px;
-					.study {
-						display: list-item; /* This has to be "list-item"                                          */
-						margin-left: 1rem;
-					}
-				}
-			}
-			.skill-container {
-				.skill-header-detail {
-					display: flex;
+			gap: 10px;
+			.subheader-container {
+				@include spaceArea();
+				.subheader-name{
 					font-weight: 700;
 					color: $special-font-color;
-					.skill-detail {
-						color: black;
-						font-weight: 100;
-						&::before {
-							content: ", ";
-						}
-						&:first-child {
-							margin-left: 30px;
-							&::before {
-								content: "";
-							}
-						}
-					}
+				}
+				.bulletpoint{
+					display: list-item;
+					margin-left: 1rem;
 				}
 			}
-			.experience-container {
-				.exp-details {
-					@include spaceArea();
-					display: grid;
-					grid-template: repeat(2, 20px) 1fr / 1fr 165px;
-					grid-auto-rows: minmax(20px, auto);
-					.company {
-						color: $special-font-color;
-						font-weight: 700;
-					}
-					.description {
-						grid-column: 1 / -1;
-					}
-					.position {
-						color: $special-font-color;
-					}
-					.bullet-point {
-						padding: 5px 0;
-						display: list-item;
-						margin-left: 1rem;
-						grid-column: 1 / -1;
-					}
-				}
-			}
-			.additional-info-container {
-				display: flex;
-				flex-direction: column;
-				gap: 10px;
-				.subheader-container {
-					@include spaceArea();
-					.subheader-name{
-						font-weight: 700;
-						color: $special-font-color;
-					}
-					.bulletpoint{
-						display: list-item;
-						margin-left: 1rem;
-					}
-				}
-			}
-		}
-		@media screen and (min-width: 550px) {
-			transform: translate(-50%, -50%) scale(0.45);
-		}
-		@media screen and (min-width: 700px) {
-			transform: translate(-50%, -50%) scale(0.6);
 		}
 	}
 	@media screen and (min-width: 550px) {
+		transform: translate(-50%, -50%) scale(0.45);
+	}
+	@media screen and (min-width: 700px) {
+		transform: translate(-50%, -50%) scale(0.6);
+	}
+	// PORTRAIT LAYOUT for printing
+	@media print {
+		transform: translate(-50%, -100%) scale(1); // Adjust only the horizontal scale to 1
+		width: 100%; // Set width to 100% to fit the page
+		height: 100%; // Set height to 100% to fit the page
+		box-shadow: none;
+		@page {
+			size: portrait;
+		}
 	}
 }
 
@@ -167,4 +173,11 @@ $special-font-color: #105581;
 		content: "-";
 		margin: 0 5px;
 	}
+}
+
+.bullet-point {
+	padding: 3px 0;
+	display: list-item;
+	margin-left: 1rem;
+	grid-column: 1 / -1;
 }
