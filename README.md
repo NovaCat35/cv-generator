@@ -4,13 +4,16 @@ GANBATTE がんばって !
 
 Link: THIS PROJECT IS CURRENTLY A WORK IN PROGRESS ... ⚠️ 📝 💻
 
-> In progress screenshot:
-<img width="951" alt="Screenshot 2023-10-29 at 11 54 33 PM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/93efe195-4786-4968-b412-ff9db4d57074">
+> Desktop:
+> <img width="1233" alt="Screenshot 2023-11-04 at 2 16 37 AM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/21a4e8f7-d0e5-491f-a2e9-d79eaa9eb25f">
+
+> Mobile:
+> 
+> <img width="296" alt="Screenshot 2023-11-04 at 2 17 41 AM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/951ca873-c7cd-4757-a251-4989d8670887">
 
 
 ## Features [Work in Progress]
- - Print option
- - Download as PDF
+ - Print | Download Option
  - Local Save
  - Resume Example | Blank Slate option
  - Resume Customization
