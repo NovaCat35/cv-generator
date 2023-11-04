@@ -63,16 +63,18 @@ $special-font-color: #105581;
 			color: $special-font-color;
 			display: flex;
 			flex-wrap: wrap;
+			justify-content: flex-end;
 			gap: 3px 5px;
-			div {
-				white-space: nowrap;
-				&:nth-child(2) {
-					@include divider();
-				}
-			}
+			white-space: nowrap;
+			.top-container,
 			.bottom-container {
 				display: flex;
 				gap: 5px;
+				div {
+					&:nth-child(2) {
+						@include divider();
+					}
+				}
 			}
 		}
 	}

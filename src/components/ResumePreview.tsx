@@ -18,8 +18,10 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 			<header>
 				<div className="name">{personInfo.name}</div>
 				<div className="contact-info">
-					{personInfo.email != "" && <div className="email">{personInfo.email}</div>}
-					{personInfo.phone != "" && <div className="phone">{personInfo.phone}</div>}
+					<div className="top-container">
+						{personInfo.email != "" && <div className="email">{personInfo.email}</div>}
+						{personInfo.phone != "" && <div className="phone">{personInfo.phone}</div>}
+					</div>
 					<div className="bottom-container">
 						{personInfo.location != "" && <div className="location">{personInfo.location}</div>}
 						{personInfo.website != "" && <div className="website">{personInfo.website}</div>}
@@ -82,7 +84,8 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 										<div className="bullet-point" key={bullet.id}>
 											{bullet.bulletPoint}
 										</div>
-									))}
+									))
+								}
 							</div>
 						))}
 					</div>
