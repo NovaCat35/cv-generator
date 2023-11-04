@@ -6,12 +6,22 @@ import ExperienceForm from "./components/ExperienceForm.tsx";
 import SkillForm from "./components/SkillForm.tsx";
 import AdditionalForm from "./components/AdditionalForm.tsx";
 import PrintComponent from "./components/PrintOption.tsx";
+import ResetButton from "./components/ResetButton.tsx";
 import "./styles/App.scss";
 import "./styles/mainForms.scss";
 import "./styles/resumePreview.scss";
 import "./styles/expandBtns.scss";
 import visibleImg from "./assets/visibility.svg";
 import visibleImgOff from "./assets/visibility_off.svg";
+import {
+	initialPersonState,
+	initialEducationState,
+	initialSkillHeadersState,
+	initialSkillsState,
+	initialExperienceState,
+	initialExpBulletPtsState,
+	initialAdditionalInfoState,
+} from "./scripts/InitialStates.tsx";
 
 export interface Person {
 	name: string;
@@ -271,6 +281,16 @@ function App() {
 		}));
 	};
 
+	const resetAll = () => {
+		setPerson(initialPersonState);
+		setEducation(initialEducationState);
+		setSkillHeaders(initialSkillHeadersState);
+		setSkills(initialSkillsState);
+		setExperience(initialExperienceState);
+		setExpBulletPts(initialExpBulletPtsState);
+		setAdditionalInfo(initialAdditionalInfoState);
+	};
+
 	/**
 	 * @param targetId
 	 * Targets the id for main header objects and the headerId targets the subsequence bullet lists.
@@ -295,13 +315,15 @@ function App() {
 		}
 		setState(filterList);
 	};
-	
 
 	return (
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<h1 className="title">MY CV Generator</h1>
-				<PrintComponent personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo}/>
+				<div className="customization-container">
+					<PrintComponent personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo}/>
+					<ResetButton handleReset={resetAll}/>
+				</div>
 				<GeneralForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
 				<SkillForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
