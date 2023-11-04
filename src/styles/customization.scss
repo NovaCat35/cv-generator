@@ -2,8 +2,8 @@
    display: flex;
    justify-content: center;
    gap: 10px;
-   margin: -5px;
    button  {
+      cursor: pointer;
       padding: 5px 10px;
       border: 2.5px solid rgb(142, 142, 142);
       border-radius: 10px;
@@ -11,9 +11,14 @@
       &:active {
          transform: translateY(5px);
       }
-      &.reset-btn {
+      &.clear-btn {
          border: 2.5px solid rgb(213, 86, 86);
          background-color: rgb(213, 86, 86);
+         color: white;
+      }
+      &.sample-btn {
+         border: 2.5px solid rgb(122, 156, 223);
+         background-color: rgb(122, 156, 223);
          color: white;
       }
    }

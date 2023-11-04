@@ -6,7 +6,7 @@ import ExperienceForm from "./components/ExperienceForm.tsx";
 import SkillForm from "./components/SkillForm.tsx";
 import AdditionalForm from "./components/AdditionalForm.tsx";
 import PrintComponent from "./components/PrintOption.tsx";
-import ResetButton from "./components/ResetButton.tsx";
+import CustomButton from "./components/CustomButton.tsx";
 import "./styles/App.scss";
 import "./styles/mainForms.scss";
 import "./styles/resumePreview.scss";
@@ -21,6 +21,13 @@ import {
 	initialExperienceState,
 	initialExpBulletPtsState,
 	initialAdditionalInfoState,
+	initialSamplePerson,
+   initialSampleEducation,
+   initialSampleSkillHeaders,
+   initialSampleSkills,
+   initialSampleExperience,
+   initialSampleExpBulletPts,
+   initialSampleAdditionalInfo,
 } from "./scripts/InitialStates.tsx";
 
 export interface Person {
@@ -117,99 +124,17 @@ export interface HandleAdditionalInfoUpdate {
 }
 
 function App() {
-	const [person, setPerson] = useState<Person>({
-		name: "Edward Elric",
-		email: "edward.elric@gmail.com",
-		phone: "(202) 456-1111",
-		location: "Resembool, Amestris",
-		website: "linkedin.com/in/edwardelric",
-	});
+	const [person, setPerson] = useState<Person>(initialSamplePerson);
 
-	const [education, setEducation] = useState<Education>({
-		school: "Amestrian State Military",
-		location: "Amestris, Central City",
-		study: "Master of State Alchemy",
-		startDate: "Oct 1911",
-		endDate: "May 1913",
-	});
+	const [education, setEducation] = useState<Education>(initialSampleEducation);
 
-	const [skillHeaders, setSkillHeaders] = useState<SkillHeader[]>([
-		{ id: "header1", header: "Scientific Disciplines" },
-		{ id: "header2", header: "Adventure Expertise" },
-	]);
-	const [skills, setSkills] = useState<SkillItem[]>([
-		{ id: "nova789", headerId: "header1", skill: "transmutation" },
-		{ id: "efg456", headerId: "header1", skill: "biology" },
-		{ id: "han23", headerId: "header1", skill: "alchemic mastery" },
-		{ id: "abc456", headerId: "header1", skill: "elemental manipulation" },
-		{ id: "head23", headerId: "header2", skill: "survival instincts" },
-		{ id: "sans23", headerId: "header2", skill: "swimming" },
-		{ id: "did89", headerId: "header2", skill: "physical combat" },
-		{ id: "magic234", headerId: "header2", skill: "tracking" },
-		{ id: "stealth678", headerId: "header2", skill: "stealth" },
-		{ id: "leadership432", headerId: "header2", skill: "adaptability" },
-	]);
+	const [skillHeaders, setSkillHeaders] = useState<SkillHeader[]>(initialSampleSkillHeaders);
+	const [skills, setSkills] = useState<SkillItem[]>(initialSampleSkills);
 
-	const [experience, setExperience] = useState<Experience>([
-		{
-			id: "abc123",
-			company: "Aperture Science, Inc.",
-			position: "Research Assistant",
-			location: "USA",
-			description: "Contributed invaluable insights to the development of cutting-edge technologies, most notably the revolutionary portal gun.",
-			startDate: "Aug 1957",
-			endDate: "April 1970",
-		},
-		{
-			id: "pwd888",
-			company: "Amestrian State Military",
-			position: "State Alchemist",
-			location: "Amestris, Central City",
-			description: "Utilized alchemical expertise and innovative problem-solving to investigate and resolve complex alchemical mysteries. Demonstrated exceptional skill in both theoretical and practical alchemy, ensuring the safety and security of Amestris through pioneering advancements in alchemical techniques.",
-			startDate: "Sept 1911",
-			endDate: "May 1917",
-		},
-	]);
-	const [expBulletPts, setExpBulletPts] = useState<ExperienceBulletPts[]>([
-		{
-			id: "bullet1",
-			headerId: "abc123",
-			bulletPoint: "Conducted extensive research on quantum mechanics and theoretical physics to support the development of innovative technologies.",
-		},
-		{
-			id: "bullet2",
-			headerId: "abc123",
-			bulletPoint: "Collaborated with a multidisciplinary team of scientists and engineers to solve complex scientific challenges related to portal technology.",
-		},
-		{
-			id: "b3ll3t3",
-			headerId: "pwd888",
-			bulletPoint: "Investigated and resolved intricate alchemical mysteries, utilizing a deep understanding of alchemical principles and techniques to uncover hidden truths and solve complex problems.",
-		},
-		{
-			id: "bullet4",
-			headerId: "pwd888",
-			bulletPoint: "Actively participated in intelligence missions, employing alchemical skills to decrypt codes, decipher ancient texts, and gain insights into the enemy's alchemical capabilities.",
-		},
-		{
-			id: "bu5et5",
-			headerId: "pwd888",
-			bulletPoint: "Conducted public demonstrations and educational outreach programs to raise awareness about alchemy, its applications, and its ethical use, promoting understanding and cooperation within the community.",
-		},
-	]);
+	const [experience, setExperience] = useState<Experience>(initialSampleExperience);
+	const [expBulletPts, setExpBulletPts] = useState<ExperienceBulletPts[]>(initialSampleExpBulletPts);
 
-	const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo>({
-		categories: [{ id: "cat1", header: "Personal Projects" }],
-		subHeaders: [
-			{ id: "sub1", categoryId: "cat1", headerName: "Alchemy Mastery: Philosopher's Stone Revelation", bulletPointIds: ["hol3", "fed"] },
-			{ id: "sub2", categoryId: "cat1", headerName: "Automail Revolution: Enhanced Prosthetics", bulletPointIds: ["see3"] },
-		],
-		bulletPoints: [
-			{ id: "hol3", subHeaderId: "sub1", bulletPoint: "Researched ancient alchemical manuscripts and decoded complex symbols, advancing the understanding of Philosopher's Stone synthesis." },
-			{ id: "fed", subHeaderId: "sub1", bulletPoint: "Developed a groundbreaking technique for Philosopher's Stone synthesis, demonstrating expertise in advanced alchemy." },
-			{ id: "see3", subHeaderId: "sub2", bulletPoint: "Worked closely with renowned automail expert Winry Rockbell, contributing expertise in alchemical principles to improve compatibility and integration with the human body." },
-		],
-	});
+	const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo>(initialSampleAdditionalInfo);
 
 	const [isPreviewActive, setIsPreviewActive] = useState(false); // keeps state of a preview button for smaller screens
 	const [activeIndex, setActiveIndex] = useState(0); // This is for keeping track of active expanded forms
@@ -281,16 +206,6 @@ function App() {
 		}));
 	};
 
-	const resetAll = () => {
-		setPerson(initialPersonState);
-		setEducation(initialEducationState);
-		setSkillHeaders(initialSkillHeadersState);
-		setSkills(initialSkillsState);
-		setExperience(initialExperienceState);
-		setExpBulletPts(initialExpBulletPtsState);
-		setAdditionalInfo(initialAdditionalInfoState);
-	};
-
 	/**
 	 * @param targetId
 	 * Targets the id for main header objects and the headerId targets the subsequence bullet lists.
@@ -316,13 +231,33 @@ function App() {
 		setState(filterList);
 	};
 
+	const clearAll = () => {
+		setPerson(initialPersonState);
+		setEducation(initialEducationState);
+		setSkillHeaders(initialSkillHeadersState);
+		setSkills(initialSkillsState);
+		setExperience(initialExperienceState);
+		setExpBulletPts(initialExpBulletPtsState);
+		setAdditionalInfo(initialAdditionalInfoState);
+	};
+	const resetSample = () => {
+		setPerson(initialSamplePerson);
+		setEducation(initialSampleEducation);
+		setSkillHeaders(initialSampleSkillHeaders);
+		setSkills(initialSampleSkills);
+		setExperience(initialSampleExperience);
+		setExpBulletPts(initialSampleExpBulletPts);
+		setAdditionalInfo(initialSampleAdditionalInfo);
+	}
+
 	return (
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<h1 className="title">MY CV Generator</h1>
 				<div className="customization-container">
 					<PrintComponent personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo}/>
-					<ResetButton handleReset={resetAll}/>
+					<CustomButton nameType={'clear'} handleClick={clearAll}/>
+					<CustomButton nameType={'sample'} handleClick={resetSample}/>
 				</div>
 				<GeneralForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
