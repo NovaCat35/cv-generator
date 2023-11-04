@@ -1,4 +1,3 @@
-@import "./print-styles.scss";
 $white-background: rgb(255, 255, 255);
 
 #root {
@@ -12,4 +11,8 @@ $white-background: rgb(255, 255, 255);
     display: grid;
     grid-template-columns: 1fr 2fr;
   }
+}
+
+p {
+  margin: 0;
 }

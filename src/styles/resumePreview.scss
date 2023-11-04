@@ -22,7 +22,12 @@ $special-font-color: #105581;
 	}
 }
 
-// MAIN SURROUNDING AREA CONTAINER 
+@mixin specialBoldHighlight() {
+	color: $special-font-color;
+	font-weight: 700;
+}
+
+// MAIN SURROUNDING AREA CONTAINER
 .resume-preview {
 	height: 100vh;
 	padding: 1rem;
@@ -65,7 +70,7 @@ $special-font-color: #105581;
 					@include divider();
 				}
 			}
-			.bottom-container{
+			.bottom-container {
 				display: flex;
 				gap: 5px;
 			}
@@ -76,41 +81,35 @@ $special-font-color: #105581;
 		flex-direction: column;
 		gap: 18px;
 		h1 {
-			color: $special-font-color;
+			@include specialBoldHighlight();
 			font-size: 1.3rem;
-			font-weight: 700;
 			font-family: $header-fonts;
 		}
 		.education-container {
 			.education-details {
+				.school {
+					@include specialBoldHighlight();
+				}
 				display: grid;
-				grid-template: repeat(2, 20px) / 2fr 165px;
+				grid-template: repeat(2, 20px) / 2fr 175px;
 				.study {
 					display: list-item; /* This has to be "list-item"                                          */
 					margin-left: 1rem;
 				}
 			}
 		}
-		.skill-container {
-			.skill-header-detail {
+		.main-skill-container {
+			.skill-info-container {
 				display: flex;
-				font-weight: 700;
-				color: $special-font-color;
-				.skill-detail {
+				p {
+					white-space: nowrap;
+					@include specialBoldHighlight();
+				}
+				.skill-list-container {
+					margin-left: 30px;
 					display: flex;
-					align-items: center;
-					justify-content: center;
-					color: black;
-					font-weight: 100;
-					&::before {
-						content: ", ";
-					}
-					&:first-child {
-						margin-left: 30px;
-						&::before {
-							content: "";
-						}
-					}
+					flex-wrap: wrap;
+					width: 100%;
 				}
 			}
 		}
@@ -118,11 +117,10 @@ $special-font-color: #105581;
 			.exp-details {
 				@include spaceArea();
 				display: grid;
-				grid-template: repeat(2, 20px) 1fr / 1fr 165px;
+				grid-template: repeat(2, 20px) 1fr / 1fr 175px;
 				grid-auto-rows: minmax(20px, auto);
 				.company {
-					color: $special-font-color;
-					font-weight: 700;
+					@include specialBoldHighlight();
 				}
 				.description {
 					grid-column: 1 / -1;
@@ -138,11 +136,10 @@ $special-font-color: #105581;
 			gap: 10px;
 			.subheader-container {
 				@include spaceArea();
-				.subheader-name{
-					font-weight: 700;
-					color: $special-font-color;
+				.subheader-name {
+					@include specialBoldHighlight();
 				}
-				.bulletpoint{
+				.bulletpoint {
 					display: list-item;
 					margin-left: 1rem;
 				}
@@ -169,6 +166,7 @@ $special-font-color: #105581;
 
 .date-container {
 	display: flex;
+	@include specialBoldHighlight();
 	.startDate::after {
 		content: "-";
 		margin: 0 5px;

@@ -130,15 +130,14 @@ function App() {
 	const [skills, setSkills] = useState<SkillItem[]>([
 		{ id: "nova789", headerId: "header1", skill: "transmutation" },
 		{ id: "efg456", headerId: "header1", skill: "biology" },
-		{ id: "han23", headerId: "header1", skill: "alchemy mastery" },
-		{ id: "abc456", headerId: "header1", skill: "metal manipulation" },
-		{ id: "metal321", headerId: "header1", skill: "metal bending" },
-		{ id: "head23", headerId: "header2", skill: "climbing" },
+		{ id: "han23", headerId: "header1", skill: "alchemic mastery" },
+		{ id: "abc456", headerId: "header1", skill: "elemental manipulation" },
+		{ id: "head23", headerId: "header2", skill: "survival instincts" },
 		{ id: "sans23", headerId: "header2", skill: "swimming" },
-		{ id: "did89", headerId: "header2", skill: "fighting" },
-		{ id: "magic234", headerId: "header2", skill: "spell casting" },
+		{ id: "did89", headerId: "header2", skill: "physical combat" },
+		{ id: "magic234", headerId: "header2", skill: "tracking" },
 		{ id: "stealth678", headerId: "header2", skill: "stealth" },
-		{ id: "leadership432", headerId: "header2", skill: "leadership" },
+		{ id: "leadership432", headerId: "header2", skill: "adaptability" },
 	]);
 
 	const [experience, setExperience] = useState<Experience>([
@@ -193,7 +192,7 @@ function App() {
 		categories: [{ id: "cat1", header: "Personal Projects" }],
 		subHeaders: [
 			{ id: "sub1", categoryId: "cat1", headerName: "Alchemy Mastery: Philosopher's Stone Revelation", bulletPointIds: ["hol3", "fed"] },
-			{ id: "sub2", categoryId: "cat1", headerName: "Automail Revolution: Crafting Enhanced Prosthetics", bulletPointIds: ["see3"] },
+			{ id: "sub2", categoryId: "cat1", headerName: "Automail Revolution: Enhanced Prosthetics", bulletPointIds: ["see3"] },
 		],
 		bulletPoints: [
 			{ id: "hol3", subHeaderId: "sub1", bulletPoint: "Researched ancient alchemical manuscripts and decoded complex symbols, advancing the understanding of Philosopher's Stone synthesis." },

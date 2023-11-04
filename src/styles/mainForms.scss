@@ -17,7 +17,7 @@
 	width: 80vw;
 	height: 100vh;
 	z-index: 1;
-	background-color: rgb(242, 242, 243);
+	background-color: #f3f4f6;
 	padding: 1rem;
 	min-height: 100vh;
 	transition: all 0.5s ease-in-out;
@@ -31,7 +31,8 @@
 		// background: linear-gradient(to right, #f32170,
 		// #ff6b08, #cf23cf, #eedd44);
 		// background: linear-gradient(to right, #CA4246, #E16541, #F18F43, #8B9862, #476098, );
-		background: linear-gradient(to right, #dc3755, #e96e17, #f3b713, #59a90e, #208bd2);
+		// background: linear-gradient(to right, #dc3755, #e96e17, #f3b713, #59a90e, #208bd2);
+		background: linear-gradient(to right, #dc3755, #208bd2);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 	}
@@ -50,7 +51,7 @@
 		background-color: $white-background;
 		font-family: "CustomFont";
 		transition: all 1s ease-in-out;
-		box-shadow: 2px 2px 10px 1px rgb(183, 182, 182);
+		box-shadow: 2px 2px 8px 1px rgb(213, 213, 213);
 		// When container is active, all hidden child component will now show
 		&.active {
 			form,
@@ -90,15 +91,7 @@
 				flex-direction: column;
 				gap: 5px;
 				label:not(.toggle-container label) {
-					font-size: clamp(0.7rem, 2vw, 0.95rem);
-					position: relative;
-					left: 8px;
-					top: 9px;
-					padding: 1px 5px;
-					align-self: flex-start;
-					border-radius: 5px;
-					background-color: rgb(207, 225, 238);
-					color: rgb(38, 42, 48);
+					@include label();
 				}
 				input:not(input[type="checkbox"]) {
 					@include input();

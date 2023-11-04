@@ -42,18 +42,24 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 					</div>
 				)}
 				{skillListInfo.length != 0 && (
-					<div className="skill-container">
+					<div className="main-skill-container">
 						<h1>Skill Proficiencies</h1>
 						{skillHeaderInfo.map((category) => (
-							<div className="skill-header-detail" key={category.id}>
-								{category.header}:
-								{skillListInfo
-									.filter((info) => info.headerId === category.id)
-									.map((info) => (
-										<div className="skill-detail" key={info.id}>
-											{info.skill}
-										</div>
-									))}
+							<div className="skill-info-container" key={category.id}>
+								<p>{category.header}:</p>
+								<div className="skill-list-container">
+									{/* {skillListInfo
+										.filter((info) => info.headerId === category.id)
+										.map((info) => (
+											<div className="skill-detail" key={info.id}>
+												{info.skill}
+											</div>
+										))} */}
+									{skillListInfo
+										.filter((info) => info.headerId === category.id)
+										.map((info) => info.skill)
+										.join(", ")}
+								</div>
 							</div>
 						))}
 					</div>
