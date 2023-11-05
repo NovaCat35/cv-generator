@@ -1,6 +1,6 @@
 # My CV Generator
 While looking for a job can often feel frustrating, making a resume shouldn't be. This CV generator will help you fill in the essential details and give you a basic layout as you persevere on your job hunting journey. <br>
-GANBATTE がんばって !
+~ GANBATTE がんばって !
 
 Link: THIS PROJECT IS CURRENTLY A WORK IN PROGRESS ... ⚠️ 📝 💻
 

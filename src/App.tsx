@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GeneralForm from "./components/GeneralForm.tsx";
 import ResumePreview from "./components/ResumePreview.tsx";
 import EducationForm from "./components/EducationForm.tsx";
@@ -13,22 +13,7 @@ import "./styles/resumePreview.scss";
 import "./styles/expandBtns.scss";
 import visibleImg from "./assets/visibility.svg";
 import visibleImgOff from "./assets/visibility_off.svg";
-import {
-	initialPersonState,
-	initialEducationState,
-	initialSkillHeadersState,
-	initialSkillsState,
-	initialExperienceState,
-	initialExpBulletPtsState,
-	initialAdditionalInfoState,
-	initialSamplePerson,
-   initialSampleEducation,
-   initialSampleSkillHeaders,
-   initialSampleSkills,
-   initialSampleExperience,
-   initialSampleExpBulletPts,
-   initialSampleAdditionalInfo,
-} from "./scripts/InitialStates.tsx";
+import { initialPersonState, initialEducationState, initialSkillHeadersState, initialSkillsState, initialExperienceState, initialExpBulletPtsState, initialAdditionalInfoState, initialSamplePerson, initialSampleEducation, initialSampleSkillHeaders, initialSampleSkills, initialSampleExperience, initialSampleExpBulletPts, initialSampleAdditionalInfo } from "./scripts/InitialStates.tsx";
 
 export interface Person {
 	name: string;
@@ -124,17 +109,22 @@ export interface HandleAdditionalInfoUpdate {
 }
 
 function App() {
-	const [person, setPerson] = useState<Person>(initialSamplePerson);
+	// Retrieve data from localStorage
+	const storedPerson = JSON.parse(localStorage.getItem("person") || "null") as Person;
+	const storedEducation = JSON.parse(localStorage.getItem("education") || "null") as Education;
+	const storedSkillHeaders = JSON.parse(localStorage.getItem("skillHeaders") || "null") as SkillHeader[];
+	const storedSkills = JSON.parse(localStorage.getItem("skills") || "null") as SkillItem[];
+	const storedExperience = JSON.parse(localStorage.getItem("experience") || "null") as Experience;
+	const storedExpBulletPts = JSON.parse(localStorage.getItem("expBulletPts") || "null") as ExperienceBulletPts[];
+	const storedAdditionalInfo = JSON.parse(localStorage.getItem("additionalInfo") || "null") as AdditionalInfo;
 
-	const [education, setEducation] = useState<Education>(initialSampleEducation);
-
-	const [skillHeaders, setSkillHeaders] = useState<SkillHeader[]>(initialSampleSkillHeaders);
-	const [skills, setSkills] = useState<SkillItem[]>(initialSampleSkills);
-
-	const [experience, setExperience] = useState<Experience>(initialSampleExperience);
-	const [expBulletPts, setExpBulletPts] = useState<ExperienceBulletPts[]>(initialSampleExpBulletPts);
-
-	const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo>(initialSampleAdditionalInfo);
+	const [person, setPerson] = useState<Person>(storedPerson || initialSamplePerson);
+	const [education, setEducation] = useState<Education>(storedEducation || initialSampleEducation);
+	const [skillHeaders, setSkillHeaders] = useState<SkillHeader[]>(storedSkillHeaders || initialSampleSkillHeaders);
+	const [skills, setSkills] = useState<SkillItem[]>(storedSkills || initialSampleSkills);
+	const [experience, setExperience] = useState<Experience>(storedExperience || initialSampleExperience);
+	const [expBulletPts, setExpBulletPts] = useState<ExperienceBulletPts[]>(storedExpBulletPts || initialSampleExpBulletPts);
+	const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo>(storedAdditionalInfo || initialSampleAdditionalInfo);
 
 	const [isPreviewActive, setIsPreviewActive] = useState(false); // keeps state of a preview button for smaller screens
 	const [activeIndex, setActiveIndex] = useState(0); // This is for keeping track of active expanded forms
@@ -240,6 +230,7 @@ function App() {
 		setExpBulletPts(initialExpBulletPtsState);
 		setAdditionalInfo(initialAdditionalInfoState);
 	};
+
 	const resetSample = () => {
 		setPerson(initialSamplePerson);
 		setEducation(initialSampleEducation);
@@ -248,16 +239,27 @@ function App() {
 		setExperience(initialSampleExperience);
 		setExpBulletPts(initialSampleExpBulletPts);
 		setAdditionalInfo(initialSampleAdditionalInfo);
-	}
+	};
+
+	useEffect(() => {
+		// Save data to localStorage whenever the state changes
+		localStorage.setItem("person", JSON.stringify(person));
+		localStorage.setItem("education", JSON.stringify(education));
+		localStorage.setItem("skillHeaders", JSON.stringify(skillHeaders));
+		localStorage.setItem("skills", JSON.stringify(skills));
+		localStorage.setItem("experience", JSON.stringify(experience));
+		localStorage.setItem("expBulletPts", JSON.stringify(expBulletPts));
+		localStorage.setItem("additionalInfo", JSON.stringify(additionalInfo));
+	}, [person, education, skillHeaders, skills, experience, expBulletPts, additionalInfo]);
 
 	return (
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<h1 className="title">MY CV Generator</h1>
 				<div className="customization-container">
-					<PrintComponent personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo}/>
-					<CustomButton nameType={'clear'} handleClick={clearAll}/>
-					<CustomButton nameType={'sample'} handleClick={resetSample}/>
+					<PrintComponent personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo} />
+					<CustomButton nameType={"clear"} handleClick={clearAll} />
+					<CustomButton nameType={"sample"} handleClick={resetSample} />
 				</div>
 				<GeneralForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
