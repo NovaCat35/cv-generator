@@ -7,6 +7,7 @@ import SkillForm from "./components/SkillForm.tsx";
 import AdditionalForm from "./components/AdditionalForm.tsx";
 import PrintComponent from "./components/PrintOption.tsx";
 import CustomButton from "./components/CustomButton.tsx";
+import MainIcon from "./components/MainIcon.tsx";
 import "./styles/App.scss";
 import "./styles/mainForms.scss";
 import "./styles/resumePreview.scss";
@@ -136,6 +137,7 @@ function App() {
 	const handleChange = ({ value, keyName, setState, currState }: HandleChange) => {
 		setState({ ...currState, [keyName]: value });
 	};
+
 	/**
 	 * The handleCollectionList updates the currState list by adding the new object by form submits
 	 * While the individual 'forms'.tsx handle the adding of individual elements, we need to update the state here with the submitted Info
@@ -146,9 +148,9 @@ function App() {
 		const updatedState = currState.map((item: any) => {
 			if (item.id == newElement.id) {
 				foundId = true;
-				return newElement; // Update the matching object
+				return newElement;
 			}
-			return item; // Keep other objects unchanged
+			return item;
 		});
 		// If no matching id was found, add the newElement to the state
 		if (!foundId) {
@@ -257,6 +259,7 @@ function App() {
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<h1 className="title">MY CV Generator</h1>
 				<div className="customization-container">
+					<MainIcon />
 					<PrintComponent personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo} />
 					<CustomButton nameType={"clear"} handleClick={clearAll} />
 					<CustomButton nameType={"sample"} handleClick={resetSample} />

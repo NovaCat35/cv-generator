@@ -1,0 +1,21 @@
+.main-forms-container {
+   .main-icon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 2px solid rgb(234, 176, 18);
+      img {
+         cursor: pointer;
+         width: 100px;
+         margin: 10px 0px 0px -5px;
+         transition: all .7s ease-in-out;
+         &:hover {
+            transform: rotate(360deg);
+         }
+      }
+   }
+}

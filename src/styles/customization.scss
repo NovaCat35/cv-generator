@@ -1,25 +1,51 @@
+$clear-color: rgb(213, 86, 86);
+$clear-hover-color: rgb(199, 51, 51);
+
+$sample-color: rgb(122, 156, 223);
+$sample-hover-color: rgb(93, 133, 213);
+
 .customization-container {
    display: flex;
    justify-content: center;
+   align-items: center;
    gap: 10px;
    button  {
       cursor: pointer;
       padding: 5px 10px;
       border: 2.5px solid rgb(142, 142, 142);
       border-radius: 10px;
-      transition: all .5s ease-in-out;
+      transition: all .3s ease-in-out;
       &:active {
          transform: translateY(5px);
       }
+      // &:hover {
+      //    transform: translateY(-2px);
+      // }
       &.clear-btn {
-         border: 2.5px solid rgb(213, 86, 86);
-         background-color: rgb(213, 86, 86);
+         border: 2.5px solid $clear-color;
+         background-color: $clear-color;
          color: white;
+         &:hover {
+            transform: translateY(-2px);
+            border: 2.5px solid $clear-hover-color;
+            background-color: $clear-hover-color;
+         }
+         &:active {
+            transform: translateY(3px);
+         }
       }
       &.sample-btn {
-         border: 2.5px solid rgb(122, 156, 223);
-         background-color: rgb(122, 156, 223);
+         border: 2.5px solid $sample-color;
+         background-color: $sample-color;
          color: white;
+         &:hover {
+            transform: translateY(-1px);
+            border: 2.5px solid $sample-hover-color;
+            background-color: $sample-hover-color;
+         }
+         &:active {
+            transform: translateY(5px);
+         }
       }
    }
 }
