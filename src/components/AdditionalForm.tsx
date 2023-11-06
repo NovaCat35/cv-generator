@@ -153,8 +153,6 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 		// Create a new subheader if we can't find an existing one
 		else {
 			const newSubHeader = { id: uuidv4(), headerName: currSubHeader.headerName, categoryId: currMainInfo.id, bulletPointIds: [] };
-			const newSubHeaderList = [...currMainInfo.subHeaders, newSubHeader];
-
 			return newSubHeader;
 		}
 	}

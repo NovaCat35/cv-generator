@@ -69,7 +69,7 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 				{experienceInfo.length != 0 && (
 					<div className="experience-container">
 						<h1>Career Experience</h1>
-						{experienceInfo.map((experience: ExperienceItem, index: number) => (
+						{experienceInfo.map((experience: ExperienceItem) => (
 							<div className={`exp-details`} key={experience.id}>
 								<div className="company">{experience.company}</div>
 								<div className="date-container">

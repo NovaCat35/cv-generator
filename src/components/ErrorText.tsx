@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface ErrorProps {
    errorMessage: string;
    alertStatus: boolean;
