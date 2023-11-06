@@ -239,7 +239,7 @@ export default function AdditionalForm({ isActive, onExpand, currState, setState
 			<Header name="Other Info" isActive={isActive} handleExpandClick={handleExpandClick} imgSrc={infoSvg} />
 			{showForm ? (
 				<form onSubmit={handleSubmit}>
-					<Input label="Category Name" keyName="categoryName" placeholder="Company Name" onChange={onChangeInputInfo} setState={setCurrMainInfo} currState={currMainInfo} propValue={currMainInfo.categoryName} required={true} />
+					<Input label="Category Name" keyName="categoryName" placeholder="Category Name" onChange={onChangeInputInfo} setState={setCurrMainInfo} currState={currMainInfo} propValue={currMainInfo.categoryName} required={true} />
 
 					<CardList type="subheader" currSubHeaderList={currMainInfo.subHeaders} currBulletList={currMainInfo.bulletPoints} mainName="additional-info" handleRemoveCard={removeBulletCard} />
 					<div className="subheader-container bullet-pt-container">

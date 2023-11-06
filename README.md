@@ -12,16 +12,16 @@ Link: THIS PROJECT IS CURRENTLY A WORK IN PROGRESS ... ⚠️ 📝 💻
 > <img width="296" alt="Screenshot 2023-11-04 at 2 17 41 AM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/951ca873-c7cd-4757-a251-4989d8670887">
 
 
-## Features [Work in Progress]
+## Features 
  - Print | Download Option
- - Local Save
+ - Save on Local Storage 
  - Resume Example | Blank Slate option
- - Resume Customization
+ - Resume Customization [Work in Progress]
 
 ## Challenges
-In my pursuit to enhance code efficiency and reduce redundancy, I encountered challenges in TypeScript related to managing state variables, passing setState as a parameter to components for later use as a callback, and maintaining a well-structured codebase. As I continuously modify variables and components to accommodate new features, I persistently work to rectify these issues and improve the overall code quality.
+n my quest to make my code smarter and cleaner, I've come across some tricky hurdles in TypeScript. Specifically, managing state variables and passing setState as a callback to components has been a bit of a puzzle. I've been focused on keeping my codebase organized and efficient, but as I add new features, it's a constant battle to maintain that balance.
 
-As new features and plans are added and changed, I learn how important it is to keep separate components for reusability. 
+One big lesson I've learned is the importance of keeping separate components for reusability. It's a game-changer when it comes to adapting to new features and changes in plans. Each tweak and adjustment is a step toward better code quality, and I'm always on the lookout for ways to improve.
 
 ## Build With
  - React + Vite
@@ -36,6 +36,8 @@ As new features and plans are added and changed, I learn how important it is to 
 3) npm install
 4) npm run dev
 ```
+> Setup webpack file-loader for assets images
+https://stackoverflow.com/questions/43638454/webpack-typescript-image-import/66251201#66251201
 
 ## Sources & Icons
  - https://www.svgrepo.com/

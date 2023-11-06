@@ -1,3 +1,5 @@
+@import "./mainIcon.scss";
+
 $clear-color: rgb(213, 86, 86);
 $clear-hover-color: rgb(199, 51, 51);
 
@@ -8,19 +10,20 @@ $sample-hover-color: rgb(93, 133, 213);
    display: flex;
    justify-content: center;
    align-items: center;
-   gap: 10px;
+   // flex-wrap: wrap;
+   column-gap: 10px;
    button  {
       cursor: pointer;
       padding: 5px 10px;
       border: 2.5px solid rgb(142, 142, 142);
       border-radius: 10px;
       transition: all .3s ease-in-out;
+      &:hover {
+         transform: translateY(-2px);
+      }
       &:active {
          transform: translateY(5px);
       }
-      // &:hover {
-      //    transform: translateY(-2px);
-      // }
       &.clear-btn {
          border: 2.5px solid $clear-color;
          background-color: $clear-color;
