@@ -2,7 +2,7 @@
 While looking for a job can often feel frustrating, making a resume shouldn't be. This CV generator will help you fill in the essential details and give you a basic layout as you persevere on your job hunting journey. <br>
 ~ GANBATTE がんばって !
 
-Link: THIS PROJECT IS CURRENTLY A WORK IN PROGRESS ... ⚠️ 📝 💻
+Link: cv-generator-5zf.pages.dev 📝 💻
 
 > Desktop:
 > <img width="1233" alt="Screenshot 2023-11-04 at 2 16 37 AM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/21a4e8f7-d0e5-491f-a2e9-d79eaa9eb25f">
