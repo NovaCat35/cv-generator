@@ -258,12 +258,16 @@ function App() {
 		<>
 			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
 				<h1 className="title">MY CV Generator</h1>
-				<div className="customization-container">
-					<MainIcon />
+				<div className="toolkit-container">
 					<PrintComponent personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo} />
 					<CustomButton nameType={"clear"} handleClick={clearAll} />
 					<CustomButton nameType={"sample"} handleClick={resetSample} />
 				</div>
+				<div className="customization-container">
+					<MainIcon />
+					<p>All changes are saved on your local storage. Click on the left image for more info.</p>
+				</div>
+				<div className="divider"></div>
 				<GeneralForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={person} setState={setPerson} />
 				<EducationForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
 				<SkillForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />

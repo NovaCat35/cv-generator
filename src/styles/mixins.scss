@@ -1,4 +1,11 @@
 $white-background: rgb(255, 255, 255);
+@mixin outerContainer() {
+	border-radius: 10px;
+	padding: 10px 15px 10px;
+	background-color: $white-background;
+	box-shadow: 2px 2px 8px 1px rgb(213, 213, 213);
+}
+
 @mixin button() {
 	cursor: pointer;
 	margin-top: 10px;
@@ -11,6 +18,7 @@ $white-background: rgb(255, 255, 255);
 	align-self: center;
 	transition: all 0.35s ease-in-out;
 	text-shadow: 1px 1px 5px rgb(242, 242, 242);
+	color: black;
 	&:active {
 		transform: translateY(3px);
 	}

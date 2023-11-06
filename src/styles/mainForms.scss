@@ -4,6 +4,7 @@
 @import "./skillsContainer.scss";
 @import "./bannerOpt.scss";
 @import "./addBulletContainer.scss";
+@import "./toolkit.scss";
 @import "./customization.scss";
 @import "./fonts.scss";
 
@@ -19,12 +20,12 @@
 	height: 100vh;
 	z-index: 1;
 	background-color: #f3f4f6;
+	box-shadow: 1px 1px 10px 0px rgb(163, 161, 161);
 	padding: 1rem;
 	min-height: 100vh;
 	transition: all 0.5s ease-in-out;
 	overflow-y: auto;
 	overscroll-behavior: contain;
-	box-shadow: 1px 1px 10px 0px rgb(163, 161, 161);
 	.title {
 		text-align: center;
 		font-size: 2.2rem;
@@ -38,6 +39,10 @@
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 	}
+	.divider {
+		padding: 1.2px;
+		background: linear-gradient(to right, rgb(31, 110, 170), rgb(131, 54, 218));
+	}
 	/* Hides the 'preview' btn for smaller screens */
 	&.hidden {
 		overflow: hidden;
@@ -48,12 +53,9 @@
 		}
 	}
 	.form-container {
-		border-radius: 10px;
-		padding: 10px 15px 10px;
-		background-color: $white-background;
+		@include outerContainer();
 		font-family: "CustomFont";
 		transition: all 1s ease-in-out;
-		box-shadow: 2px 2px 8px 1px rgb(213, 213, 213);
 		// When container is active, all hidden child component will now show
 		&.active {
 			form,
