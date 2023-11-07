@@ -1,11 +1,11 @@
 # My CV Generator
-While looking for a job can often feel frustrating, making a resume shouldn't be. This CV generator will help you fill in the essential details and give you a basic layout as you persevere on your job hunting journey. <br>
-~ GANBATTE がんばって !
+While looking for a job can often feel frustrating, making a resume shouldn't be. This CV generator was designed to provide a realistic resume layout (yeah I know, wowzers) while offering freedom in customization. The idea is to guide you in filling in the essential details and to give you a general idea of your career goal as you persevere on your job-hunting journey. <br>
+~ NOW GANBATTE がんばって !
 
 Link: https://cv-generator-5zf.pages.dev/ 📝 💻 
 
 > Desktop:
-> <img width="1217" alt="Screenshot 2023-11-06 at 1 52 29 AM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/62964ec6-71a6-4815-b65e-6cd5a0866640">
+> <img width="1198" alt="Screenshot 2023-11-06 at 11 33 13 PM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/a83a99eb-8684-43a2-8941-f53bf9175f0a">
 
 > Mobile:
 > 
@@ -19,9 +19,9 @@ Link: https://cv-generator-5zf.pages.dev/ 📝 💻
  - Resume Customization
 
 ## Challenges
-In my quest to make my code cleaner, I've come across some tricky hurdles in TypeScript and React. Specifically, managing state variables and the mess of passing setState as a callback to components (i.e. prop drilling) has been a bit of a puzzle. I've been focused on keeping my codebase organized and efficient, but as I add new features, it's a constant battle to maintain that balance.
+In my quest to make my code cleaner, I've come across some tricky hurdles in both TypeScript and React. Specifically, managing state variables and the initial mess of passing setState as a callback to components (i.e. prop drilling). In addition, while I strived right at the start to focus on keeping my codebase organized and efficient, the desire to add new features and implement new ideas to existing features soon became a constant battle to maintain that perfect organizational balance.
 
-One big lesson I've learned is the importance of keeping separate components for reusability. It's a game-changer when it comes to adapting to new features and changes in plans. Each tweak and adjustment is a step toward better code quality, and I'm always on the lookout for ways to improve.
+While initially puzzling, hooks soon became my best friend in this project, helping structure cleaner and neater in both state management and local storage saves. One big lesson to come out of this project is the importance of keeping separate components for reusability. In React, getting used to the separation of components and hooks has been a game-changer when it comes to adapting to new features and planning changes. Each tweak and adjustment is a step toward better code quality, and I'm excited to say this project really helped me step foot into the realm of React.
 
 ## Build With
  - React + Vite
@@ -29,7 +29,7 @@ One big lesson I've learned is the importance of keeping separate components for
  - Sass
 
 ## React Setup
-> To get setup with React, run the following in terminal
+> To get set with React, run the following in the terminal/command prompt
 ```
 1) npm create vite@latest projectName -- --template react-ts
 2) cd cv-generator
