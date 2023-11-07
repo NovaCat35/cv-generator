@@ -120,6 +120,9 @@ function App() {
 	const storedExperience = JSON.parse(localStorage.getItem("experience") || "null") as Experience;
 	const storedExpBulletPts = JSON.parse(localStorage.getItem("expBulletPts") || "null") as ExperienceBulletPts[];
 	const storedAdditionalInfo = JSON.parse(localStorage.getItem("additionalInfo") || "null") as AdditionalInfo;
+	const storedColorName = JSON.parse(localStorage.getItem("colorName") || "null");
+	const storedColorHeader = JSON.parse(localStorage.getItem("colorHeader") || "null");
+	const storedColorSubheader = JSON.parse(localStorage.getItem("colorSubheader") || "null");
 
 	const [person, setPerson] = useState<Person>(storedPerson || initialSamplePerson);
 	const [education, setEducation] = useState<Education>(storedEducation || initialSampleEducation);
@@ -132,9 +135,9 @@ function App() {
 	const [isPreviewActive, setIsPreviewActive] = useState(false); // keeps state of a preview button for smaller screens
 	const [activeIndex, setActiveIndex] = useState(0); // This is for keeping track of active expanded forms
 
-	const [colorName, setColorName] = useState("#105581"); // Color info used for Context API
-	const [colorHeader, setColorHeader] = useState("#105581"); 
-	const [colorSubheader, setColorSubheader] = useState("#105581"); 
+	const [colorName, setColorName] = useState<string>(storedColorName || "#105581"); // Color info used for Context API
+	const [colorHeader, setColorHeader] = useState<string>(storedColorHeader || "#105581");
+	const [colorSubheader, setColorSubheader] = useState<string>(storedColorSubheader || "#105581");
 
 	/**
 	 * While the setState and currState is the parameters unique to each 'form' component, this function is made for reusability.
@@ -247,6 +250,9 @@ function App() {
 		setExperience(initialSampleExperience);
 		setExpBulletPts(initialSampleExpBulletPts);
 		setAdditionalInfo(initialSampleAdditionalInfo);
+		setColorName("#105581");
+		setColorHeader("#105581");
+		setColorSubheader("#105581");
 	};
 
 	useEffect(() => {
@@ -259,6 +265,13 @@ function App() {
 		localStorage.setItem("expBulletPts", JSON.stringify(expBulletPts));
 		localStorage.setItem("additionalInfo", JSON.stringify(additionalInfo));
 	}, [person, education, skillHeaders, skills, experience, expBulletPts, additionalInfo]);
+
+	useEffect(() => {
+		// Save data to localStorage whenever the state changes
+		localStorage.setItem("colorName", JSON.stringify(colorName));
+		localStorage.setItem("colorHeader", JSON.stringify(colorHeader));
+		localStorage.setItem("colorSubheader", JSON.stringify(colorSubheader));
+	}, [colorName, colorHeader, colorSubheader]);
 
 	return (
 		<>
@@ -273,7 +286,7 @@ function App() {
 					<Customization isActive={activeIndex === 5} onExpand={(param) => setActiveIndex(param)} />
 					<div className="note-container">
 						<MainIcon />
-						<p>All changes are saved on your local storage. Click on the left image for more info.</p>
+						<p>All changes are saved locally. Click on the left image for more info.</p>
 					</div>
 					<div className="divider"></div>
 					<GeneralForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={person} setState={setPerson} />
