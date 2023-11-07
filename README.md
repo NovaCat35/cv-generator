@@ -1,5 +1,6 @@
 # My CV Generator
-While looking for a job can often feel frustrating, making a resume shouldn't be. This CV generator was designed to provide a realistic resume layout (yeah I know, wowzers) while offering freedom in customization. The idea is to guide you in filling in the essential details and to give you a general idea of your career goal as you persevere on your job-hunting journey. <br>
+While looking for a job can often feel frustrating, making a resume shouldn't be. This CV generator was designed to provide a realistic resume layout (yeah I know, wow 😙) while offering freedom in customization. The goal is to guide you in completing crucial details and to offer a broad perspective on your career progression as you navigate your job search journey. <br>
+
 ~ NOW GANBATTE がんばって !
 
 Link: https://cv-generator-5zf.pages.dev/ 📝 💻 
