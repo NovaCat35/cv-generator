@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ColorContext } from "./contexts/ColorContext.ts";
 import GeneralForm from "./components/GeneralForm.tsx";
 import ResumePreview from "./components/ResumePreview.tsx";
 import EducationForm from "./components/EducationForm.tsx";
@@ -8,6 +9,7 @@ import AdditionalForm from "./components/AdditionalForm.tsx";
 import PrintComponent from "./components/PrintOption.tsx";
 import CustomButton from "./components/CustomButton.tsx";
 import MainIcon from "./components/MainIcon.tsx";
+import Customization from "./components/Customization.tsx";
 import "./styles/App.scss";
 import "./styles/mainForms.scss";
 import "./styles/resumePreview.scss";
@@ -129,6 +131,10 @@ function App() {
 
 	const [isPreviewActive, setIsPreviewActive] = useState(false); // keeps state of a preview button for smaller screens
 	const [activeIndex, setActiveIndex] = useState(0); // This is for keeping track of active expanded forms
+
+	const [colorName, setColorName] = useState("#105581"); // Color info used for Context API
+	const [colorHeader, setColorHeader] = useState("#105581"); 
+	const [colorSubheader, setColorSubheader] = useState("#105581"); 
 
 	/**
 	 * While the setState and currState is the parameters unique to each 'form' component, this function is made for reusability.
@@ -256,27 +262,30 @@ function App() {
 
 	return (
 		<>
-			<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
-				<h1 className="title">MY CV Generator</h1>
-				<div className="toolkit-container">
-					<PrintComponent personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo} />
-					<CustomButton nameType={"clear"} handleClick={clearAll} />
-					<CustomButton nameType={"sample"} handleClick={resetSample} />
+			<ColorContext.Provider value={{ colorName, colorHeader, colorSubheader, setColorName, setColorHeader, setColorSubheader }}>
+				<div className={isPreviewActive ? "main-forms-container hidden" : "main-forms-container"}>
+					<h1 className="title">MY CV Generator</h1>
+					<div className="toolkit-container">
+						<PrintComponent personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo} />
+						<CustomButton nameType={"clear"} handleClick={clearAll} />
+						<CustomButton nameType={"sample"} handleClick={resetSample} />
+					</div>
+					<Customization isActive={activeIndex === 5} onExpand={(param) => setActiveIndex(param)} />
+					<div className="note-container">
+						<MainIcon />
+						<p>All changes are saved on your local storage. Click on the left image for more info.</p>
+					</div>
+					<div className="divider"></div>
+					<GeneralForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={person} setState={setPerson} />
+					<EducationForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
+					<SkillForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
+					<ExperienceForm isActive={activeIndex === 3} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateExp={experience} currStateBulletPts={expBulletPts} setStateExp={setExperience} setStateBulletPts={setExpBulletPts} />
+					<AdditionalForm isActive={activeIndex === 4} onExpand={(param) => setActiveIndex(param)} currState={additionalInfo} setState={setAdditionalInfo} handleRemoveChange={removeIDFromList} handleSubmitCategory={updateAdditionalInfo} />
 				</div>
-				<div className="customization-container">
-					<MainIcon />
-					<p>All changes are saved on your local storage. Click on the left image for more info.</p>
+				<div className="resume-preview">
+					<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo} />
 				</div>
-				<div className="divider"></div>
-				<GeneralForm isActive={activeIndex === 0} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={person} setState={setPerson} />
-				<EducationForm isActive={activeIndex === 1} onExpand={(param) => setActiveIndex(param)} onChange={handleChange} currState={education} setState={setEducation} />
-				<SkillForm isActive={activeIndex === 2} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateHeader={skillHeaders} currStateItem={skills} setStateHeader={setSkillHeaders} setStateSkills={setSkills} />
-				<ExperienceForm isActive={activeIndex === 3} onExpand={(param) => setActiveIndex(param)} handleSubmitHeader={updateInfoList} handleSubmitList={updateHeaderCategoryList} handleRemoveChange={removeIDFromList} currStateExp={experience} currStateBulletPts={expBulletPts} setStateExp={setExperience} setStateBulletPts={setExpBulletPts} />
-				<AdditionalForm isActive={activeIndex === 4} onExpand={(param) => setActiveIndex(param)} currState={additionalInfo} setState={setAdditionalInfo} handleRemoveChange={removeIDFromList} handleSubmitCategory={updateAdditionalInfo} />
-			</div>
-			<div className="resume-preview">
-				<ResumePreview personInfo={person} educationInfo={education} skillHeaderInfo={skillHeaders} skillListInfo={skills} experienceInfo={experience} expBulletPoints={expBulletPts} additionalInfo={additionalInfo} />
-			</div>
+			</ColorContext.Provider>
 			<button
 				className={isPreviewActive ? "previewBtn active" : "previewBtn"}
 				onClick={() => {

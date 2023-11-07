@@ -2,7 +2,7 @@
 While looking for a job can often feel frustrating, making a resume shouldn't be. This CV generator will help you fill in the essential details and give you a basic layout as you persevere on your job hunting journey. <br>
 ~ GANBATTE がんばって !
 
-Link: https://cv-generator-5zf.pages.dev/ 📝 💻
+Link: https://cv-generator-5zf.pages.dev/ 📝 💻 
 
 > Desktop:
 > <img width="1217" alt="Screenshot 2023-11-06 at 1 52 29 AM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/62964ec6-71a6-4815-b65e-6cd5a0866640">
@@ -14,12 +14,12 @@ Link: https://cv-generator-5zf.pages.dev/ 📝 💻
 
 ## Features 
  - Print | Download Option
- - Save on Local Storage 
+ - Changes are saved on your Local Storage (You can refresh your page!)
  - Resume Example | Blank Slate option
- - Resume Customization [Work in Progress]
+ - Resume Customization
 
 ## Challenges
-n my quest to make my code smarter and cleaner, I've come across some tricky hurdles in TypeScript. Specifically, managing state variables and passing setState as a callback to components has been a bit of a puzzle. I've been focused on keeping my codebase organized and efficient, but as I add new features, it's a constant battle to maintain that balance.
+In my quest to make my code cleaner, I've come across some tricky hurdles in TypeScript and React. Specifically, managing state variables and the mess of passing setState as a callback to components (i.e. prop drilling) has been a bit of a puzzle. I've been focused on keeping my codebase organized and efficient, but as I add new features, it's a constant battle to maintain that balance.
 
 One big lesson I've learned is the importance of keeping separate components for reusability. It's a game-changer when it comes to adapting to new features and changes in plans. Each tweak and adjustment is a step toward better code quality, and I'm always on the lookout for ways to improve.
 
@@ -36,9 +36,11 @@ One big lesson I've learned is the importance of keeping separate components for
 3) npm install
 4) npm run dev
 ```
-> Setup webpack file-loader for assets images
-https://stackoverflow.com/questions/43638454/webpack-typescript-image-import/66251201#66251201
 
 ## Sources & Icons
  - https://www.svgrepo.com/
  - https://fonts.google.com/icons
+ - https://cssgradient.io/
+ - https://htmlcolorcodes.com/color-picker/
+ - https://codepen.io/sosuke/pen/Pjoqqp
+

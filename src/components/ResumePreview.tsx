@@ -1,5 +1,6 @@
 import { Person, Education, Experience, SkillHeader, SkillItem, ExperienceItem, ExperienceBulletPts, AdditionalInfo } from "../App.tsx";
-import React from "react";
+import React, {useContext} from "react";
+import { ColorContext } from "../contexts/ColorContext.ts";
 
 export interface ResumePreviewProps {
 	personInfo: Person;
@@ -12,17 +13,28 @@ export interface ResumePreviewProps {
 }
 const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => {
 	const { personInfo, educationInfo, skillHeaderInfo, skillListInfo, experienceInfo, expBulletPoints, additionalInfo } = props;
+	const { colorName, colorHeader, colorSubheader } = useContext(ColorContext);
+
+	const nameStyle = {
+		color: colorName,
+	}
+	const headerStyle = {
+		color: colorHeader,
+	}
+	const subHeaderStyle = {
+		color: colorSubheader,
+	}
 
 	return (
 		<div ref={ref} id="resume-container" className="resume-container">
 			<header>
-				<div className="name">{personInfo.name}</div>
+				<div className="name" style={nameStyle}>{personInfo.name}</div>
 				<div className="contact-info">
-					<div className="top-container">
+					<div className="top-container" style={subHeaderStyle}>
 						{personInfo.email != "" && <div className="email">{personInfo.email}</div>}
 						{personInfo.phone != "" && <div className="phone">{personInfo.phone}</div>}
 					</div>
-					<div className="bottom-container">
+					<div className="bottom-container" style={subHeaderStyle}>
 						{personInfo.location != "" && <div className="location">{personInfo.location}</div>}
 						{personInfo.website != "" && <div className="website">{personInfo.website}</div>}
 					</div>
@@ -31,12 +43,12 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 			<main>
 				{Object.values(educationInfo).some((value) => value.trim() !== "") && (
 					<div className="education-container">
-						<h1>Education</h1>
+						<h1 style={headerStyle}>Education</h1>
 						<div className="education-details">
-							<div className="school">{educationInfo.school}</div>
+							<div style={subHeaderStyle} className="school">{educationInfo.school}</div>
 							<div className="date-container">
-								<div className="startDate">{educationInfo.startDate}</div>
-								<div className="endDate">{educationInfo.endDate}</div>
+								<div style={subHeaderStyle} className="startDate">{educationInfo.startDate}</div>
+								<div style={subHeaderStyle} className="endDate">{educationInfo.endDate}</div>
 							</div>
 							<div className="study">{educationInfo.study}</div>
 							<div className="location">{educationInfo.location}</div>
@@ -45,18 +57,11 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 				)}
 				{skillListInfo.length != 0 && (
 					<div className="main-skill-container">
-						<h1>Skill Proficiencies</h1>
+						<h1 style={headerStyle}>Skill Proficiencies</h1>
 						{skillHeaderInfo.map((category) => (
 							<div className="skill-info-container" key={category.id}>
-								<p>{category.header}:</p>
+								<p style={subHeaderStyle}>{category.header}:</p>
 								<div className="skill-list-container">
-									{/* {skillListInfo
-										.filter((info) => info.headerId === category.id)
-										.map((info) => (
-											<div className="skill-detail" key={info.id}>
-												{info.skill}
-											</div>
-										))} */}
 									{skillListInfo
 										.filter((info) => info.headerId === category.id)
 										.map((info) => info.skill)
@@ -68,15 +73,15 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 				)}
 				{experienceInfo.length != 0 && (
 					<div className="experience-container">
-						<h1>Career Experience</h1>
+						<h1 style={headerStyle}>Career Experience</h1>
 						{experienceInfo.map((experience: ExperienceItem) => (
 							<div className={`exp-details`} key={experience.id}>
-								<div className="company">{experience.company}</div>
+								<div style={subHeaderStyle} className="company">{experience.company}</div>
 								<div className="date-container">
-									<div className="startDate">{experience.startDate}</div>
-									<div className="endDate">{experience.endDate}</div>
+									<div style={subHeaderStyle} className="startDate">{experience.startDate}</div>
+									<div style={subHeaderStyle} className="endDate">{experience.endDate}</div>
 								</div>
-								<div className="position">{experience.position}</div>
+								<div style={subHeaderStyle} className="position">{experience.position}</div>
 								<div className="description">{experience.description}</div>
 								{expBulletPoints
 									.filter((bullet) => bullet.headerId == experience.id)
@@ -93,12 +98,12 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 				<div className="additional-info-container">
 					{additionalInfo["categories"].map((category) => (
 						<div className="main-category-container" key={category.id}>
-							<h1 className="category-name">{category.header}</h1>
+							<h1 className="category-name" style={headerStyle}>{category.header}</h1>
 							{additionalInfo["subHeaders"]
 								.filter((subHeader: any) => subHeader.categoryId == category.id)
 								.map((subHeader: any) => (
 									<div className="subheader-container" key={subHeader.id}>
-										<div className="subheader-name">{subHeader.headerName}</div>
+										<div className="subheader-name" style={subHeaderStyle}>{subHeader.headerName}</div>
 										{additionalInfo["bulletPoints"]
 											.filter((bulletPt) => bulletPt.subHeaderId == subHeader.id)
 											.map((bulletPt) => (

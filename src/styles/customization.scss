@@ -1,8 +1,19 @@
-.customization-container {
-   @include outerContainer();
+.main-custom-container {
+   overflow: hidden;
+   height: 0;
    display: flex;
-   justify-content: center;
    align-items: center;
-   gap: 10px;
-   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   gap: 5px;
+   .color-picker-container{
+      input#color-picker {
+         cursor: pointer;
+         width: 40px;
+         height:40px;
+         border: none;
+         background-color: transparent;
+         &::-webkit-color-swatch{
+            border-radius: 50%;
+         }
+      }
+   }
 }

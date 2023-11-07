@@ -4,8 +4,9 @@
 @import "./skillsContainer.scss";
 @import "./bannerOpt.scss";
 @import "./addBulletContainer.scss";
-@import "./toolkit.scss";
 @import "./customization.scss";
+@import "./toolkit.scss";
+@import "./noteContainer.scss";
 @import "./fonts.scss";
 
 .main-forms-container {
@@ -43,12 +44,30 @@
 		padding: 1.2px;
 		background: linear-gradient(to right, rgb(31, 110, 170), rgb(131, 54, 218));
 	}
+	// This is the header container that is at the top of every form container, it holds the expand btn
+	.head {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.left-container {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			.header-icon {
+				height: 30px;
+				width: 30px;
+			}
+			h1 {
+				margin-top: 3px;
+			}
+		}
+	}
 	/* Hides the 'preview' btn for smaller screens */
 	&.hidden {
 		overflow: hidden;
 		width: 0;
 		padding: 0;
-		.title{
+		.title {
 			white-space: nowrap; // I want better closing transition so I nowrap so the closing main-form doesn't look awkward
 		}
 	}
@@ -60,29 +79,13 @@
 		&.active {
 			form,
 			.opt-container,
-			.main-skill-container {
+			.main-skill-container,
+			.main-custom-container {
 				height: auto;
 			}
 		}
 		h1 {
 			font-size: clamp(1rem, 2vw, 1.5rem);
-		}
-		.head {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			.left-container{
-				display: flex;
-				align-items: center;
-				gap: 10px;
-				.header-icon{
-					height: 30px;
-					width: 30px;
-				}
-				h1{
-					margin-top: 3px;
-				}
-			}
 		}
 		form {
 			height: 0;
@@ -153,7 +156,7 @@
 			overflow: auto;
 			width: auto;
 			padding: 1.7rem;
-			.title{
+			.title {
 				white-space: wrap;
 			}
 		}
