@@ -16,7 +16,7 @@ import "./styles/resumePreview.scss";
 import "./styles/expandBtns.scss";
 import visibleImg from "./assets/visibility.svg";
 import visibleImgOff from "./assets/visibility_off.svg";
-import { initialPersonState, initialEducationState, initialSkillHeadersState, initialSkillsState, initialExperienceState, initialExpBulletPtsState, initialAdditionalInfoState, initialSamplePerson, initialSampleEducation, initialSampleSkillHeaders, initialSampleSkills, initialSampleExperience, initialSampleExpBulletPts, initialSampleAdditionalInfo } from "./scripts/InitialStates.tsx";
+import { initialPersonState, initialEducationState, initialSkillHeadersState, initialSkillsState, initialExperienceState, initialExpBulletPtsState, initialAdditionalInfoState, initialSamplePerson, initialSampleEducation, initialSampleSkillHeaders, initialSampleSkills, initialSampleExperience, initialSampleExpBulletPts, initialSampleAdditionalInfo } from "./scripts/InitialStates.ts";
 
 export interface Person {
 	name: string;

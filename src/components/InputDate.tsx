@@ -1,5 +1,5 @@
 import { HandleChange } from "../App.tsx";
-import {formatDate, revertFormatDate} from '../scripts/DateFormatter.tsx'
+import {formatDate, revertFormatDate} from '../scripts/DateFormatter.ts'
 import { useState } from 'react';
 
 interface InputDateProps {
