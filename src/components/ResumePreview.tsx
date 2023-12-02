@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Person, Education, Experience, SkillHeader, SkillItem, ExperienceItem, ExperienceBulletPts, AdditionalInfo } from "../App.tsx";
 import React, {useContext} from "react";
 import { ColorContext } from "../contexts/ColorContext.ts";
@@ -20,6 +21,9 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 	}
 	const headerStyle = {
 		color: colorHeader,
+	}
+	const headerStyleDivider = {
+		background: colorHeader,
 	}
 	const subHeaderStyle = {
 		color: colorSubheader,
@@ -44,6 +48,7 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 				{Object.values(educationInfo).some((value) => value.trim() !== "") && (
 					<div className="education-container">
 						<h1 style={headerStyle}>Education</h1>
+						<div className="line-divider" style={headerStyleDivider}></div>
 						<div className="education-details">
 							<div style={subHeaderStyle} className="school">{educationInfo.school}</div>
 							<div className="date-container">
@@ -58,6 +63,7 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 				{skillListInfo.length != 0 && (
 					<div className="main-skill-container">
 						<h1 style={headerStyle}>Skill Proficiencies</h1>
+						<div className="line-divider" style={headerStyleDivider}></div>
 						{skillHeaderInfo.map((category) => (
 							<div className="skill-info-container" key={category.id}>
 								<p style={subHeaderStyle}>{category.header}:</p>
@@ -74,6 +80,7 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 				{experienceInfo.length != 0 && (
 					<div className="experience-container">
 						<h1 style={headerStyle}>Career Experience</h1>
+						<div className="line-divider" style={headerStyleDivider}></div>
 						{experienceInfo.map((experience: ExperienceItem) => (
 							<div className={`exp-details`} key={experience.id}>
 								<div style={subHeaderStyle} className="company">{experience.company}</div>
@@ -99,6 +106,7 @@ const ResumePreview = React.forwardRef((props: ResumePreviewProps, ref: any) => 
 					{additionalInfo["categories"].map((category) => (
 						<div className="main-category-container" key={category.id}>
 							<h1 className="category-name" style={headerStyle}>{category.header}</h1>
+							<div className="line-divider" style={headerStyleDivider}></div>
 							{additionalInfo["subHeaders"]
 								.filter((subHeader: any) => subHeader.categoryId == category.id)
 								.map((subHeader: any) => (

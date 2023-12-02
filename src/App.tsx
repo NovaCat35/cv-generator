@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { ColorContext } from "./contexts/ColorContext.ts";
 import GeneralForm from "./components/GeneralForm.tsx";
@@ -256,7 +257,7 @@ function App() {
 	};
 
 	useEffect(() => {
-		// Save data to localStorage whenever the state changes
+		// Save general data to localStorage whenever the state changes
 		localStorage.setItem("person", JSON.stringify(person));
 		localStorage.setItem("education", JSON.stringify(education));
 		localStorage.setItem("skillHeaders", JSON.stringify(skillHeaders));
@@ -267,7 +268,7 @@ function App() {
 	}, [person, education, skillHeaders, skills, experience, expBulletPts, additionalInfo]);
 
 	useEffect(() => {
-		// Save data to localStorage whenever the state changes
+		// Save color info to localStorage whenever the state changes
 		localStorage.setItem("colorName", JSON.stringify(colorName));
 		localStorage.setItem("colorHeader", JSON.stringify(colorHeader));
 		localStorage.setItem("colorSubheader", JSON.stringify(colorSubheader));

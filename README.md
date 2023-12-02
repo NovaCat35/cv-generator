@@ -5,31 +5,38 @@ While looking for a job can often feel frustrating, making a resume shouldn't be
 
 Link: https://cv-generator-5zf.pages.dev/ 📝 💻 
 
-> Desktop:
+> Desktop (See above link for updated page):
 > <img width="1124" alt="Screenshot 2023-11-06 at 11 41 10 PM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/221d8d3e-da3a-45de-a3ef-6967d4d8046e">
 
-> Mobile:
+> Mobile:🖌️
 > 
 > <img width="296" alt="Screenshot 2023-11-04 at 2 17 41 AM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/951ca873-c7cd-4757-a251-4989d8670887">
 
 
-## Features 
+## Features 🎯
  - Print | Download Option
  - Changes are saved on your Local Storage (You can refresh your page!)
  - Resume Example | Blank Slate option
  - Resume Customization
 
-## Challenges
+## Tips for Users ✍️
+>  When printing, you can set 'custom page' to 1 to get rid of extra pages and download the paper as a pdf by changing print 'destination'.
+
+> While this CV generator features colors, usually most resume are black but if you need to add color, choose blue and black is a good bet.
+
+> Search online for good resume tips. I found asking reddit really helped a lot. Also use the CV generator as inspiration even if the format doesn't fit your requirement. LMK if there's a particularly feature you want, maybe I can add it in!
+
+## Challenges 😖
 In my quest to make my code cleaner, I've come across some tricky hurdles in both TypeScript and React. Specifically, managing state variables and the initial mess of passing setState as a callback to components (i.e. prop drilling). In addition, while I strived right at the start to focus on keeping my codebase organized and efficient, the desire to add new features and implement new ideas to existing features soon became a constant battle to maintain that perfect organizational balance.
 
 While initially puzzling, hooks soon became my best friend in this project, helping structure cleaner and neater in both state management and local storage saves. One big lesson to come out of this project is the importance of keeping separate components for reusability. In React, getting used to the separation of components and hooks has been a game-changer when it comes to adapting to new features and planning changes. Each tweak and adjustment is a step toward better code quality, and I'm excited to say this project really helped me step foot into the realm of React.
 
-## Build With
+## Build With 🏗️
  - React + Vite
  - TypeScript
  - Sass
 
-## React Setup
+## React Setup 🚂
 > To get set with React, run the following in the terminal/command prompt
 ```
 1) npm create vite@latest projectName -- --template react-ts
@@ -38,7 +45,7 @@ While initially puzzling, hooks soon became my best friend in this project, help
 4) npm run dev
 ```
 
-## Sources & Icons
+## Sources & Icons 🖌️
  - https://www.svgrepo.com/
  - https://fonts.google.com/icons
  - https://cssgradient.io/

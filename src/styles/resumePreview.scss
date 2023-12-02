@@ -12,6 +12,12 @@ $special-font-color: #105581;
 	}
 }
 
+@mixin lineDivider() {
+	margin: 4px 0 3.5px;
+	padding: .8px;
+	background: #105581;
+}
+
 @mixin spaceArea() {
 	margin-bottom: 10px;
 	&:first-of-type {
@@ -38,7 +44,7 @@ $special-font-color: #105581;
 }
 
 .resume-container {
-	padding: 55px 35px;
+	padding: 48px 35px;
 	background-color: $white-background;
 	width: 8.5in;
 	height: 11in;
@@ -81,11 +87,14 @@ $special-font-color: #105581;
 	main {
 		display: flex;
 		flex-direction: column;
-		gap: 18px;
+		gap: 13px;
 		h1 {
 			@include specialBoldHighlight();
 			font-size: 1.3rem;
 			font-family: $header-fonts;
+		}
+		.line-divider {
+			@include lineDivider();
 		}
 		.education-container {
 			.education-details {
