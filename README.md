@@ -20,11 +20,11 @@ Link: https://cv-generator-5zf.pages.dev/ 📝 💻
  - Resume Customization
 
 ## Tips for Users ✍️
->  When printing, you can set 'custom page' to 1 to get rid of extra pages and download the paper as a pdf by changing print 'destination'.
+>  When printing, you can set 'custom page' to 1 to get rid of extra pages and download the paper as a pdf by changing print 'destination'. (It is a good rule to keep your resume 1 PAGE!)
 
-> While this CV generator features colors, usually most resume are black but if you need to add color, choose blue and black is a good bet.
+> While this CV generator features colors, usually most resumes are black but if you need to add color, choosing blue and black is a good bet.
 
-> Search online for good resume tips. I found asking reddit really helped a lot. Also use the CV generator as inspiration even if the format doesn't fit your requirement. LMK if there's a particularly feature you want, maybe I can add it in!
+> Search online for good resume tips. I found asking Reddit helped a lot (look online for advice, avoid paying for services, you got this). Also, you can use this CV generator as inspiration if you plan to do a more manual approach using Google or Microsoft Docs. This way maybe you can build your resume while drawing inspiration from the resume structure on this site.
 
 ## Challenges 😖
 In my quest to make my code cleaner, I've come across some tricky hurdles in both TypeScript and React. Specifically, managing state variables and the initial mess of passing setState as a callback to components (i.e. prop drilling). In addition, while I strived right at the start to focus on keeping my codebase organized and efficient, the desire to add new features and implement new ideas to existing features soon became a constant battle to maintain that perfect organizational balance.
