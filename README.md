@@ -5,13 +5,7 @@ While looking for a job can often feel frustrating, making a resume shouldn't be
 
 Link: https://cv-generator-5zf.pages.dev/ 📝 💻 
 
-> Desktop (See above link for updated page):
-> <img width="1124" alt="Screenshot 2023-11-06 at 11 41 10 PM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/221d8d3e-da3a-45de-a3ef-6967d4d8046e">
-
-> Mobile:🖌️
-> 
-> <img width="296" alt="Screenshot 2023-11-04 at 2 17 41 AM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/951ca873-c7cd-4757-a251-4989d8670887">
-
+<img width="1047" alt="Screenshot 2024-02-06 at 6 53 09 PM" src="https://github.com/NovaCat35/cv-generator/assets/54908064/ddf0cebc-ac9c-4209-9c9b-873b678d1872">
 
 ## Features 🎯
  - Print | Download Option
